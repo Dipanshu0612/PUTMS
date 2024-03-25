@@ -34,7 +34,7 @@ export default function BusPass() {
         <>
             <Header />
             <div className='w-full h-[30rem] flex px-2 bg-slate-200'>
-                <div className='w-2/3 m-3 bg-slate-100 p-3 cursor-pointer'>
+                <div className='w-2/3 m-3 bg-slate-100 p-3 cursor-pointer shadow-lg'>
                     <div className='flex space-x-2 text-center items-center text-blue-500'>
                         <div className=''>
                             <FaAddressCard className='text-3xl mb-2' />
@@ -72,7 +72,7 @@ export default function BusPass() {
 
                     </div>
                 </div>
-                <div className='w-1/3 m-3 bg-slate-100 p-3 flex items-center justify-center flex-col space-y-5'>
+                <div className='w-1/3 m-3 bg-slate-100 p-3 flex items-center justify-center flex-col space-y-5 shadow-lg'>
                     <button className='flex flex-col bg-blue-500 items-center justify-center px-[1.4rem] py-4 m-2 hover:bg-blue-800 ease-in-out transition font-bold hover:text-white rounded-md duration-200   ' onClick={DownloadBut}> 
                         <MdDownload className='text-[5rem]'/>
                         Download Virtual Bus Pass

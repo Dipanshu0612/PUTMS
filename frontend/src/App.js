@@ -20,7 +20,7 @@ function App() {
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/forgot-password" element={<ForgotPasssword />} />
         <Route path="/my-bus-pass" element={<BusPass />} />
-        <Route path="/allBuses" element={<AllBuses />} />
+        <Route path="/all-Buses" element={<AllBuses />} />
       </Routes>
     </Router>
     <ToastContainer

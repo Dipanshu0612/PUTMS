@@ -17,6 +17,8 @@ export default function Login(){
       const response = await axios.post('http://localhost:3001/verify_user', { user_id, password });
       if (response.data.success){
         toast.success(response.data.message)
+        localStorage.setItem("user_id",user_id);
+        // console.log(localStorage.getItem("user_id"));
         navigate('/home')
       }
       else{
@@ -48,8 +50,8 @@ return (
         </div>
 
         <div className='flex flex-col w-50 space-y-5 py-5 px-6 bg-slate-200 rounded-3xl'> 
-          <input type="email" placeholder='User Id' className='bg-slate-100 rounded-sm px-2 py-1' value={user_id} onChange={(e) => setUserID(e.target.value)} required />
-          <input type="password" placeholder='Password' className='bg-slate-100 rounded-sm px-2 py-1' value={password} onChange={(e) => setPassword(e.target.value)} required/>
+          <input type="email" placeholder='User Id' className='bg-slate-100 rounded-lg px-2 py-1' value={user_id} onChange={(e) => setUserID(e.target.value)} required />
+          <input type="password" placeholder='Password' className='bg-slate-100 rounded-lg px-2 py-1' value={password} onChange={(e) => setPassword(e.target.value)} required/>
           <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700 ease-in-out transition' onClick={()=>{
             handleLogin()
           }}>Submit</button>

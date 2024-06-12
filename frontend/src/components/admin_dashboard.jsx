@@ -28,14 +28,14 @@ export default function Admin_Dashboard() {
 
             <div className='h-[90vh] w-1/6 bg-gray-700 my-[0.01rem]'>
                 <ul className='flex flex-col flex-wrap justify-centre items-start p-0 admin text-xl'>
-                    <li className="text-white cursor-pointer my-3 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/admin_home" activeClassName='active' className="!text-white flex items-center"><FaUsers className='mr-3 text-2xl'/> View All Users</Link></li>
-                    <li className="text-white cursor-pointer my-3 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/all-Users" activeClassName='active' className="!text-white flex items-center"><FaPlus className='mr-3 text-2xl'/> Add User</Link></li>
-                    <li className="text-white cursor-pointer my-3 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/admin_all_buses" activeClassName='active' className="!text-white flex"><FaBus className='mr-3 text-2xl'/>View All Buses</Link></li>
-                    <li className="text-white cursor-pointer my-3 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/all-Buses" activeClassName='active' className="!text-white flex"><FaPlus className='mr-3 text-2xl'/>Add Bus</Link></li>
-                    <li className="text-white cursor-pointer my-3 w-full p-2 font-semibold hover:bg-gray-900 " ><Link to="/my-bus-pass" activeClassName='active' className="!text-white flex text-[1rem]"><FaRupeeSign className='mr-3 text-2xl'/>View Recent Transactions</Link></li>
-                    <li className="text-white cursor-pointer my-3 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/feedback" activeClassName='active' className="!text-white flex"><MdNotificationsActive className='mr-3 text-2xl'/>Push Notice</Link></li>
-                    <li className="cursor-pointer my-3 w-full p-2 font-semibold hover:bg-gray-900" ><a href="https://ums.paruluniversity.ac.in/" className='text-white flex'><FaLocationArrow className='mr-3 text-2xl'/>GNUMS</a></li>
-                    <li className="cursor-pointer my-3 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/" activeClassName='active' className="!text-white flex"><RiLogoutBoxRLine className='mr-3 text-2xl'/>Logout</Link></li>
+                    <li className="text-white cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/admin_home" activeClassName='active' className="!text-white flex items-center"><FaUsers className='mr-3 text-2xl'/> View All Users</Link></li>
+                    <li className="text-white cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/all-Users" activeClassName='active' className="!text-white flex items-center"><FaPlus className='mr-3 text-2xl'/> Add User</Link></li>
+                    <li className="text-white cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/admin_all_buses" activeClassName='active' className="!text-white flex"><FaBus className='mr-3 text-2xl'/>View All Buses</Link></li>
+                    <li className="text-white cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/all-Buses" activeClassName='active' className="!text-white flex"><FaPlus className='mr-3 text-2xl'/>Add Bus</Link></li>
+                    <li className="text-white cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900 " ><Link to="/my-bus-pass" activeClassName='active' className="!text-white flex text-[1rem] items-center"><FaRupeeSign className='mr-3 text-2xl'/>View Recent Transactions</Link></li>
+                    <li className="text-white cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/feedback" activeClassName='active' className="!text-white flex"><MdNotificationsActive className='mr-3 text-2xl'/>Push Notice</Link></li>
+                    <li className="cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><a href="https://ums.paruluniversity.ac.in/" className='text-white flex'><FaLocationArrow className='mr-3 text-2xl'/>GNUMS</a></li>
+                    <li className="cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/" activeClassName='active' className="!text-white flex"><RiLogoutBoxRLine className='mr-3 text-2xl'/>Logout</Link></li>
                 </ul>
             </div>
         </>

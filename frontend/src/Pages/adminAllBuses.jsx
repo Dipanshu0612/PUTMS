@@ -4,6 +4,7 @@ import Footer from '../components/footer'
 import { FaBus } from 'react-icons/fa6'
 import Table from 'react-bootstrap/esm/Table'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 export default function AdminAllBuses() {
     const [bus_data, setBusData] = useState([])
@@ -24,7 +25,7 @@ export default function AdminAllBuses() {
     return (
         <>
             <Admin_Dashboard />
-            <div className='top-[4.3rem] left-[14.6rem] absolute h-[90vh] w-5/6 bg-slate-200'>
+            <div className='top-[4.3rem] left-[13.1rem] absolute h-[90vh] w-5/6 bg-slate-200'>
                 <div className='bg-slate-200 p-3 m-2'>
                     <div className='flex flex-col bg-white p-3 shadow-lg'>
                         <div className='flex space-x-2 text-center items-center text-blue-500'>

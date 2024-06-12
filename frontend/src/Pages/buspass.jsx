@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import { FaAddressCard } from "react-icons/fa"
@@ -8,10 +8,20 @@ import My from "../assests/My.jpg"
 import { MdDownload } from "react-icons/md";    
 import { FaRupeeSign } from "react-icons/fa";
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 
 
 export default function BusPass() {
+    const user_id=localStorage.getItem("user_id");
+    const [userData,setUserData]=useState({});
+    async function getUserInfo(){
+        let response=await axios.post("http://localhost:3001/getUserInfo", {user_id} );
+        setUserData(response.data);
+    }
+    useEffect(()=>{
+        getUserInfo();
+    })
     function DownloadBut(){
         toast.error("This feature is still in development!")
     }
@@ -52,18 +62,18 @@ export default function BusPass() {
                                 <img src={My} alt="UserIMG" className='border border-black object-cover rounded-lg' />
                             </div>
                             <div className='w-2/3 flex p-2 tracking-wide text-4xl gap-4'>
-                                <div className='flex flex-col space-y-5 justify-center'>
-                                    <h5 className='font-bold'>Name : Dipanshu Mishra</h5>
-                                    <h5 className='font-bold'>Enrollment : 210305105661</h5>
-                                    <h5 className='font-bold'>Card ID : 77108 (01690)</h5>
-                                    <h5 className='font-bold'>Bus Pass No : 23/S/0102/010</h5>
-                                    <h5 className='font-bold'>Department : BE-CSE</h5>
+                                <div className='flex flex-col space-y-3 justify-center'>
+                                    <h5 className='font-bold'>Name : {userData.Name}</h5>
+                                    <h5 className='font-bold'>Enrollment : {userData.Enrollment || userData.MIS_ID}</h5>
+                                    <h5 className='font-bold'>Card ID : {userData.Card_ID}</h5>
+                                    <h5 className='font-bold'>Bus Pass No : {userData.Bus_Pass_No}</h5>
+                                    <h5 className='font-bold'>Department : {userData.Department}</h5>
                                 </div>
                              <div className='flex flex-col space-y-5 justify-center'>
-                                    <h5 className='font-bold'>Institute : PIT-1</h5>
-                                    <h5 className='font-bold'>Shift Time : 09:30 - 17:00</h5>
-                                    <h5 className='font-bold'>Area : AREA-01</h5>
-                                    <h5 className='font-bold'>Contact : 8485974624</h5>
+                                    <h5 className='font-bold'>Institute : {userData.Institute}</h5>
+                                    <h5 className='font-bold'>Shift Time : {userData.Shift}</h5>
+                                    <h5 className='font-bold'>Area : {userData.Area}</h5>
+                                    <h5 className='font-bold'>Contact : {userData.Mobile}</h5>
                                     <h5 className='font-bold'>Valid Upto : 30-6-2024</h5>
                                 </div>
 

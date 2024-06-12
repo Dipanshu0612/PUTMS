@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -18,7 +19,7 @@ app.listen(3001, (res) => {
 });
 
 const url =
-  "mongodb+srv://dipanshuamishra06:9Tna7xJAsdI6RPeB@cluster0.0j2tmr7.mongodb.net/users_db";
+  `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASS}@cluster0.0j2tmr7.mongodb.net/users_db`;
 mongoose.connect(url).then(console.log("Connected to Database!"));
 
 app.post("/payment", async (req, res) => {
@@ -100,7 +101,10 @@ app.post('/removeUser',async (req,res)=>{
 app.post('/removeBus',async (req,res)=>{
   const {bus_number}=req.body;
   const data=await AllUsersModel.deleteOne({bus_number})
-  console.log(data)
 })
 
-
+app.post('/getUserInfo',async(req,res)=>{
+  const { user_id } = req.body;
+  let data = await AllUsersModel.findOne({"Enrollment":user_id})
+  res.send(data);
+})

@@ -25,7 +25,7 @@ export default function AdminHome() {
   return (
     <>
       <Admin_Dashboard />
-      <div className='top-[4.3rem] left-[14.6rem] absolute h-[90vh] w-5/6 bg-slate-200'>
+      <div className='top-[4.3rem] left-[13.1rem] absolute h-[90vh] w-5/6 bg-slate-200'>
         
           <div className='flex flex-col bg-white p-3 shadow-lg m-3'>
             <div className='flex space-x-2 text-center items-center text-blue-500'>

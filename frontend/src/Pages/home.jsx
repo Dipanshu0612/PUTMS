@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import { FaBus } from "react-icons/fa6";
@@ -9,8 +9,18 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdTime } from "react-icons/io";
 import My from "../assests/My.jpg"
+import axios from 'axios';
 
 export default function Home() {
+  const user_id = localStorage.getItem("user_id");
+  const [userData, setUserData] = useState({});
+  async function getUserInfo() {
+    let response = await axios.post("http://localhost:3001/getUserInfo", { user_id });
+    setUserData(response.data);
+  }
+  useEffect(() => {
+    getUserInfo();
+  })
 
   return (
     <>
@@ -20,17 +30,17 @@ export default function Home() {
         <div className='m-3 bg-slate-100 h-[45rem] w-1/4 shadow-lg flex space-y-2 flex-col items-center py-3 overflow-hidden cursor-pointer'>
           <img src={My} alt="UserIMG" className='border border-black object-cover rounded-full h-[15rem] w-[15rem]' />
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h2 className='hover:bg-gray-300 p-2 font-extrabold'>Dipanshu Mishra</h2>
+          <h2 className='hover:bg-gray-300 p-2 font-extrabold'>{userData.Name}</h2>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2'>B-Tech : CSE</h4>
+          <h4 className='hover:bg-gray-300 p-2'>{userData.Department}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2 font-semibold'>210305105661</h4>
+          <h4 className='hover:bg-gray-300 p-2 font-semibold'>{userData.Enrollment || userData.MIS_ID}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2'>Semester 6</h4>
+          <h4 className='hover:bg-gray-300 p-2'>Semester : {userData.Semester}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2  '>Mobile : 8485974624</h4>
+          <h4 className='hover:bg-gray-300 p-2  '>Mobile : {userData.Mobile}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2'>Area : Area-01</h4>
+          <h4 className='hover:bg-gray-300 p-2'>Area : {userData.Area}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
           <h4 className='hover:bg-gray-300 p-2'>Boarding Point : Maneja</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>

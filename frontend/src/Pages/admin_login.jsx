@@ -33,7 +33,7 @@ export default function AdminLogin() {
           <div className='flex flex-col m-[4rem]'>
             <img src={PU} alt="No" />
             <h3 className='font-bold text-center text-4xl mt-4'>Transport Management System</h3>
-            <img src={Bus} alt="No" className='h-[30rem]' />
+            <img src={Bus} alt="No" className='h-[25rem]' />
 
           </div>
         </div>
@@ -46,10 +46,10 @@ export default function AdminLogin() {
             <h3>Admin Login</h3>
           </div>
 
-          <div className='flex flex-col w-50 space-y-5 py-5 px-6 bg-blue-100 rounded-3xl'>
-            <input type="email" placeholder='User Id' value={user_id} className='bg-slate-100 rounded-sm px-2 py-1' onChange={(e) => setUserID(e.target.value)} required />
-            <input type="password" placeholder='Password' value={password} className='bg-slate-100 rounded-sm px-2 py-1' onChange={(e) => setPassword(e.target.value)} required />
-            <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700 ease-in-out transition' onClick={() => {
+          <div className='flex flex-col w-[20rem] h-[15rem] space-y-5 bg-slate-200 rounded-3xl items-center justify-center'>
+            <input type="email" placeholder='User Id' className='bg-slate-100 rounded-lg w-[80%] p-2' value={user_id} onChange={(e) => setUserID(e.target.value)} required />
+            <input type="password" placeholder='Password' className='bg-slate-100 rounded-lg w-[80%] p-2' value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <button className='bg-green-500 py-2 px-3 rounded-lg hover:bg-green-600 ease-in-out transition' onClick={() => {
               handleLogin()
             }}>Submit</button>
           </div>

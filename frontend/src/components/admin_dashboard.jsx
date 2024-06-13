@@ -8,10 +8,20 @@ import { FaUsers, FaBus } from "react-icons/fa6";
 import { FaLocationArrow, FaPlus, FaRupeeSign } from "react-icons/fa";
 import { MdNotificationsActive } from "react-icons/md";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import Footer from './footer';
+import { Sidenav, Nav, Toggle } from 'rsuite';
+import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
+import GroupIcon from '@rsuite/icons/legacy/Group';
+import MagicIcon from '@rsuite/icons/legacy/Magic';
+import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
+import 'rsuite/Sidenav/styles/index.css';
+import 'rsuite/Nav/styles/index.css';
 
 export default function Admin_Dashboard() {
     let [menuicon, changemenuicon] = useState(false);
     const [show, setShow] = useState(false);
+    const [expanded, setExpanded] = useState(true);
+  const [activeKey, setActiveKey] = useState('1');
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -26,7 +36,7 @@ export default function Admin_Dashboard() {
             </div>
 
 
-            <div className='h-[90vh] w-1/6 bg-gray-700 my-[0.01rem]'>
+            {/* <div className='h-[90vh] w-1/6 bg-gray-700 my-[0.01rem] fixed top-19 left-0'>
                 <ul className='flex flex-col flex-wrap justify-centre items-start p-0 admin text-xl'>
                     <li className="text-white cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/admin_home" activeClassName='active' className="!text-white flex items-center"><FaUsers className='mr-3 text-2xl'/> View All Users</Link></li>
                     <li className="text-white cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/all-Users" activeClassName='active' className="!text-white flex items-center"><FaPlus className='mr-3 text-2xl'/> Add User</Link></li>
@@ -37,7 +47,42 @@ export default function Admin_Dashboard() {
                     <li className="cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><a href="https://ums.paruluniversity.ac.in/" className='text-white flex'><FaLocationArrow className='mr-3 text-2xl'/>GNUMS</a></li>
                     <li className="cursor-pointer my-2 w-full p-2 font-semibold hover:bg-gray-900" ><Link to="/" activeClassName='active' className="!text-white flex"><RiLogoutBoxRLine className='mr-3 text-2xl'/>Logout</Link></li>
                 </ul>
-            </div>
+            </div> */}
+       <div className='w-[13rem] bg-gray-700 h-[90vh]'>     
+      <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} appearance='subtle' className='text-white'>
+        <Sidenav.Body className='bg-gray-700 hover:bg-gray-700'>
+          <Nav activeKey={activeKey} onSelect={setActiveKey} className=''>
+            <Nav.Item eventKey="1" icon={<DashboardIcon />} className='text-white'>
+              Dashboard
+            </Nav.Item>
+            <Nav.Item eventKey="2" icon={<GroupIcon />}>
+              User Group
+            </Nav.Item>
+            <Nav.Menu placement="rightStart" eventKey="3" title="Advanced" icon={<MagicIcon />}>
+              <Nav.Item eventKey="3-1">Geo</Nav.Item>
+              <Nav.Item eventKey="3-2">Devices</Nav.Item>
+              <Nav.Item eventKey="3-3">Loyalty</Nav.Item>
+              <Nav.Item eventKey="3-4">Visit Depth</Nav.Item>
+            </Nav.Menu>
+            <Nav.Menu
+              placement="rightStart"
+              eventKey="4"
+              title="Settings"
+              icon={<GearCircleIcon />}
+            >
+              <Nav.Item eventKey="4-1">Applications</Nav.Item>
+              <Nav.Item eventKey="4-2">Channels</Nav.Item>
+              <Nav.Item eventKey="4-3">Versions</Nav.Item>
+              <Nav.Menu eventKey="4-5" title="Custom Action">
+                <Nav.Item eventKey="4-5-1">Action Name</Nav.Item>
+                <Nav.Item eventKey="4-5-2">Action Params</Nav.Item>
+              </Nav.Menu>
+            </Nav.Menu>
+          </Nav>
+        </Sidenav.Body>
+        <Sidenav.Toggle onToggle={expanded => setExpanded(expanded)} />
+      </Sidenav>
+      </div>
         </>
     )
 }

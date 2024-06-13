@@ -53,16 +53,9 @@ app.get("/all-users", async (req, res) => {
 
 app.post("/verify_user", async (req, res) => {
   const { user_id, password } = req.body;
-  console.log(
-    "Received request for userID:",
-    user_id,
-    "with password:",
-    password
-  );
   const ID=user_id
   const user = await LoginModel.findOne({ ID });
-  console.log("User found in database:", user);
-  console.log(user.Password, password)
+
   
   if (user.Password == password){
     res.send({success:true,message:"Login Successful!"})
@@ -76,12 +69,6 @@ app.post("/verify_user", async (req, res) => {
 app.post("/verify_admin", async (req, res) => {
   // console.log("Hii")
   const { user_id, password } = req.body;
-  console.log(
-    "Received request for ADMIN:",
-    user_id,
-    "with password:",
-    password
-  );
   
   if ( user_id == "admin" && password == "admin123"){
     res.send({success:true,message:"Login Successful!"})
@@ -95,7 +82,6 @@ app.post("/verify_admin", async (req, res) => {
 app.post('/removeUser',async (req,res)=>{
   const {Mobile}=req.body;
   const data=await AllUsersModel.deleteOne({Mobile})
-  console.log(data)
 })
 
 app.post('/removeBus',async (req,res)=>{
@@ -106,5 +92,10 @@ app.post('/removeBus',async (req,res)=>{
 app.post('/getUserInfo',async(req,res)=>{
   const { user_id } = req.body;
   let data = await AllUsersModel.findOne({"Enrollment":user_id})
+  res.send(data);
+})
+app.post('/getBusInfo',async(req,res)=>{
+  const {busArea} = req.body;
+  let data = await AllBusModel.findOne({"Area":busArea});
   res.send(data);
 })

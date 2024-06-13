@@ -73,7 +73,7 @@ export default function AdminHome() {
             </div>
           </div>
       </div>
-      <Footer />
+      <Footer/>
     </>
   )
 }

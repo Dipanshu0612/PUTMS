@@ -14,9 +14,14 @@ import axios from 'axios';
 export default function Home() {
   const user_id = localStorage.getItem("user_id");
   const [userData, setUserData] = useState({});
+  const [busData, setBusData] = useState({});
+
   async function getUserInfo() {
     let response = await axios.post("http://localhost:3001/getUserInfo", { user_id });
     setUserData(response.data);
+    const busArea = response.data.Area;
+    let busResponse = await axios.post("http://localhost:3001/getBusInfo",{ busArea } );
+    setBusData(busResponse.data);
   }
   useEffect(() => {
     getUserInfo();
@@ -60,16 +65,16 @@ export default function Home() {
                 <h5 className='font-bold uppercase text-3xl'><GrBus className='inline mr-3 text-[2rem]' />Current Bus</h5>
                 <div className='h-[0.01rem] bg-black w-[100%]'></div>
                 <h4 className='text-center w-full text-[2.5rem] mt-3 tracking-widest'>GJ 06 BY</h4>
-                <h2 className='text-center w-full text-[5rem] font-extrabold tracking-wide'>5342</h2>
+                <h2 className='text-center w-full text-[5rem] font-extrabold tracking-wide'>{busData.Bus_Number}</h2>
 
               </div>
 
               <div className='flex w-2/3 flex-col justify-center space-y-2'>
-                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300'><TbUser className='inline mr-2 text-[2rem] justify-center' />Driver Name : Mr. Shailesh</h3>
+                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300'><TbUser className='inline mr-2 text-[2rem] justify-center' />Driver Name : {busData.Driver_Name}</h3>
                 <div className='h-[0.15rem] bg-slate-200 w-[100%]'></div>
-                <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300'><FaPhoneAlt className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Contact : 9876543210</h3>
+                <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300'><FaPhoneAlt className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Contact : {busData.Driver_Contact}</h3>
                 <div className='h-[0.15rem] bg-slate-200 w-[100%]'></div>
-                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300'><FaLocationDot className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Area : Area-01</h3>
+                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300'><FaLocationDot className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Area : {busData.Area}</h3>
                 <div className='h-[0.15rem] bg-slate-200 w-[100%]'></div>
                 <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300'><IoMdTime className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Departure Time : 5:15 PM</h3>
 

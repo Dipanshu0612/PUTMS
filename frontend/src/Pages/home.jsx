@@ -12,7 +12,7 @@ import My from "../assests/My.jpg"
 import axios from 'axios';
 
 export default function Home() {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = sessionStorage.getItem("user_id");
   const [userData, setUserData] = useState({});
   const [busData, setBusData] = useState({});
 
@@ -20,7 +20,7 @@ export default function Home() {
     let response = await axios.post("http://localhost:3001/getUserInfo", { user_id });
     setUserData(response.data);
     const busArea = response.data.Area;
-    let busResponse = await axios.post("http://localhost:3001/getBusInfo",{ busArea } );
+    let busResponse = await axios.post("http://localhost:3001/getBusInfo", { busArea });
     setBusData(busResponse.data);
   }
   useEffect(() => {

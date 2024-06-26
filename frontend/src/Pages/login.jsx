@@ -17,7 +17,7 @@ export default function Login() {
       const response = await axios.post('http://localhost:3001/verify_user', { user_id, password });
       if (response.data.success) {
         toast.success(response.data.message)
-        localStorage.setItem("user_id", user_id);
+        sessionStorage.setItem("user_id", user_id);
         navigate('/home')
       }
       else {

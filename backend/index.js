@@ -9,6 +9,7 @@ const Razorpay = require("razorpay");
 const AllBusModel = require("./Models/allbuses.jsx");
 const AllUsersModel = require("./Models/allusers.jsx");
 const LoginModel = require("./Models/loginmodel.jsx");
+const bycrypt = require("bcrypt");
 
 app.use(express.json());
 app.use(cors());
@@ -55,9 +56,9 @@ app.post("/verify_user", async (req, res) => {
   const { user_id, password } = req.body;
   const ID=user_id
   const user = await LoginModel.findOne({ ID });
-
+  const ValidPass = await bycrypt.compare(password, user.Password);
   
-  if (user.Password == password){
+  if (ValidPass){
     res.send({success:true,message:"Login Successful!"})
   }
   else{
@@ -99,3 +100,78 @@ app.post('/getBusInfo',async(req,res)=>{
   let data = await AllBusModel.findOne({"Area":busArea});
   res.send(data);
 })
+app.post("/forgot_pass", async (req, res) => {
+  try {
+    const { user_id } = req.body;
+    const user = await AllUsersModel.findOne({ Enrollment:user_id });
+    if (!user) {
+      res.json({success:false,message:"User Not Found!"});
+    }
+
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "dipanshu.a.mishra06@gmail.com",
+        pass: "xybatwjbiiossxlv",
+      },
+    });
+
+    const otp = Math.floor(Math.random() * 10000);
+
+    const mailOptions = {
+      from: "dipanshu.a.mishra06@gmail.com",
+      to: "dipanshu.a.mishra06@gmail.com",
+      subject: "Forgot Password OTP for PUTMS",
+      text: `Dear ${user.Name},\n\nYour OTP for the PUTMS Password Reset is:\n\n${otp}\n\nThe OTP is valid only for 5 minutes.\n\nThank You for using PUTMS!`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    let otpreg = await LoginModel.updateOne(
+      { ID:user_id },
+      { $set: { otp: otp.toString() } }
+    );
+    console.log(otpreg);
+
+    res.json({ success: true, message: "OTP Sent Successfully" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.json({ success: false, message: "Failed to Send OTP!!" });
+  }
+});
+app.post("/change_pass", async (req, res) => {
+  try {
+    const { user_id, newPass } = req.body;
+    const hashedpass = await bycrypt.hash(newPass, 10);
+    const user = await LoginModel.findOne({ ID:user_id });
+    if (!user) {
+      res.json({ success: false, message: "User Not Found!" });
+    }
+    let result = await LoginModel.updateOne({ID:user_id},{$set:{Password:hashedpass}});
+    if(result){
+      res.json({ success: true, message: "Password Changed Successfully" });
+    }
+    else{
+      res.json({ success: false, message: "Failed to Change Password" });
+    }
+  } catch (error) {
+    console.error("Error changing password:", error);
+    res.json({ success: false, message: "Failed to Change Password" });
+  }
+})
+app.post("/verify_otp", async (req, res) => {
+  try {
+    const { user_id, otp } = req.body;
+
+    const user = await LoginModel.findOne({ ID:user_id });
+
+    if (!user || user.otp !== otp) {
+      console.log(user, otp, user.otp);
+      res.json({ success: false, message: "Invalid OTP" });
+    } else {
+      res.send({ success: true, message: "OTP Verification Successful" });
+    }
+  } catch (error) {
+    console.error("Error verifying OTP:", error);
+  }
+});

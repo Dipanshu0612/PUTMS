@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import MainCarousel from '../components/carousel'
 import { NavLink as Link, Navigate, useNavigate } from 'react-router-dom'
 import PU from "../assests/PU.png"
 import Bus from "../assests/Bus.jpg"

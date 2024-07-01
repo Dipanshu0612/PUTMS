@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import MainCarousel from '../components/carousel'
 import { NavLink as Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from "react-toastify"
@@ -54,11 +53,12 @@ export default function Login() {
             <button className='bg-green-500 py-2 px-3 rounded-lg hover:bg-green-600 ease-in-out transition' onClick={() => {
               handleLogin()
             }}>Submit</button>
+            <h6 className='text-center font-medium'><Link to="/forgot-password" className="text-black no-underline hover:!text-blue-500 hover:!underline">Forgot Password ?</Link></h6> 
           </div>
 
           <div>
             <button className='bg-green-500 py-2 px-3 my-2 mx-2 rounded-lg hover:bg-green-600 ease-in-out transition '><Link to="/admin-login" className="text-black no-underline hover:text-white">Admin Login</Link></button>
-            <button className='bg-blue-500 py-2 px-3 my-2 mx-2 rounded-lg hover:bg-blue-700 ease-in-out transition '><Link to="/forgot-password" className="text-white no-underline hover:text-white">Forgot Password</Link></button>
+            {/* <button className='bg-blue-500 py-2 px-3 my-2 mx-2 rounded-lg hover:bg-blue-700 ease-in-out transition '><Link to="/forgot-password" className="text-white no-underline hover:text-white">Forgot Password</Link></button> */}
 
           </div>
 

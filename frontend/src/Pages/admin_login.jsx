@@ -4,6 +4,7 @@ import PU from "../assests/PU.png"
 import Bus from "../assests/Bus.jpg"
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import "../index.css"
 
 export default function AdminLogin() {
   const [user_id, setUserID] = useState('');
@@ -28,21 +29,16 @@ export default function AdminLogin() {
     <>
       <div className='flex justify-around h-screen w-full'>
 
-        <div className='w-1/2 min-h-fit overflow-hidden'>
-          <div className='flex flex-col m-[4rem]'>
-            <img src={PU} alt="No" />
-            <h3 className='font-bold text-center text-4xl mt-4'>Transport Management System</h3>
-            <img src={Bus} alt="No" className='h-[25rem]' />
-
-          </div>
+        <div className='w-1/2 min-h-fit overflow-hidden busimg'>
         </div>
 
         <div className='w-1/2 h-full bg-slate-100 flex items-center justify-center flex-col space-y-8'>
 
 
           <div className='flex flex-col items-center justify-center'>
-            <h1>Welcome to PUTMS</h1>
-            <h3>Admin Login</h3>
+          <img src={PU} alt="No" className='h-[5rem]'/>
+          <h3 className='font-bold text-center text-4xl mt-4'>Transport Management System</h3>
+          <h3>Admin Login</h3>
           </div>
 
           <div className='flex flex-col w-[20rem] h-[15rem] space-y-5 bg-slate-200 rounded-3xl items-center justify-center'>

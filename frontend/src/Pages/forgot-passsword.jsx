@@ -3,7 +3,7 @@ import { NavLink as Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from "react-toastify"
 import PU from "../assests/PU.png"
-import Bus from "../assests/Bus.jpg"
+import "../index.css"
 
 
 export default function Login() {
@@ -61,13 +61,13 @@ export default function Login() {
   return (
     <>
 
-      <div className='flex justify-around h-screen w-full'>
+      <div className='flex justify-around h-screen w-full fpbg'>
 
-        <div className='w-1/2 min-h-fit overflow-hidden'>
+        <div className='w-1/2 min-h-fit overflow-hidden '>
           <div className='flex flex-col m-[4rem]'>
             <img src={PU} alt="No" />
             <h3 className='font-bold text-center text-4xl mt-4'>Transport Management System</h3>
-            <img src={Bus} alt="No" className='h-[25rem]' />
+            <img src="https://www.shutterstock.com/image-vector/illustration-yellow-school-bus-flat-600nw-2246845245.jpg" alt="No" className='h-[25rem]' />
           </div>
         </div>
 
@@ -83,7 +83,7 @@ export default function Login() {
             {a === 1 ? <><input type="password" placeholder='Enter OTP' className='bg-slate-100 rounded-sm px-2 py-1 ' onChange={(e) => {
               setOtp(e.target.value)
             }} autoFocus="true"/>
-              <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg' onClick={verifyOTP} hidden={showNewPass}>Submit</button> </> : <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg' onClick={()=>{
+              <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700' onClick={verifyOTP} hidden={showNewPass}>Submit</button> </> : <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700' onClick={()=>{
                 submit();
                 setIsDisabled(true);
               }}>Send OTP</button>}
@@ -91,8 +91,9 @@ export default function Login() {
               setNewPass(e.target.value);
             }} autoFocus="true"/>
               <input type="password" placeholder='Confirm Password' className='bg-slate-100 rounded-sm px-2 py-1' onChange={(e) => { setConfirmPass(e.target.value) }} />
-              <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg' onClick={handleChangePass}>Change Password</button></>}
+              <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700' onClick={handleChangePass}>Change Password</button></>}
         </div>
+        <button className='bg-green-500 py-2 px-[0.5rem] mt-4 mx-5 rounded-lg hover:bg-green-700'><Link to="/" className="decoration-none text-black">User Login</Link></button>
 
         </div>
 

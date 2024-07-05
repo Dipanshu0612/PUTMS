@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Admin_Dashboard from '../components/admin_dashboard'
+// import Admin_Dashboard from '../components/admin_dashboard'
 import Footer from '../components/footer'
 import { FaBus } from 'react-icons/fa6'
 import Table from 'react-bootstrap/esm/Table'

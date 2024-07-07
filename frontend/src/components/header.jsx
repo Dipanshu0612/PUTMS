@@ -5,9 +5,6 @@ import { CgProfile } from "react-icons/cg";
 import PU2 from "../assests/PU2.png"
 import Header_dropdown from './header_dropdown';
 
-
-
-
 export default function Header() {
   let [menuicon, changemenuicon] = useState(false);
   let [showDrop, setShowDrop]= useState(false);

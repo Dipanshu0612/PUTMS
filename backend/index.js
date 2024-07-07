@@ -104,7 +104,10 @@ app.post('/getBusInfo',async(req,res)=>{
 app.post("/forgot_pass", async (req, res) => {
   try {
     const { user_id } = req.body;
-    const user = await AllUsersModel.findOne({ Enrollment:user_id });
+    let user = await AllUsersModel.findOne({ Enrollment:user_id });
+    if (!user) {
+      user=await AllUsersModel.findOne({ MIS_ID:user_id });
+    }
     if (!user) {
       res.json({success:false,message:"User Not Found!"});
     }

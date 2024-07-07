@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-// import Admin_Dashboard from '../components/admin_dashboard'
 import Footer from '../components/footer'
-import { FaUsers } from 'react-icons/fa6'
+import { FaPlus, FaUsers } from 'react-icons/fa6'
 import Table from 'react-bootstrap/esm/Table'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Admin_Sidebar from '../components/Admin_Sidebar'
 
 export default function AdminHome() {
   const [user_data, setUserData] = useState([])
@@ -24,9 +24,9 @@ export default function AdminHome() {
   }
   return (
     <>
-      <Admin_Dashboard />
-      <div className='top-[4.3rem] left-[13.1rem] absolute h-[90vh] w-5/6 bg-slate-200'>
-        
+    <Admin_Sidebar /> 
+    <div className='bg-slate-200'>
+      <div className=' bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>
           <div className='flex flex-col bg-white p-3 shadow-lg m-3'>
             <div className='flex space-x-2 text-center items-center text-blue-500'>
               <div className=''>
@@ -72,6 +72,10 @@ export default function AdminHome() {
               </Table>
             </div>
           </div>
+          <div className='flex justify-end mr-5'>
+                    <button className='bg-blue-500 p-2 w-[7rem] text-white flex items-center justify-center rounded-lg'><FaPlus className='mr-2'/>Add User</button>
+                    </div>
+      </div>
       </div>
       <Footer/>
     </>

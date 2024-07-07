@@ -58,11 +58,6 @@ p {
 #menuicon {
   display: none;
 }
-@media screen and (min-width: 801px) {
-  #nav {
-    display: block !important;
-  }
-}
 
 @media screen and (max-width: 800px) {
   #menuicon {

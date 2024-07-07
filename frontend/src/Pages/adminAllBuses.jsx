@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-// import Admin_Dashboard from '../components/admin_dashboard'
 import Footer from '../components/footer'
-import { FaBus } from 'react-icons/fa6'
+import { FaBus, FaPlus } from 'react-icons/fa6'
 import Table from 'react-bootstrap/esm/Table'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Admin_Sidebar from '../components/Admin_Sidebar'
 
 export default function AdminAllBuses() {
     const [bus_data, setBusData] = useState([])
@@ -12,7 +12,7 @@ export default function AdminAllBuses() {
         axios.get('http://localhost:3001/all-Buses')
             .then(bus => setBusData(bus.data))
             .catch(err => console.log(err))
-    })
+    },[])
 
     async function RemoveBus(bus_number) {
         let response = await axios.post("http://localhost:3001/removeBus", { bus_number })
@@ -22,11 +22,14 @@ export default function AdminAllBuses() {
     function ViewRoute() {
         toast.error("This feature is still in development!")
     }
+
+
+
     return (
         <>
-            <Admin_Dashboard />
-            <div className='top-[4.3rem] left-[13.1rem] absolute h-[90vh] w-5/6 bg-slate-200'>
-                <div className='bg-slate-200 p-3 m-2'>
+            <Admin_Sidebar />
+            <div className='bg-slate-200'>
+                <div className='bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>
                     <div className='flex flex-col bg-white p-3 shadow-lg'>
                         <div className='flex space-x-2 text-center items-center text-blue-500'>
                             <div className=''>
@@ -35,7 +38,6 @@ export default function AdminAllBuses() {
                             <h4 className='text-center font-semibold'>ALL BUSES INFORMATION</h4>
                         </div>
                         <div className='h-[0.1rem] bg-slate-200 w-[100%] mb-3'></div>
-
                         <div>
                             <Table striped bordered responsive hover variant="dark" className='text-center cursor-pointer'>
                                 <thead>
@@ -71,6 +73,10 @@ export default function AdminAllBuses() {
                                 </tbody>
                             </Table>
                         </div>
+
+                    </div>
+                    <div className='flex justify-end mr-5'>
+                    <button className='bg-blue-500 p-2 w-[7rem] text-white flex items-center justify-center rounded-lg'><FaPlus className='mr-2'/>Add Bus</button>
                     </div>
                 </div>
             </div>

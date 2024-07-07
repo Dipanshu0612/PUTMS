@@ -15,6 +15,7 @@ export default function AdminLogin() {
     try {
       const response = await axios.post('http://localhost:3001/verify_admin', { user_id, password });
       if (response.data.success) {
+        sessionStorage.setItem("user_id", user_id);
         navigate('/admin_home')
         toast.success(response.data.message)
       }

@@ -10,6 +10,7 @@ import BusPass from "./Pages/buspass";
 import AllBuses from "./Pages/allBuses";
 import AdminHome from "./Pages/adminHome";
 import AdminAllBuses from "./Pages/adminAllBuses";
+import AdminAllUsers from "./Pages/adminAllUsers";
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
         <Route path="/my-bus-pass" element={<BusPass />} />
         <Route path="/all-Buses" element={<AllBuses />} />
         <Route path="/admin_home" element={<AdminHome />} />
+        <Route path="/admin_all_users" element={<AdminAllUsers />} />
         <Route path="/admin_all_buses" element={<AdminAllBuses />} />
       </Routes>
     </Router>

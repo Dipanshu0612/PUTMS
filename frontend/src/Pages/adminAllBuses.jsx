@@ -76,7 +76,7 @@ export default function AdminAllBuses() {
 
                     </div>
                     <div className='flex justify-end mr-5'>
-                    <button className='bg-blue-500 p-2 w-[7rem] text-white flex items-center justify-center rounded-lg'><FaPlus className='mr-2'/>Add Bus</button>
+                    <button className='bg-blue-500 p-2 w-[7rem] text-white flex items-center justify-center rounded-lg hover:bg-blue-700    '><FaPlus className='mr-2'/>Add Bus</button>
                     </div>
                 </div>
             </div>

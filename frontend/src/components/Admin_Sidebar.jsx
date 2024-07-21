@@ -10,7 +10,8 @@ import { TbBus } from "react-icons/tb";
 import { GrTransaction } from "react-icons/gr";
 import { IoIosLogOut } from "react-icons/io";
 import { FaLocationArrow } from "react-icons/fa";
-
+import { toast } from "react-toastify"
+ 
 
 export default function Admin_Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +35,7 @@ export default function Admin_Sidebar() {
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <FaUserGroup />
-                        <Link to="/admin_home" activeClassName='active' className="text-white">Show Users</Link>
+                        <Link to="/admin_all_users" activeClassName='active' className="text-white">Show Users</Link>
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <TbBus />
@@ -52,9 +53,12 @@ export default function Admin_Sidebar() {
                         <FaLocationArrow />
                         <a href="https://ums.paruluniversity.ac.in" target='_blank' className='decoration-none text-white'>GNUMS</a>
                     </li>
-                    <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start" onClick={sessionStorage.removeItem("user_id")}>
+                    <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start" onClick={()=>{
+                            sessionStorage.removeItem("user_id")
+                            toast.success("Logout Successful!")
+                    }}>
                         <IoIosLogOut />
-                        <Link to="/home" activeClassName='active' className="text-white">Logout</Link>
+                        <Link to="/" activeClassName='active' className="text-white">Logout</Link>
                     </li>
                 </ul>
             </div>

@@ -12,7 +12,8 @@ const AllUsersSchema=new mongoose.Schema({
    Card_ID:String,
    Bus_Pass_No:String,
    Area:String,
-   Shift:String
+   Shift:String,
+   img_url:String
 })
 
 const myDB=mongoose.connection.useDb('users_db')

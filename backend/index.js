@@ -58,7 +58,7 @@ app.post("/verify_user", async (req, res) => {
   const user = await LoginModel.findOne({ ID });
   password=password.toString();
   const ValidPass = await bycrypt.compare(password, user.Password);
-  // console.log(ValidPass, typeof(user.Password), typeof(password));
+  // console.log(ValidPass, typeof(user.Password), typeof(password))
   if (ValidPass){
     res.send({success:true,message:"Login Successful!"})
   }

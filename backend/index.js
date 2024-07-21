@@ -1,5 +1,5 @@
 const express = require("express");
-require('dotenv').config();
+require("dotenv").config();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -19,8 +19,7 @@ app.listen(3001, (res) => {
   console.log("Listening on port 3001");
 });
 
-const url =
-  `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASS}@cluster0.0j2tmr7.mongodb.net/users_db`;
+const url = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASS}@cluster0.0j2tmr7.mongodb.net/users_db`;
 mongoose.connect(url).then(console.log("Connected to Database!"));
 
 app.post("/payment", async (req, res) => {
@@ -51,65 +50,60 @@ app.get("/all-users", async (req, res) => {
   res.send(data);
 });
 
-
 app.post("/verify_user", async (req, res) => {
   let { user_id, password } = req.body;
-  const ID=user_id
+  const ID = user_id;
   const user = await LoginModel.findOne({ ID });
-  password=password.toString();
+  password = password.toString();
   const ValidPass = await bycrypt.compare(password, user.Password);
   // console.log(ValidPass, typeof(user.Password), typeof(password))
-  if (ValidPass){
-    res.send({success:true,message:"Login Successful!"})
+  if (ValidPass) {
+    res.send({ success: true, message: "Login Successful!" });
+  } else {
+    res.send({ success: false, message: "Invalid Credentials!" });
   }
-  else{
-    res.send({success:false , message:"Invalid Credentials!"})
-  }
-
 });
 
 app.post("/verify_admin", async (req, res) => {
   // console.log("Hii")
   const { user_id, password } = req.body;
-  
-  if ( user_id == "admin" && password == "admin123"){
-    res.send({success:true,message:"Login Successful!"})
-  }
-  else{
-    res.send({success:false , message:"Invalid Credentials!"})
-  }
 
+  if (user_id == "admin" && password == "admin123") {
+    res.send({ success: true, message: "Login Successful!" });
+  } else {
+    res.send({ success: false, message: "Invalid Credentials!" });
+  }
 });
 
-app.post('/removeUser',async (req,res)=>{
-  const {Mobile}=req.body;
-  const data=await AllUsersModel.deleteOne({Mobile})
-})
+app.post("/removeUser", async (req, res) => {
+  const { Mobile } = req.body;
+  const data = await AllUsersModel.deleteOne({ Mobile });
+});
 
-app.post('/removeBus',async (req,res)=>{
-  const {bus_number}=req.body;
-  const data=await AllUsersModel.deleteOne({bus_number})
-})
+app.post("/removeBus", async (req, res) => {
+  const { bus_number } = req.body;
+  const data = await AllUsersModel.deleteOne({ bus_number });
+});
 
-app.post('/getUserInfo',async(req,res)=>{
+app.post("/getUserInfo", async (req, res) => {
   const { user_id } = req.body;
-  let data = await AllUsersModel.findOne({"Enrollment":user_id})
+  let data = await AllUsersModel.findOne({ Enrollment: user_id });
   res.send(data);
-})
-app.post('/getBusInfo',async(req,res)=>{
-  const {busArea} = req.body;
-  let data = await AllBusModel.findOne({"Area":busArea});
+});
+app.post("/getBusInfo", async (req, res) => {
+  const { busArea } = req.body;
+  let data = await AllBusModel.findOne({ Area: busArea });
   res.send(data);
-})
+});
 app.post("/forgot_pass", async (req, res) => {
   try {
     const { user_id } = req.body;
-    let user = await AllUsersModel.findOne({ Enrollment:user_id });
+    let user = await AllUsersModel.findOne({ Enrollment: user_id });
     if (!user) {
-      user=await AllUsersModel.findOne({ MIS_ID:user_id });
+      user = await AllUsersModel.findOne({ MIS_ID: user_id });
     }
     if (!user) {
-      res.json({success:false,message:"User Not Found!"});
+      res.json({ success: false, message: "User Not Found!" });
     }
 
     const transporter = nodemailer.createTransport({
@@ -132,7 +126,7 @@ app.post("/forgot_pass", async (req, res) => {
     await transporter.sendMail(mailOptions);
 
     let otpreg = await LoginModel.updateOne(
-      { ID:user_id },
+      { ID: user_id },
       { $set: { otp: otp.toString() } }
     );
     console.log(otpreg);
@@ -147,27 +141,29 @@ app.post("/change_pass", async (req, res) => {
   try {
     const { user_id, newPass } = req.body;
     const hashedpass = await bycrypt.hash(newPass, 10);
-    const user = await LoginModel.findOne({ ID:user_id });
+    const user = await LoginModel.findOne({ ID: user_id });
     if (!user) {
       res.json({ success: false, message: "User Not Found!" });
     }
-    let result = await LoginModel.updateOne({ID:user_id},{$set:{Password:hashedpass}});
-    if(result){
+    let result = await LoginModel.updateOne(
+      { ID: user_id },
+      { $set: { Password: hashedpass } }
+    );
+    if (result) {
       res.json({ success: true, message: "Password Changed Successfully" });
-    }
-    else{
+    } else {
       res.json({ success: false, message: "Failed to Change Password" });
     }
   } catch (error) {
     console.error("Error changing password:", error);
     res.json({ success: false, message: "Failed to Change Password" });
   }
-})
+});
 app.post("/verify_otp", async (req, res) => {
   try {
     const { user_id, otp } = req.body;
 
-    const user = await LoginModel.findOne({ ID:user_id });
+    const user = await LoginModel.findOne({ ID: user_id });
 
     if (!user || user.otp !== otp) {
       console.log(user, otp, user.otp);
@@ -177,5 +173,33 @@ app.post("/verify_otp", async (req, res) => {
     }
   } catch (error) {
     console.error("Error verifying OTP:", error);
+  }
+});
+app.post("/addNewUser", async (req, res) => {
+  try {
+    let {Name,Designation,Enrollment,Department,Mobile,Area,Shift,Institute} = req.body;
+    let Card_ID=Mobile.toString().slice(0,5) + " (" + Mobile.toString().slice(5,10) + ")";
+    let Bus_Pass_No="23/S/"+Enrollment.toString().slice(0,4)+"/"+Mobile.toString().slice(4,7);
+    Shift=Shift.toString().slice(10,Shift.length);
+    let newUser;
+    if(Designation=="Student"){
+      newUser = {Name, Designation, Enrollment, Department, Mobile, Institute, Card_ID, Bus_Pass_No, Area, Shift,img_url:""};
+    }
+    else{
+      let MIS_ID=Enrollment;
+      newUser = {Name, Designation, MIS_ID, Department, Mobile, Institute, Card_ID,Bus_Pass_No, Area, Shift,img_url:""};
+    }
+    let response = await AllUsersModel.create(newUser);
+    let response2=await LoginModel.create({ID:Enrollment, Password:"12345678", otp:""});
+    if(response && response2){
+      res.json({ success: true, message: "Success" });
+    }
+    else{
+      res.json({ success: false, message: "Failed" });
+    }
+
+  } catch (error) {
+    console.error("Error adding new user:", error);
+    res.json({ success: false, message: "Failed to Add New User!" });
   }
 });

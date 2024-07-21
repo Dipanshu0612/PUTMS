@@ -6,6 +6,8 @@ import { GoBellFill } from 'react-icons/go'
 import Footer from '../components/footer'
 import CountUp from 'react-countup'
 import axios from 'axios'
+import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
+        
 
 export default function AdminHome() {
   const [user_data, setUserData] = useState([])

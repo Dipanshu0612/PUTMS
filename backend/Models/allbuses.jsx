@@ -5,8 +5,8 @@ const AllBusesSchema=new mongoose.Schema({
     Driver_Name:String,
     Driver_Contact:Number,
     Area:String,
-    Starting_Point:String,
-    End_Point:String
+    End_Point:String,
+    Start_Point:String,
 })
 
 const myDB=mongoose.connection.useDb('users_db')

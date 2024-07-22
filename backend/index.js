@@ -6,8 +6,8 @@ const cors = require("cors");
 const app = express();
 const nodemailer = require("nodemailer");
 const Razorpay = require("razorpay");
-const AllBusModel = require("./Models/allbuses.jsx");
 const AllUsersModel = require("./Models/allusers.jsx");
+const AllBusModel = require("./Models/allbuses.jsx");
 const LoginModel = require("./Models/loginmodel.jsx");
 const bycrypt = require("bcrypt");
 
@@ -82,7 +82,14 @@ app.post("/removeUser", async (req, res) => {
 
 app.post("/removeBus", async (req, res) => {
   const { bus_number } = req.body;
-  const data = await AllUsersModel.deleteOne({ bus_number });
+  console.log(bus_number);
+  const data = await AllBusModel.deleteOne({ Bus_Number:bus_number });
+  if (data) {
+    console.log(data);
+    res.send({ success: true, message: "Bus Deleted Successfully!" });
+  } else {
+    res.send({ success: false, message: "Failed to Delete Bus!" });
+  }
 });
 
 app.post("/getUserInfo", async (req, res) => {
@@ -201,5 +208,23 @@ app.post("/addNewUser", async (req, res) => {
   } catch (error) {
     console.error("Error adding new user:", error);
     res.json({ success: false, message: "Failed to Add New User!" });
+  }
+});
+app.post("/addNewBus", async (req, res) => {
+  try {
+    let { Bus_Number, Driver_Name, Driver_Contact, Area, Start_Point, End_Point } = req.body;
+    let newBus = { Bus_Number, Driver_Name, Driver_Contact, Area, Start_Point, End_Point };
+    console.log(newBus);
+    let response = await AllBusModel.create(newBus);
+    if(response){
+      res.json({ success: true, message: "Success" });
+    }
+    else{
+      res.json({ success: false, message: "Failed" });
+    }
+
+  } catch (error) {
+    console.error("Error adding new bus!:", error);
+    res.json({ success: false, message: "Failed to Add New Bus!" });
   }
 });

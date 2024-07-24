@@ -51,29 +51,33 @@ export default function BusPass() {
                     </div>
                     <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
                     <div className='border border-black h-[22rem] my-3 hover:bg-slate-50' >
-                        <div className='h-[5.5rem] flex justify-between p-2 bg-green-600'>
+                        <div className='h-[5.5rem] flex justify-between py-2 px-4 bg-green-600'>
                             <img src={NAAC} alt="Naac" className='w-1/3 h-full p-1' />
                             <img src={PU3} alt="PuLogo" className='w-1/3 h-full' />
                         </div>
                         <div className='h-[16.5rem] flex p-2 space-x-2'>
+                            
                             <div className='w-1/3'>
-                                <img src={My} alt="UserIMG" className='border border-black object-cover rounded-lg' />
+                                <img src={user_id==210305105661 ? My : "https://thumbs.dreamstime.com/b/profile-pic-icon-isolated-white-background-your-web-mobile-app-design-133862807.jpg"} alt="UserIMG" className='border border-black object-cover rounded-lg mix-blend-multiply' />
                             </div>
-                            <div className='w-2/3 flex p-2 tracking-wide text-4xl gap-4'>
-                                <div className='flex flex-col space-y-3 justify-center'>
-                                    <h5 className='font-bold'>Name : {userData.Name}</h5>
-                                    <h5 className='font-bold'>Enrollment : {userData.Enrollment || userData.MIS_ID}</h5>
-                                    <h5 className='font-bold'>Card ID : {userData.Card_ID}</h5>
-                                    <h5 className='font-bold'>Bus Pass No : {userData.Bus_Pass_No}</h5>
-                                    <h5 className='font-bold'>Department : {userData.Department}</h5>
+                            <div className='w-2/3 flex p-2 tracking-wide text-4xl gap-4 relative mb-1'>
+                                <div className='flex flex-col space-y-5 justify-center mb-5'>
+                                    <h6 className='font-bold'>Name : {userData.Name}</h6>
+                                    <h6 className='font-bold'>Enrollment : {userData.Enrollment || userData.MIS_ID}</h6>
+                                    <h6 className='font-bold'>Card ID : {userData.Card_ID}</h6>
+                                    <h6 className='font-bold'>Bus Pass No : {userData.Bus_Pass_No}</h6>
+                                    <h6 className='font-bold'>Department : {userData.Department}</h6>
                                 </div>
-                                <div className='flex flex-col space-y-5 justify-center'>
-                                    <h5 className='font-bold'>Institute : {userData.Institute}</h5>
-                                    <h5 className='font-bold'>Shift Time : {userData.Shift}</h5>
-                                    <h5 className='font-bold'>Area : {userData.Area}</h5>
-                                    <h5 className='font-bold'>Contact : {userData.Mobile}</h5>
-                                    <h5 className='font-bold'>Valid Upto : 30-6-2024</h5>
+                                <div className='flex flex-col space-y-5 justify-center mb-5'>
+                                    <h6 className='font-bold'>Institute : {userData.Institute}</h6>
+                                    <h6 className='font-bold'>Shift Time : {userData.Shift} PM</h6>
+                                    <h6 className='font-bold'>Area : {userData.Area}</h6>
+                                    <h6 className='font-bold'>Contact : {userData.Mobile}</h6>
+                                    <h6 className='font-bold'>Valid Upto : 30-6-2025</h6>
                                 </div>
+                                <div className='flex absolute border border-black p-1 bottom-0 bg-green-500'>
+                                <h5 className='m-0'>{userData.Designation}</h5>
+                            </div>
 
                             </div>
                         </div>

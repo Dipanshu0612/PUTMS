@@ -93,9 +93,13 @@ app.post("/removeBus", async (req, res) => {
 });
 
 app.post("/getUserInfo", async (req, res) => {
-  const { user_id } = req.body;
-  let data = await AllUsersModel.findOne({ Enrollment: user_id });
-  res.send(data);
+  try {
+    const { user_id } = req.body;
+    let data = await AllUsersModel.findOne({ Enrollment: user_id });
+    res.send(data);
+  } catch (error) {
+    console.error("Error getting user info:", error);
+  }
 });
 app.post("/getBusInfo", async (req, res) => {
   const { busArea } = req.body;

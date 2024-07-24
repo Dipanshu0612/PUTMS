@@ -41,7 +41,7 @@ export default function Home() {
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
           <h4 className='hover:bg-gray-300 p-2 font-semibold'>{userData.Enrollment || userData.MIS_ID}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2'>{userData.Designation=="Student" ? `Semester ${userData.Semester}` : "Faculty"}</h4>
+          <h4 className='hover:bg-gray-300 p-2'>{userData.Designation=="Student" ? `Semester : ${userData.Semester}` : "Faculty"}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
           <h4 className='hover:bg-gray-300 p-2  '>Mobile : {userData.Mobile}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>

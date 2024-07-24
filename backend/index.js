@@ -95,7 +95,13 @@ app.post("/removeBus", async (req, res) => {
 app.post("/getUserInfo", async (req, res) => {
   try {
     const { user_id } = req.body;
-    let data = await AllUsersModel.findOne({ Enrollment: user_id });
+    let data;
+    if(user_id.length >5){
+      data = await AllUsersModel.findOne({ Enrollment: user_id });
+    }
+    else{
+      data = await AllUsersModel.findOne({ MIS_ID: user_id });
+    }
     res.send(data);
   } catch (error) {
     console.error("Error getting user info:", error);

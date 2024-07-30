@@ -22,7 +22,7 @@ export default function BusPass() {
         setUserData(response.data);
     }
         getUserInfo();
-    }, [])
+    }, [user_id])
 
     const openRazorpay = () => {
         let options = {
@@ -57,7 +57,7 @@ export default function BusPass() {
                         <div className='h-[16.5rem] flex p-2 space-x-2'>
 
                             <div className='w-1/3'>
-                                <img src={user_id == 210305105661 ? My : "https://thumbs.dreamstime.com/b/profile-pic-icon-isolated-white-background-your-web-mobile-app-design-133862807.jpg"} alt="UserIMG" className='border border-black object-cover rounded-lg mix-blend-multiply' />
+                                <img src={user_id === 210305105661 ? My : "https://thumbs.dreamstime.com/b/profile-pic-icon-isolated-white-background-your-web-mobile-app-design-133862807.jpg"} alt="UserIMG" className='border border-black object-cover rounded-lg mix-blend-multiply' />
                             </div>
                             <div className='w-2/3 flex p-2 tracking-wide text-4xl gap-4 relative mb-1'>
                                 <div className='flex flex-col space-y-5 justify-center mb-5'>

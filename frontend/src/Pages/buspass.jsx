@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import { FaAddressCard } from "react-icons/fa"
@@ -7,7 +7,6 @@ import NAAC from "../assests/NAAC.png"
 import My from "../assests/My.jpg"
 import { MdDownload } from "react-icons/md";
 import { FaRupeeSign } from "react-icons/fa";
-import { toast } from 'react-toastify'
 import axios from 'axios'
 import { usePDF } from 'react-to-pdf';
 
@@ -17,11 +16,11 @@ export default function BusPass() {
     const user_id = sessionStorage.getItem("user_id");
     const [userData, setUserData] = useState({});
     const { toPDF, targetRef } = usePDF({ filename: `${user_id}_BusPass.pdf` });
+    useEffect(() => {
     async function getUserInfo() {
         let response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
         setUserData(response.data);
     }
-    useEffect(() => {
         getUserInfo();
     }, [])
 

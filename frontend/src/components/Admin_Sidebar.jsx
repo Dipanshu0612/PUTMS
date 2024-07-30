@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { AiOutlineClose, AiOutlineMenu, AiOutlineNotification } from 'react-icons/ai';
 import { NavLink as Link } from 'react-router-dom';
-import { CgProfile } from "react-icons/cg";
 import PU2 from "../assests/PU2.png"
 import { RxDashboard } from "react-icons/rx";
 import "./Sidebar.css"
@@ -13,7 +12,7 @@ import { FaLocationArrow } from "react-icons/fa";
 import { toast } from "react-toastify"
  
 
-export default function Admin_Sidebar() {
+export default function AdminSidebar() {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
@@ -51,7 +50,7 @@ export default function Admin_Sidebar() {
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <FaLocationArrow />
-                        <a href="https://ums.paruluniversity.ac.in" target='_blank' className='decoration-none text-white'>GNUMS</a>
+                        <a href="https://ums.paruluniversity.ac.in" target='_blank' className='decoration-none text-white' rel='noreferrer'>GNUMS</a>
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start" onClick={()=>{
                             sessionStorage.removeItem("user_id")

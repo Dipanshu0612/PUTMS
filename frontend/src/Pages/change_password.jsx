@@ -6,7 +6,7 @@ import PU from "../assests/PU.png"
 import "../index.css"
 
 
-export default function Change_Password() {
+export default function ChangePassword() {
   let navigate = useNavigate();
   let [a, setA] = useState(0);
   const [user_id, setUserID] = useState();

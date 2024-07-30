@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { NavLink as Link, Navigate, useNavigate } from 'react-router-dom'
+import { NavLink as Link, useNavigate } from 'react-router-dom'
 import PU from "../assests/PU.png"
-import Bus from "../assests/Bus.jpg"
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import "../index.css"

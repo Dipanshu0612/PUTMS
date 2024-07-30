@@ -4,7 +4,7 @@ import { FaBus, FaPlus } from 'react-icons/fa6'
 import Table from 'react-bootstrap/esm/Table'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import Admin_Sidebar from '../components/Admin_Sidebar'
+import AdminSidebar from '../components/AdminSidebar'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -35,7 +35,7 @@ export default function AdminAllBuses() {
             Start_Point: newStartPoint,
             End_Point: newEndPoint
         })
-        if (response.data.message == "Success") {
+        if (response.data.message === "Success") {
             toast.success("New Bus Added Successfully!")
         }
         else {
@@ -64,7 +64,7 @@ export default function AdminAllBuses() {
 
     return (
         <>
-            <Admin_Sidebar />
+            <AdminSidebar />
             <div className='bg-slate-200'>
                 <div className='bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>
                     <div className='flex flex-col bg-white p-3 shadow-lg'>

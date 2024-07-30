@@ -11,7 +11,7 @@ import AllBuses from "./Pages/allBuses";
 import AdminHome from "./Pages/adminHome";
 import AdminAllBuses from "./Pages/adminAllBuses";
 import AdminAllUsers from "./Pages/adminAllUsers";
-import Change_Password from "./Pages/change_password";
+import ChangePassword from "./Pages/change_password";
 
 function App() {
   
@@ -22,7 +22,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/change-password" element={<Change_Password />} />
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/forgot-password" element={<ForgotPasssword />} />
         <Route path="/my-bus-pass" element={<BusPass />} />
         <Route path="/all-Buses" element={<AllBuses />} />

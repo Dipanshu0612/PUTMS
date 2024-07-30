@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Admin_Sidebar from '../components/Admin_Sidebar'
-import { FaPlus, FaUsers } from 'react-icons/fa6'
+import AdminSidebar from '../components/AdminSidebar'
 import { RxDashboard } from 'react-icons/rx'
 import { GoBellFill } from 'react-icons/go'
 import Footer from '../components/footer'
 import CountUp from 'react-countup'
 import axios from 'axios'
-import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 
 
 export default function AdminHome() {
@@ -24,7 +22,7 @@ export default function AdminHome() {
 
   return (
     <>
-      <Admin_Sidebar />
+      <AdminSidebar />
       <div className='bg-slate-200'>
         <div className='bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>
           <div className='flex flex-col bg-white p-3 shadow-lg m-3'>

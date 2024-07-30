@@ -3,7 +3,7 @@ import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { NavLink as Link } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg";
 import PU2 from "../assests/PU2.png"
-import Header_dropdown from './header_dropdown';
+import HeaderDropdown from './header_dropdown';
 
 export default function Header() {
   let [menuicon, changemenuicon] = useState(false);
@@ -29,7 +29,7 @@ export default function Header() {
             setShowDrop((prev) => !prev)
           }}><CgProfile className='text-2xl'/></li>
           </ul>
-        {showDrop && <Header_dropdown />}
+        {showDrop && <HeaderDropdown />}
         </div>
 
         {menuicon ? <AiOutlineClose id='menuicon' onClick={() => {

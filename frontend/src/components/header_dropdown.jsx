@@ -1,7 +1,7 @@
 import React from 'react'
 import {useNavigate} from "react-router-dom"
 
-export default function Header_dropdown() {
+export default function HeaderDropdown() {
     let navigate=useNavigate();
   return (
     <div className='flex flex-col w-[10rem] h-fit absolute top-[4.3rem] right-0 bg-gray-800 justify-center items-center'>

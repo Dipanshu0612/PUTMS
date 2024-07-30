@@ -3,7 +3,6 @@ import { NavLink as Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from "react-toastify"
 import PU from "../assests/PU.png"
-import Bus2 from "../assests/Bus2.jpg"
 import "../index.css"
 
 

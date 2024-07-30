@@ -13,7 +13,7 @@ export default function AdminLogin() {
 
   const handleLogin = async (e) => {
     try {
-      const response = await axios.post('http://localhost:3001/verify_admin', { user_id, password });
+      const response = await axios.post('https://putms.onrender.com/verify_admin', { user_id, password });
       if (response.data.success) {
         sessionStorage.setItem("user_id", user_id);
         navigate('/admin_home')
@@ -37,9 +37,9 @@ export default function AdminLogin() {
 
 
           <div className='flex flex-col items-center justify-center'>
-          <img src={PU} alt="No" className='h-[5rem]'/>
-          <h3 className='font-bold text-center text-4xl mt-4'>Transport Management System</h3>
-          <h3>Admin Login</h3>
+            <img src={PU} alt="No" className='h-[5rem]' />
+            <h3 className='font-bold text-center text-4xl mt-4'>Transport Management System</h3>
+            <h3>Admin Login</h3>
           </div>
 
           <div className='flex flex-col w-[20rem] h-[15rem] space-y-5 bg-slate-200 rounded-3xl items-center justify-center'>

@@ -18,7 +18,7 @@ export default function BusPass() {
     const [userData, setUserData] = useState({});
     const { toPDF, targetRef } = usePDF({ filename: `${user_id}_BusPass.pdf` });
     async function getUserInfo() {
-        let response = await axios.post("http://localhost:3001/getUserInfo", { user_id });
+        let response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
         setUserData(response.data);
     }
     useEffect(() => {
@@ -56,9 +56,9 @@ export default function BusPass() {
                             <img src={PU3} alt="PuLogo" className='w-1/3 h-full' />
                         </div>
                         <div className='h-[16.5rem] flex p-2 space-x-2'>
-                            
+
                             <div className='w-1/3'>
-                                <img src={user_id==210305105661 ? My : "https://thumbs.dreamstime.com/b/profile-pic-icon-isolated-white-background-your-web-mobile-app-design-133862807.jpg"} alt="UserIMG" className='border border-black object-cover rounded-lg mix-blend-multiply' />
+                                <img src={user_id == 210305105661 ? My : "https://thumbs.dreamstime.com/b/profile-pic-icon-isolated-white-background-your-web-mobile-app-design-133862807.jpg"} alt="UserIMG" className='border border-black object-cover rounded-lg mix-blend-multiply' />
                             </div>
                             <div className='w-2/3 flex p-2 tracking-wide text-4xl gap-4 relative mb-1'>
                                 <div className='flex flex-col space-y-5 justify-center mb-5'>
@@ -76,8 +76,8 @@ export default function BusPass() {
                                     <h6 className='font-bold'>Valid Upto : 30-6-2025</h6>
                                 </div>
                                 <div className='flex absolute border border-black p-1 bottom-0 bg-green-500'>
-                                <h5 className='m-0'>{userData.Designation}</h5>
-                            </div>
+                                    <h5 className='m-0'>{userData.Designation}</h5>
+                                </div>
 
                             </div>
                         </div>

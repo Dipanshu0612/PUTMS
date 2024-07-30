@@ -13,11 +13,11 @@ import Form from 'react-bootstrap/Form';
 export default function AdminAllBuses() {
     const [bus_data, setBusData] = useState([])
     const [show, setShow] = useState(false);
-    const [newBusNo,setNewBusNo]=useState('');
-    const [newDriverName,setNewDriverName]=useState('');
-    const [newDriverContact,setNewDriverContact]=useState('');
-    const [newStartPoint,setNewStartPoint]=useState('');
-    const [newEndPoint,setNewEndPoint]=useState('');
+    const [newBusNo, setNewBusNo] = useState('');
+    const [newDriverName, setNewDriverName] = useState('');
+    const [newDriverContact, setNewDriverContact] = useState('');
+    const [newStartPoint, setNewStartPoint] = useState('');
+    const [newEndPoint, setNewEndPoint] = useState('');
     const [selectedArea, setSelectedArea] = useState('');
     const handleClose = () => setShow(false);
     const handleShow = () => {
@@ -27,7 +27,7 @@ export default function AdminAllBuses() {
         setSelectedArea(e.target.value);
     }
     async function handleAddNewBus() {
-        let response = await axios.post("http://localhost:3001/addNewBus", {
+        let response = await axios.post("https://putms.onrender.com/addNewBus", {
             Bus_Number: newBusNo,
             Driver_Name: newDriverName,
             Driver_Contact: newDriverContact,
@@ -35,23 +35,24 @@ export default function AdminAllBuses() {
             Start_Point: newStartPoint,
             End_Point: newEndPoint
         })
-        if(response.data.message=="Success"){
-          toast.success("New Bus Added Successfully!")
+        if (response.data.message == "Success") {
+            toast.success("New Bus Added Successfully!")
         }
-        else{
-        toast.error("Failed to Add New Bus!")}
+        else {
+            toast.error("Failed to Add New Bus!")
+        }
         setShow(false)
         setSelectedArea('')
-      
-      }
+
+    }
     useEffect(() => {
-        axios.get('http://localhost:3001/all-Buses')
+        axios.get('https://putms.onrender.com/all-Buses')
             .then(bus => setBusData(bus.data))
             .catch(err => console.log(err))
     })
 
     async function RemoveBus(bus_number) {
-        let response = await axios.post("http://localhost:3001/removeBus", { bus_number })
+        let response = await axios.post("https://putms.onrender.com/removeBus", { bus_number })
         toast.success(response.data.message)
     }
 

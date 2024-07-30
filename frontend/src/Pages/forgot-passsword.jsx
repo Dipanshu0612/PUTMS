@@ -8,7 +8,7 @@ import "../index.css"
 
 export default function Login() {
   let navigate = useNavigate();
-  let [a,setA]=useState(0);
+  let [a, setA] = useState(0);
   const [user_id, setUserID] = useState();
   let [newPass, setNewPass] = useState('');
   let [confirmPass, setConfirmPass] = useState('');
@@ -21,7 +21,7 @@ export default function Login() {
     cursor: isDisabled ? 'not-allowed' : 'auto',
   };
   async function submit() {
-    let response = await axios.post('http://localhost:3001/forgot_pass', { user_id });
+    let response = await axios.post('https://putms.onrender.com/forgot_pass', { user_id });
     if (response.data.success) {
       setA((a) => 1 - a)
       toast.success(response.data.message);
@@ -32,7 +32,7 @@ export default function Login() {
   }
 
   async function verifyOTP() {
-    let response = await axios.post('http://localhost:3001/verify_otp', { user_id, otp });
+    let response = await axios.post('https://putms.onrender.com/verify_otp', { user_id, otp });
     if (response.data.success) {
       setIsDisabled(true);
       setShowNewPass(true);
@@ -48,7 +48,7 @@ export default function Login() {
       toast.error("Passwords do not match");
       return;
     }
-    let response = await axios.post('http://localhost:3001/change_pass', { user_id, newPass });
+    let response = await axios.post('https://putms.onrender.com/change_pass', { user_id, newPass });
     if (response.data.success) {
       toast.success(response.data.message);
       navigate('/');
@@ -78,22 +78,22 @@ export default function Login() {
             <h3>Forgot Password</h3>
           </div>
 
-          <div className='flex flex-col w-50 space-y-4 py-4 px-6 bg-slate-200 rounded-3xl shadow-2xl'> 
-          <input type="text" placeholder='User ID' className='bg-slate-100 rounded-sm px-2 py-1 ' value={user_id} onChange={(e) => setUserID(e.target.value)} required disabled={isDisabled} style={inputStyle}/>
+          <div className='flex flex-col w-50 space-y-4 py-4 px-6 bg-slate-200 rounded-3xl shadow-2xl'>
+            <input type="text" placeholder='User ID' className='bg-slate-100 rounded-sm px-2 py-1 ' value={user_id} onChange={(e) => setUserID(e.target.value)} required disabled={isDisabled} style={inputStyle} />
             {a === 1 ? <><input type="password" placeholder='Enter OTP' className='bg-slate-100 rounded-sm px-2 py-1 ' onChange={(e) => {
               setOtp(e.target.value)
-            }} autoFocus="true"/>
-              <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700' onClick={verifyOTP} hidden={showNewPass}>Submit</button> </> : <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700' onClick={()=>{
+            }} autoFocus="true" />
+              <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700' onClick={verifyOTP} hidden={showNewPass}>Submit</button> </> : <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700' onClick={() => {
                 submit();
                 setIsDisabled(true);
               }}>Send OTP</button>}
             {showNewPass && <><input type="password" placeholder='New Password' className='bg-slate-100 rounded-sm px-2 py-1 ' onChange={(e) => {
               setNewPass(e.target.value);
-            }} autoFocus="true"/>
+            }} autoFocus="true" />
               <input type="password" placeholder='Confirm Password' className='bg-slate-100 rounded-sm px-2 py-1' onChange={(e) => { setConfirmPass(e.target.value) }} />
               <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700' onClick={handleChangePass}>Change Password</button></>}
-        </div>
-        <button className='bg-green-500 py-2 px-[0.5rem] mt-4 mx-5 rounded-lg hover:bg-green-700'><Link to="/" className="decoration-none text-black">User Login</Link></button>
+          </div>
+          <button className='bg-green-500 py-2 px-[0.5rem] mt-4 mx-5 rounded-lg hover:bg-green-700'><Link to="/" className="decoration-none text-black">User Login</Link></button>
 
         </div>
 

@@ -33,7 +33,7 @@ export default function Home() {
 
       <div className='main h-[50rem] bg-slate-200 flex'>
         <div className='m-3 bg-slate-100 h-[45rem] w-1/4 shadow-lg flex space-y-2 flex-col items-center py-3 overflow-hidden cursor-pointer'>
-          <img src={user_id === 210305105661 ? My : "https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png"} alt="UserIMG" className='border border-black object-cover rounded-full h-[15rem] w-[15rem] mix-blend-normal' />
+          <img src={user_id === "210305105661" ? My : "https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png"} alt="UserIMG" className='border border-black object-cover rounded-full h-[15rem] w-[15rem] mix-blend-normal' />
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
           <h2 className='hover:bg-gray-300 p-2 font-extrabold'>{userData.Name}</h2>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>

@@ -25,7 +25,7 @@ export default function Home() {
       setBusData(busResponse.data);
     }
     getUserInfo();
-  }, [])
+  }, [user_id])
 
   return (
     <>

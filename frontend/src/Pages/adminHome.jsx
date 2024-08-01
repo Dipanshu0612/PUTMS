@@ -5,19 +5,28 @@ import { GoBellFill } from 'react-icons/go'
 import Footer from '../components/footer'
 import CountUp from 'react-countup'
 import axios from 'axios'
+import { AiOutlineClose } from 'react-icons/ai'
 
 
 export default function AdminHome() {
   const [user_data, setUserData] = useState([])
   const [bus_data, setBusData] = useState([])
+  const [notificationData, setNotification] = useState([]);
+
   useEffect(() => {
-    axios.get('https://putms.onrender.com/all-users')
+    axios.get('http://localhost:3001/all-users')
       .then(user => setUserData(user.data))
       .catch(err => console.log(err))
 
-    axios.get('https://putms.onrender.com/all-buses')
+    axios.get('http://localhost:3001/all-buses')
       .then(bus => setBusData(bus.data))
       .catch(err => console.log(err))
+
+    axios.get("http://localhost:3001/get_notifications").then((res) => {
+      setNotification(res.data);
+    }).catch((err) => {
+      console.log(err);
+    });
   })
 
   return (
@@ -70,8 +79,15 @@ export default function AdminHome() {
                 <h4 className='text-center font-semibold'>NOTICE</h4>
               </div>
               <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
-              <div className='w-full h-[10rem] my-3'>
-                <h4>There are currently no Notices! </h4>
+              <div className='w-full h-[10rem] my-3 overflow-y-scroll'>
+              {notificationData.map((item, index) => {
+                return (
+                  <div key={index} className='px-2 py-1 m-1 rounded-md cursor-pointer bg-blue-50 flex justify-between'>
+                    <h6 className='hover:underline text-blue-500'>{item.title}</h6>
+                    <button className='bg-blue-500 p-1 mr-2'><AiOutlineClose /></button>
+                  </div>
+                )
+              })}
               </div>
             </div>
           </div>

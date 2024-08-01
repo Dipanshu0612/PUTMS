@@ -20,7 +20,8 @@ export default function AdminAllUsers() {
   const [newUserEnrollment, setNewUserEnrollment] = useState('');
   const [newUserDepartment, setNewUserDepartment] = useState('');
   const [newUserMobile, setNewUserMobile] = useState('');
-  const [newUserInstitude, setNewUserInstitude] = useState('');
+  const [newUserInstitute, setNewUserInstitute] = useState('');
+  const [newUserBoard, setNewUserBoard] = useState('');
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setShow(true)
@@ -32,7 +33,7 @@ export default function AdminAllUsers() {
     setSelectedShift(e.target.value);
   }
   async function handleAddNewUser() {
-    let response = await axios.post("https://putms.onrender.com/addNewUser", {
+    let response = await axios.post("http://localhost:3001/addNewUser", {
       Name: newUserName,
       Designation: newUserDesignation,
       Enrollment: newUserEnrollment,
@@ -40,7 +41,8 @@ export default function AdminAllUsers() {
       Mobile: newUserMobile,
       Area: selectedArea,
       Shift: selectedShift,
-      Institute: newUserInstitude
+      Institute: newUserInstitute,
+      Boarding_Point: newUserBoard
     })
     if (response.data.message === "Success") {
       toast.success("New User Added Successfully!")
@@ -54,13 +56,13 @@ export default function AdminAllUsers() {
 
   }
   useEffect(() => {
-    axios.get('https://putms.onrender.com/all-users')
+    axios.get('http://localhost:3001/all-users')
       .then(user => setUserData(user.data))
       .catch(err => console.log(err))
   })
 
   async function RemoveUser(Mobile) {
-    let response = await axios.post("https://putms.onrender.com/removeUser", { Mobile })
+    let response = await axios.post("http://localhost:3001/removeUser", { Mobile })
     console.log(response.data)
   }
 
@@ -126,16 +128,16 @@ export default function AdminAllUsers() {
         </div>
       </div>
 
-      <Modal show={show} onHide={handleClose} className='overflow-visible'>
+      <Modal show={show} onHide={handleClose} className='overflow-scroll'>
         <Modal.Header closeButton>
           <Modal.Title>Add New User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className='flex flex-col space-y-2 p-4 bg-gray-200 rounded-md'>
+          <div className='flex flex-col space-y-2 p-4 bg-gray-200 rounded-md overflow-y-scroll'>
             <input type="text" name="Name" id="Name" placeholder="Enter Name" className='p-2 rounded-md border border-black' autoFocus autoComplete='off' onChange={(e) => setNewUserName(e.target.value)} />
             <input type="text" name="Designation" id="Designation" placeholder="Enter Designation" className='p-2 rounded-md border border-black' autoComplete='off' onChange={(e) => setNewUserDesignation(e.target.value)} />
             <input type="text" name="ID" id="ID" placeholder="Enter Enrollment / MIS ID" className='p-2 rounded-md border border-black' autoComplete='off' onChange={(e) => setNewUserEnrollment(e.target.value)} />
-            <input type="text" name="Institute" id="Institute" placeholder="Enter Institute Code" className='p-2 rounded-md border border-black' autoComplete='off' onChange={(e) => setNewUserInstitude(e.target.value)} />
+            <input type="text" name="Institute" id="Institute" placeholder="Enter Institute Code" className='p-2 rounded-md border border-black' autoComplete='off' onChange={(e) => setNewUserInstitute(e.target.value)} />
             <input type="text" name="Department" id="Department" placeholder="Enter Department" className='p-2 rounded-md border border-black' autoComplete='off' onChange={(e) => setNewUserDepartment(e.target.value)} />
             <input type="text" name="Mobile" id="Mobile" placeholder="Enter Mobile" className='p-2 rounded-md border border-black' autoComplete='off' onChange={(e) => setNewUserMobile(e.target.value)} />
             <Form.Select className='border border-black' onChange={handleSelectChange} value={selectedArea}>
@@ -148,6 +150,7 @@ export default function AdminAllUsers() {
               <option value="AREA-06">AREA-06</option>
               <option value="AREA-07">AREA-07</option>
             </Form.Select>
+            <input type="text" name="Boarding_Point" id="Boarding_Point" placeholder="Enter Boarding Point" className='p-2 rounded-md border border-black' autoComplete='off' onChange={(e) => setNewUserBoard(e.target.value)} />
             <Form.Select className='border border-black' onChange={handleSelectChange2} value={selectedShift}>
               <option value="">Select Shift</option>
               <option>Morning : 07:30 - 14:30</option>

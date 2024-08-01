@@ -12,6 +12,7 @@ import AdminHome from "./Pages/adminHome";
 import AdminAllBuses from "./Pages/adminAllBuses";
 import AdminAllUsers from "./Pages/adminAllUsers";
 import ChangePassword from "./Pages/change_password";
+import PushNotification from "./Pages/push_notification";
 
 function App() {
   
@@ -29,6 +30,7 @@ function App() {
         <Route path="/admin_home" element={<AdminHome />} />
         <Route path="/admin_all_users" element={<AdminAllUsers />} />
         <Route path="/admin_all_buses" element={<AdminAllBuses />} />
+        <Route path="/push_notification" element={<PushNotification />} />
       </Routes>
     </Router>
     <ToastContainer

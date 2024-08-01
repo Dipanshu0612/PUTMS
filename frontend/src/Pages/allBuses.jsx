@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 export default function AllBuses() {
   const [bus_data, setBusData] = useState([])
   useEffect(() => {
-    axios.get('https://putms.onrender.com/all-Buses')
+    axios.get('http://localhost:3001/all-Buses')
       .then(bus => setBusData(bus.data))
       .catch(err => console.log(err))
   })

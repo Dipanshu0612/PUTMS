@@ -13,7 +13,8 @@ const AllUsersSchema=new mongoose.Schema({
    Bus_Pass_No:String,
    Area:String,
    Shift:String,
-   img_url:String
+   img_url:String,
+   Boarding_Point:String,
 })
 
 const myDB=mongoose.connection.useDb('users_db')

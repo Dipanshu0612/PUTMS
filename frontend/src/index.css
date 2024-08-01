@@ -7,7 +7,6 @@
   margin: 0;
   padding: 0;
   font-family: 'PT Serif', serif;
-
 }
 body {
   /* background-color: antiquewhite; */
@@ -15,13 +14,11 @@ body {
   font-family: 'PT Serif', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+}
+textarea{
+  resize: none!important;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-} */
 .busimg{
   background-image: url(https://www.collegesamachar.com/uploads/colleges/gallery/733/1650958696transport-of-parul-university-vadodaratransport.jpg);
   background-size: cover;

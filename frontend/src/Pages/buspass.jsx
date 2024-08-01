@@ -18,7 +18,7 @@ export default function BusPass() {
     const { toPDF, targetRef } = usePDF({ filename: `${user_id}_BusPass.pdf` });
     useEffect(() => {
         async function getUserInfo() {
-            let response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
+            let response = await axios.post("http://localhost:3001/getUserInfo", { user_id });
             setUserData(response.data);
         }
         getUserInfo();

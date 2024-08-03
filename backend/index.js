@@ -271,4 +271,17 @@ app.get("/get_notifications", async (req, res) => {
     console.error("Error getting notifications:", error);
   }
 });
+app.post("/delete_notification", async (req, res) => {
+  try {
+    const { title } = req.body;
+    let data = await NotificationModel.deleteOne({ title });
+    if (data) {
+      res.json({ success: true, message: "Notification Deleted Successfully!" });
+    } else {
+      res.json({ success: false, message: "Failed to Delete Notification!" });
+    }
+  } catch (error) {
+    console.error("Error deleting notification:", error);
+  }
+});
     

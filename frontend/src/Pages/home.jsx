@@ -108,8 +108,8 @@ export default function Home() {
             <div className='w-full h-[15rem] my-3 overflow-y-scroll'>
               {notificationData.map((item, index) => {
                 return (
-                  <div key={index} className='px-2 py-1 m-1 rounded-md cursor-pointer bg-blue-50 '>
-                    <h6 className='hover:underline text-blue-500'>{item.title}</h6>
+                  <div key={index} className='px-2 py-2 m-2 rounded-md cursor-pointer bg-blue-100 '>
+                    <h6 className='hover:underline text-blue-500 m-0'>{item.title}</h6>
                   </div>
                 )
               })}

@@ -8,12 +8,20 @@ import axios from 'axios'
 import { AiOutlineClose } from 'react-icons/ai'
 import { toast } from 'react-toastify'
 import { NavLink as Link } from 'react-router-dom'
-
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 export default function AdminHome() {
   const [user_data, setUserData] = useState([])
   const [bus_data, setBusData] = useState([])
   const [notificationData, setNotification] = useState([]);
+  const [curr_notification, setCurrNotification] = useState({
+    title: "",
+    message: ""
+  });
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     axios.get('http://localhost:3001/all-users')
@@ -29,7 +37,7 @@ export default function AdminHome() {
     }).catch((err) => {
       console.log(err);
     });
-  },[user_data, bus_data])
+  }, [user_data, bus_data])
 
   const handleDeleteNotification = async (title) => {
     let response = await axios.post("http://localhost:3001/delete_notification", { title })
@@ -91,16 +99,33 @@ export default function AdminHome() {
               </div>
               <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
               <div className='w-full h-[9rem] my-3 overflow-y-scroll'>
-              {notificationData.map((item, index) => {
-                return (
-                  <div key={index} className='px-2 py-2 m-2 rounded-md cursor-pointer bg-blue-100 flex justify-between'>
-                    <h6 className='hover:underline text-blue-500 m-0'>{item.title}</h6>
-                    <button className='bg-blue-500 p-1 mr-2' onClick={()=>{
-                      handleDeleteNotification(item.title);
-                    }}><AiOutlineClose /></button>
-                  </div>
-                )
-              })}
+                {notificationData.map((item, index) => {
+                  return (
+                    <div key={index} className='px-2 py-2 m-2 rounded-md cursor-pointer bg-blue-100 flex justify-between'>
+                      <h6 className='hover:underline text-blue-500 m-0' onClick={()=>{
+                        setCurrNotification({
+                          title: item.title,
+                          message: item.message
+                        });
+                        handleShow();
+                      }}>{item.title}</h6>
+                      <button className='bg-blue-500 p-1 mr-2' onClick={() => {
+                        handleDeleteNotification(item.title);
+                      }}><AiOutlineClose /></button>
+                    </div>
+                  )
+                })}
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>{curr_notification.title}</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>{curr_notification.message}</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="danger" onClick={handleClose}>
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
               </div>
               <div className='flex justify-center items-center'>
                 <button className='bg-blue-500 rounded-sm py-2 hover:bg-blue-700 ease-in-out transition-all'><Link to="/push_notification" className="text-white p-2">Push Notification</Link></button>

@@ -11,6 +11,10 @@ import { IoMdTime } from "react-icons/io";
 import My from "../assests/My.jpg"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+
 
 export default function Home() {
   const user_id = sessionStorage.getItem("user_id");
@@ -18,7 +22,13 @@ export default function Home() {
   const [busData, setBusData] = useState({});
   const [notificationData, setNotification] = useState([]);
   const navigate = useNavigate();
-
+  const [curr_notification, setCurrNotification] = useState({
+    title: "",
+    message: ""
+  });
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     async function getUserInfo() {
@@ -109,10 +119,27 @@ export default function Home() {
               {notificationData.map((item, index) => {
                 return (
                   <div key={index} className='px-2 py-2 m-2 rounded-md cursor-pointer bg-blue-100 '>
-                    <h6 className='hover:underline text-blue-500 m-0'>{item.title}</h6>
+                    <h6 className='hover:underline text-blue-500 m-0' onClick={()=>{
+                        setCurrNotification({
+                          title: item.title,
+                          message: item.message
+                        });
+                        handleShow();
+                      }}>{item.title}</h6>
                   </div>
                 )
               })}
+              <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>{curr_notification.title}</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>{curr_notification.message}</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="danger" onClick={handleClose}>
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
             </div>
           </div>
 

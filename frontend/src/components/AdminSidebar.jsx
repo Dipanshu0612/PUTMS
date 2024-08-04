@@ -10,7 +10,7 @@ import { GrTransaction } from "react-icons/gr";
 import { IoIosLogOut } from "react-icons/io";
 import { FaLocationArrow } from "react-icons/fa";
 import { toast } from "react-toastify"
- 
+import { VscFeedback } from "react-icons/vsc";
 
 export default function AdminSidebar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +47,10 @@ export default function AdminSidebar() {
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <AiOutlineNotification />
                         <Link to="/push_notification" activeClassName='active' className="text-white">Push Notification</Link>
+                    </li>
+                    <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
+                    <VscFeedback />
+                        <Link to="/admin_feedback" activeClassName='active' className="text-white">User Feedback</Link>
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <FaLocationArrow />

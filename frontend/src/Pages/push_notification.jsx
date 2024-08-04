@@ -14,6 +14,8 @@ export default function PushNotification() {
         let response = await axios.post('http://localhost:3001/push_notification', { title, message });
         if (response.data.success) {
             toast.success(response.data.message)
+            setTitle('')
+            setMessage('')
         }
         else {
             toast.error(response.data.message)

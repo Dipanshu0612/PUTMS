@@ -2,9 +2,23 @@ import React, { useState } from 'react'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import { AiOutlineNotification } from 'react-icons/ai';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 export default function Feedback() {
     const [title, setTitle] = useState('');
-    const [message, setMessage] = useState('');
+    const [Feedback, setFeedback] = useState('');
+    const user_id = sessionStorage.getItem("user_id");
+
+    const postFeedback = async () => {
+        let response = await axios.post("http://localhost:3001/post_feedback", { user_id, title, Feedback });
+        if (response.data.success) {
+            toast.success("Feedback Sent Successfully");
+            setTitle('');
+            setFeedback('');
+        } else {
+            toast.error("Failed to Send Feedback");
+    }
+}
   return (
     <>
     <Header />
@@ -23,8 +37,8 @@ export default function Feedback() {
                         <div className='flex flex-col'>
                             <div className='flex flex-col space-y-2'>
                                 <input type="text" name="title" id="title" className='p-2 border-2 border-gray-300 rounded-md' placeholder='Enter Title' onChange={(e)=>setTitle(e.target.value)}/>
-                                <textarea name="message" id="message" cols="30" rows="8" className='p-2 border-2 border-gray-300 rounded-md' placeholder='Enter the message' onChange={(e)=>setMessage(e.target.value)}></textarea>
-                                <button className='bg-blue-500 p-2 w-max text-white flex items-center justify-center rounded-lg hover:bg-blue-700'>Send Feedback</button> 
+                                <textarea name="Feedback" id="Feedback" cols="30" rows="8" className='p-2 border-2 border-gray-300 rounded-md' placeholder='Enter your feedback' onChange={(e)=>setFeedback(e.target.value)}></textarea>
+                                <button className='bg-blue-500 p-2 w-max text-white flex items-center justify-center rounded-lg hover:bg-blue-700' onClick={postFeedback}>Send Feedback</button> 
                             </div>
                         </div>
                     </div>

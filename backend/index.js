@@ -11,6 +11,8 @@ const AllBusModel = require("./Models/allbuses.jsx");
 const LoginModel = require("./Models/loginmodel.jsx");
 const NotificationModel = require("./Models/notification.jsx");
 const bycrypt = require("bcrypt");
+const FeebackModel = require("./Models/feedback.jsx");
+
 
 app.use(express.json());
 app.use(cors());
@@ -282,6 +284,32 @@ app.post("/delete_notification", async (req, res) => {
     }
   } catch (error) {
     console.error("Error deleting notification:", error);
+  }
+});
+app.post("/post_feedback", async (req, res) => {
+  try {
+    const { user_id, title, Feedback } = req.body;
+    let NameData = await AllUsersModel.findOne({ Enrollment: user_id });
+    if(!NameData){
+      NameData = await AllUsersModel.findOne({ MIS_ID: user_id });
+    }
+    let Name=NameData.Name;
+    let data = await FeebackModel.create({ ID:user_id, Name, Title: title, Feedback });
+    if (data) {
+      res.json({ success: true, message: "Feedback Sent Successfully!" });
+    } else {
+      res.json({ success: false, message: "Failed to Send Feedback!" });
+    }
+  } catch (error) {
+    console.error("Error posting feedback:", error);
+  }
+});
+app.get("/get_feedback", async (req, res) => {
+  try {
+    let data = await FeebackModel.find({});
+    res.send(data);
+  } catch (error) {
+    console.error("Error getting feedback:", error);
   }
 });
     

@@ -91,3 +91,9 @@ p {
   color: white;
   background-color: white!important;
 }
+
+.links a:hover{
+  color: rgb(86, 146, 198)!important;
+  transform: scale(1.1);
+  transition: 0.4s ease-in-out;
+}

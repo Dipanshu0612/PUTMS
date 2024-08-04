@@ -40,14 +40,14 @@ export default function Home() {
 
     }
     getUserInfo();
-  }, [user_id])
+  }, [])
   useEffect(() => {
     async function getNotification() {
       let response = await axios.get("https://putms.onrender.com/get_notifications");
       setNotification(response.data);
     }
     getNotification();
-  })
+  },[])
 
   return (
     <>
@@ -58,19 +58,19 @@ export default function Home() {
         <div className='m-3 bg-slate-100 h-[45rem] w-1/4 shadow-lg flex space-y-2 flex-col items-center py-3 overflow-hidden cursor-pointer'>
           <img src={user_id === "210305105661" ? My : "https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png"} alt="UserIMG" className='border border-black object-cover rounded-full h-[15rem] w-[15rem] mix-blend-normal' />
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h2 className='hover:bg-gray-300 p-2 font-extrabold'>{userData.Name}</h2>
+          <h2 className='hover:underline p-2 font-extrabold'>{userData.Name || "----"}</h2>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2'>{userData.Department}</h4>
+          <h4 className='hover:underline p-2'>{userData.Department || "----"}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2 font-semibold'>{userData.Enrollment || userData.MIS_ID}</h4>
+          <h4 className='hover:underline p-2 font-semibold'>{userData.Enrollment || userData.MIS_ID || "----"}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2'>{userData.Designation === "Student" ? `Semester : ${userData.Semester}` : "Faculty"}</h4>
+          <h4 className='hover:underline p-2'>{userData.Designation === "Student" ? `Semester : ${userData.Semester}` : "Faculty"}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2  '>Mobile : {userData.Mobile}</h4>
+          <h4 className='hover:underline p-2  '>Mobile : {userData.Mobile || "----"}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2'>Area : {userData.Area}</h4>
+          <h4 className='hover:underline p-2'>Area : {userData.Area || "----"}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h5 className='hover:bg-gray-300 p-2'>Boarding Point : {userData.Boarding_Point}</h5>
+          <h5 className='hover:underline p-2'>Boarding Point : {userData.Boarding_Point || "----"}</h5>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
 
         </div>
@@ -88,16 +88,16 @@ export default function Home() {
                 <h5 className='font-bold uppercase text-3xl'><GrBus className='inline mr-3 text-[2rem]' />Current Bus</h5>
                 <div className='h-[0.01rem] bg-black w-[100%]'></div>
                 <h4 className='text-center w-full text-[2.5rem] mt-3 tracking-widest'>GJ 06 BY</h4>
-                <h2 className='text-center w-full text-[5rem] font-extrabold tracking-wide'>{busData.Bus_Number}</h2>
+                <h2 className='text-center w-full text-[5rem] font-extrabold tracking-wide'>{busData.Bus_Number || "----"}</h2>
 
               </div>
 
               <div className='flex w-2/3 flex-col justify-center space-y-2'>
-                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300'><TbUser className='inline mr-2 text-[2rem] justify-center' />Driver Name : {busData.Driver_Name}</h3>
+                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300'><TbUser className='inline mr-2 text-[2rem] justify-center' />Driver Name : {busData.Driver_Name || "----"}</h3>
                 <div className='h-[0.15rem] bg-slate-200 w-[100%]'></div>
-                <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300'><FaPhoneAlt className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Contact : {busData.Driver_Contact}</h3>
+                <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300'><FaPhoneAlt className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Contact : {busData.Driver_Contact || "----"}</h3>
                 <div className='h-[0.15rem] bg-slate-200 w-[100%]'></div>
-                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300'><FaLocationDot className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Area : {busData.Area}</h3>
+                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300'><FaLocationDot className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Area : {busData.Area || "----"}</h3>
                 <div className='h-[0.15rem] bg-slate-200 w-[100%]'></div>
                 <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300'><IoMdTime className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Departure Time : 5:15 PM</h3>
 

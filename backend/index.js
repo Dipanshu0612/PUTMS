@@ -25,6 +25,10 @@ app.listen(3001, (res) => {
 const url = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASS}@cluster0.0j2tmr7.mongodb.net/users_db`;
 mongoose.connect(url).then(console.log("Connected to Database!"));
 
+app.get("/hello", (req, res) => {
+  res.send("Hello World!");
+});
+
 app.post("/payment", async (req, res) => {
   let instance = new Razorpay({
     key_id: "rzp_test_CXhrGKDYeZO527",

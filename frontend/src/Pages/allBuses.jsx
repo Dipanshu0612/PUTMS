@@ -13,7 +13,7 @@ export default function AllBuses() {
     axios.get('https://putms.onrender.com/all-Buses')
       .then(bus => setBusData(bus.data))
       .catch(err => console.log(err))
-  })
+  },[])
 
   function ViewRoute() {
     toast.error("This feature is still in development!")

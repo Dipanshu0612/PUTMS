@@ -49,7 +49,7 @@ export default function AdminAllBuses() {
         axios.get('https://putms.onrender.com/all-Buses')
             .then(bus => setBusData(bus.data))
             .catch(err => console.log(err))
-    })
+    },[])
 
     async function RemoveBus(bus_number) {
         let response = await axios.post("https://putms.onrender.com/removeBus", { bus_number })

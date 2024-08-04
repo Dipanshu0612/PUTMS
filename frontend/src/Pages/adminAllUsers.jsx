@@ -59,7 +59,7 @@ export default function AdminAllUsers() {
     axios.get('https://putms.onrender.com/all-users')
       .then(user => setUserData(user.data))
       .catch(err => console.log(err))
-  })
+  },[])
 
   async function RemoveUser(Mobile) {
     let response = await axios.post("https://putms.onrender.com/removeUser", { Mobile })

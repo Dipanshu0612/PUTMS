@@ -40,7 +40,7 @@ export default function Home() {
 
     }
     getUserInfo();
-  }, [])
+  }, [user_id])
   useEffect(() => {
     async function getNotification() {
       let response = await axios.get("https://putms.onrender.com/get_notifications");

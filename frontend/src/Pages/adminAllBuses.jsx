@@ -27,7 +27,7 @@ export default function AdminAllBuses() {
         setSelectedArea(e.target.value);
     }
     async function handleAddNewBus() {
-        let response = await axios.post("http://localhost:3001/addNewBus", {
+        let response = await axios.post("https://putms.onrender.com/addNewBus", {
             Bus_Number: newBusNo,
             Driver_Name: newDriverName,
             Driver_Contact: newDriverContact,
@@ -46,13 +46,13 @@ export default function AdminAllBuses() {
 
     }
     useEffect(() => {
-        axios.get('http://localhost:3001/all-Buses')
+        axios.get('https://putms.onrender.com/all-Buses')
             .then(bus => setBusData(bus.data))
             .catch(err => console.log(err))
     })
 
     async function RemoveBus(bus_number) {
-        let response = await axios.post("http://localhost:3001/removeBus", { bus_number })
+        let response = await axios.post("https://putms.onrender.com/removeBus", { bus_number })
         toast.success(response.data.message)
     }
 

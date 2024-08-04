@@ -33,7 +33,7 @@ export default function AdminAllUsers() {
     setSelectedShift(e.target.value);
   }
   async function handleAddNewUser() {
-    let response = await axios.post("http://localhost:3001/addNewUser", {
+    let response = await axios.post("https://putms.onrender.com/addNewUser", {
       Name: newUserName,
       Designation: newUserDesignation,
       Enrollment: newUserEnrollment,
@@ -56,13 +56,13 @@ export default function AdminAllUsers() {
 
   }
   useEffect(() => {
-    axios.get('http://localhost:3001/all-users')
+    axios.get('https://putms.onrender.com/all-users')
       .then(user => setUserData(user.data))
       .catch(err => console.log(err))
   })
 
   async function RemoveUser(Mobile) {
-    let response = await axios.post("http://localhost:3001/removeUser", { Mobile })
+    let response = await axios.post("https://putms.onrender.com/removeUser", { Mobile })
     console.log(response.data)
   }
 

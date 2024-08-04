@@ -24,15 +24,15 @@ export default function AdminHome() {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/all-users')
+    axios.get('https://putms.onrender.com/all-users')
       .then(user => setUserData(user.data))
       .catch(err => console.log(err))
 
-    axios.get('http://localhost:3001/all-buses')
+    axios.get('https://putms.onrender.com/all-buses')
       .then(bus => setBusData(bus.data))
       .catch(err => console.log(err))
 
-    axios.get("http://localhost:3001/get_notifications").then((res) => {
+    axios.get("https://putms.onrender.com/get_notifications").then((res) => {
       setNotification(res.data);
     }).catch((err) => {
       console.log(err);
@@ -40,7 +40,7 @@ export default function AdminHome() {
   }, [user_data, bus_data])
 
   const handleDeleteNotification = async (title) => {
-    let response = await axios.post("http://localhost:3001/delete_notification", { title })
+    let response = await axios.post("https://putms.onrender.com/delete_notification", { title })
     if (response.data.success) {
       toast.success("Notification Deleted Successfully");
     } else {
@@ -102,7 +102,7 @@ export default function AdminHome() {
                 {notificationData.map((item, index) => {
                   return (
                     <div key={index} className='px-2 py-2 m-2 rounded-md cursor-pointer bg-blue-100 flex justify-between'>
-                      <h6 className='hover:underline text-blue-500 m-0' onClick={()=>{
+                      <h6 className='hover:underline text-blue-500 m-0' onClick={() => {
                         setCurrNotification({
                           title: item.title,
                           message: item.message

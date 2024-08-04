@@ -21,7 +21,7 @@ export default function ChangePassword() {
     cursor: isDisabled ? 'not-allowed' : 'auto',
   };
   async function submit() {
-    let response = await axios.post('http://localhost:3001/forgot_pass', { user_id });
+    let response = await axios.post('https://putms.onrender.com/forgot_pass', { user_id });
     if (response.data.success) {
       setA((a) => 1 - a)
       toast.success(response.data.message);
@@ -32,7 +32,7 @@ export default function ChangePassword() {
   }
 
   async function verifyOTP() {
-    let response = await axios.post('http://localhost:3001/verify_otp', { user_id, otp });
+    let response = await axios.post('https://putms.onrender.com/verify_otp', { user_id, otp });
     if (response.data.success) {
       setIsDisabled(true);
       setShowNewPass(true);
@@ -48,7 +48,7 @@ export default function ChangePassword() {
       toast.error("Passwords do not match");
       return;
     }
-    let response = await axios.post('http://localhost:3001/change_pass', { user_id, newPass });
+    let response = await axios.post('https://putms.onrender.com/change_pass', { user_id, newPass });
     if (response.data.success) {
       toast.success(response.data.message);
       navigate('/');

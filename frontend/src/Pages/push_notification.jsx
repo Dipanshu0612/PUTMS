@@ -11,7 +11,7 @@ export default function PushNotification() {
     const [message, setMessage] = useState('');
 
     const postNotification = async () => {
-        let response = await axios.post('http://localhost:3001/push_notification', { title, message });
+        let response = await axios.post('https://putms.onrender.com/push_notification', { title, message });
         if (response.data.success) {
             toast.success(response.data.message)
             setTitle('')
@@ -19,8 +19,8 @@ export default function PushNotification() {
         }
         else {
             toast.error(response.data.message)
+        }
     }
-}
     return (
         <>
             <AdminSidebar />
@@ -38,9 +38,9 @@ export default function PushNotification() {
 
                         <div className='flex flex-col'>
                             <div className='flex flex-col space-y-2'>
-                                <input type="text" name="title" id="title" className='p-2 border-2 border-gray-300 rounded-md' placeholder='Enter Title' onChange={(e)=>setTitle(e.target.value)}/>
-                                <textarea name="message" id="message" cols="30" rows="8" className='p-2 border-2 border-gray-300 rounded-md' placeholder='Enter the message' onChange={(e)=>setMessage(e.target.value)}></textarea>
-                                <button className='bg-blue-500 p-2 w-max text-white flex items-center justify-center rounded-lg hover:bg-blue-700' onClick={postNotification}>Post Notification</button> 
+                                <input type="text" name="title" id="title" className='p-2 border-2 border-gray-300 rounded-md' placeholder='Enter Title' onChange={(e) => setTitle(e.target.value)} />
+                                <textarea name="message" id="message" cols="30" rows="8" className='p-2 border-2 border-gray-300 rounded-md' placeholder='Enter the message' onChange={(e) => setMessage(e.target.value)}></textarea>
+                                <button className='bg-blue-500 p-2 w-max text-white flex items-center justify-center rounded-lg hover:bg-blue-700' onClick={postNotification}>Post Notification</button>
                             </div>
                         </div>
                     </div>

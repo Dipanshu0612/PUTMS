@@ -32,18 +32,18 @@ export default function Home() {
 
   useEffect(() => {
     async function getUserInfo() {
-      let response = await axios.post("http://localhost:3001/getUserInfo", { user_id });
+      let response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
       setUserData(response.data);
       const busArea = response.data.Area;
-      let busResponse = await axios.post("http://localhost:3001/getBusInfo", { busArea });
+      let busResponse = await axios.post("https://putms.onrender.com/getBusInfo", { busArea });
       setBusData(busResponse.data);
-      
+
     }
     getUserInfo();
   }, [user_id])
   useEffect(() => {
     async function getNotification() {
-      let response = await axios.get("http://localhost:3001/get_notifications");
+      let response = await axios.get("https://putms.onrender.com/get_notifications");
       setNotification(response.data);
     }
     getNotification();
@@ -51,7 +51,7 @@ export default function Home() {
 
   return (
     <>
-    {user_id === "admin" ? navigate('/') : null}
+      {user_id === "admin" ? navigate('/') : null}
       <Header />
 
       <div className='main h-[50rem] bg-slate-200 flex'>
@@ -119,27 +119,27 @@ export default function Home() {
               {notificationData.map((item, index) => {
                 return (
                   <div key={index} className='px-2 py-2 m-2 rounded-md cursor-pointer bg-blue-100 '>
-                    <h6 className='hover:underline text-blue-500 m-0' onClick={()=>{
-                        setCurrNotification({
-                          title: item.title,
-                          message: item.message
-                        });
-                        handleShow();
-                      }}>{item.title}</h6>
+                    <h6 className='hover:underline text-blue-500 m-0' onClick={() => {
+                      setCurrNotification({
+                        title: item.title,
+                        message: item.message
+                      });
+                      handleShow();
+                    }}>{item.title}</h6>
                   </div>
                 )
               })}
               <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>{curr_notification.title}</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>{curr_notification.message}</Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="danger" onClick={handleClose}>
-                      Close
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
+                <Modal.Header closeButton>
+                  <Modal.Title>{curr_notification.title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{curr_notification.message}</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="danger" onClick={handleClose}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
 

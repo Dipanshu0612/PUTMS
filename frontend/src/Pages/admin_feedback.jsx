@@ -8,7 +8,7 @@ export default function AdminFeedback() {
   const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/get_feedback").then((res) => {
+    axios.get("https://putms.onrender.com/get_feedback").then((res) => {
       setFeedbacks(res.data);
     });
   }, [feedbacks]);
@@ -29,15 +29,15 @@ export default function AdminFeedback() {
             <div className='h-[0.1rem] bg-slate-200 w-[100%] mb-3'></div>
 
             <div className='flex flex-col m-0 p-0'>
-                {feedbacks.map((feedback,index) => {
-                    return (
-                        <div className='flex flex-col bg-blue-100 p-3 m-2 shadow-md cursor-pointer'>
-                            <h4 className='font-semibold'>{feedback.Name} - ({feedback.ID})</h4>
-                            <h5>{feedback.Title}</h5>
-                            <h6>{feedback.Feedback}</h6>
-                        </div>
-                    );
-                })}
+              {feedbacks.map((feedback, index) => {
+                return (
+                  <div className='flex flex-col bg-blue-100 p-3 m-2 shadow-md cursor-pointer'>
+                    <h4 className='font-semibold'>{feedback.Name} - ({feedback.ID})</h4>
+                    <h5>{feedback.Title}</h5>
+                    <h6>{feedback.Feedback}</h6>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ import { GrTransaction } from "react-icons/gr";
 import { IoIosLogOut } from "react-icons/io";
 import { FaLocationArrow } from "react-icons/fa";
 import { toast } from "react-toastify"
- 
+import { VscFeedback } from "react-icons/vsc";
 
 export default function AdminSidebar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function AdminSidebar() {
 
     return (
         <>
-            <div className='flex flex-wrap justify-between items-center bg-gray-800 h-[4.3rem] sticky top-0 z-10 '>
+            <div className='flex flex-wrap justify-between items-center bg-gray-800 h-[4.3rem] sticky top-0 z-10'>
                 <div className="logo flex flex-wrap justify-center items-center ml-4">
                     {isOpen ? <AiOutlineClose className='text-white text-3xl cursor-pointer' onClick={toggle} /> :
                         <AiOutlineMenu className='text-white text-3xl cursor-pointer' onClick={toggle} />}
@@ -26,7 +26,7 @@ export default function AdminSidebar() {
                     <h4 className='flex text-white items-center mt-2 font-extrabold text-4xl'>PU-TMS</h4>
                 </div>
             </div>
-            <div className={`w-[250px] bg-gray-800 ${isOpen ? "absolute" : "hidden"} h-[100vh] sidebar`} id='nav'>
+            <div className={`w-[250px] bg-gray-800 ${isOpen ? "fixed" : "hidden"} h-[100vh] sidebar`} id='nav'>
                 <ul className='flex flex-col flex-wrap p-0'>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 justify-start items-center">
                         <RxDashboard />
@@ -46,7 +46,11 @@ export default function AdminSidebar() {
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <AiOutlineNotification />
-                        <Link to="/home" activeClassName='active' className="text-white">Push Notification</Link>
+                        <Link to="/push_notification" activeClassName='active' className="text-white">Push Notification</Link>
+                    </li>
+                    <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
+                    <VscFeedback />
+                        <Link to="/admin_feedback" activeClassName='active' className="text-white">User Feedback</Link>
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <FaLocationArrow />

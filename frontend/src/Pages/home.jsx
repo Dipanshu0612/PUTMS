@@ -10,25 +10,48 @@ import { FaLocationDot } from "react-icons/fa6";
 import { IoMdTime } from "react-icons/io";
 import My from "../assests/My.jpg"
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+
 
 export default function Home() {
   const user_id = sessionStorage.getItem("user_id");
   const [userData, setUserData] = useState({});
   const [busData, setBusData] = useState({});
+  const [notificationData, setNotification] = useState([]);
+  const navigate = useNavigate();
+  const [curr_notification, setCurrNotification] = useState({
+    title: "",
+    message: ""
+  });
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     async function getUserInfo() {
-      let response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
+      let response = await axios.post("http://localhost:3001/getUserInfo", { user_id });
       setUserData(response.data);
       const busArea = response.data.Area;
-      let busResponse = await axios.post("https://putms.onrender.com/getBusInfo", { busArea });
+      let busResponse = await axios.post("http://localhost:3001/getBusInfo", { busArea });
       setBusData(busResponse.data);
+      
     }
     getUserInfo();
   }, [user_id])
+  useEffect(() => {
+    async function getNotification() {
+      let response = await axios.get("http://localhost:3001/get_notifications");
+      setNotification(response.data);
+    }
+    getNotification();
+  })
 
   return (
     <>
+    {user_id === "admin" ? navigate('/') : null}
       <Header />
 
       <div className='main h-[50rem] bg-slate-200 flex'>
@@ -47,7 +70,7 @@ export default function Home() {
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
           <h4 className='hover:bg-gray-300 p-2'>Area : {userData.Area}</h4>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-          <h4 className='hover:bg-gray-300 p-2'>Boarding Point : Maneja</h4>
+          <h5 className='hover:bg-gray-300 p-2'>Boarding Point : {userData.Boarding_Point}</h5>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
 
         </div>
@@ -92,8 +115,31 @@ export default function Home() {
               <h4 className='text-center font-semibold'>NOTICE</h4>
             </div>
             <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
-            <div className='w-full h-[15rem] my-3'>
-              <h4>There are currently no Notices! </h4>
+            <div className='w-full h-[15rem] my-3 overflow-y-scroll'>
+              {notificationData.map((item, index) => {
+                return (
+                  <div key={index} className='px-2 py-2 m-2 rounded-md cursor-pointer bg-blue-100 '>
+                    <h6 className='hover:underline text-blue-500 m-0' onClick={()=>{
+                        setCurrNotification({
+                          title: item.title,
+                          message: item.message
+                        });
+                        handleShow();
+                      }}>{item.title}</h6>
+                  </div>
+                )
+              })}
+              <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>{curr_notification.title}</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>{curr_notification.message}</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="danger" onClick={handleClose}>
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
             </div>
           </div>
 

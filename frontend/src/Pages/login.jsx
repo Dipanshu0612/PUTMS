@@ -13,7 +13,7 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     try {
-      const response = await axios.post('https://putms.onrender.com/verify_user', { user_id, password });
+      const response = await axios.post('http://localhost:3001/verify_user', { user_id, password });
       if (response.data.success) {
         toast.success(response.data.message)
         sessionStorage.setItem("user_id", user_id);

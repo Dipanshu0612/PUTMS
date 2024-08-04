@@ -9,7 +9,10 @@ const Razorpay = require("razorpay");
 const AllUsersModel = require("./Models/allusers.jsx");
 const AllBusModel = require("./Models/allbuses.jsx");
 const LoginModel = require("./Models/loginmodel.jsx");
+const NotificationModel = require("./Models/notification.jsx");
 const bycrypt = require("bcrypt");
+const FeebackModel = require("./Models/feedback.jsx");
+
 
 app.use(express.json());
 app.use(cors());
@@ -51,18 +54,28 @@ app.get("/all-users", async (req, res) => {
 });
 
 app.post("/verify_user", async (req, res) => {
-  let { user_id, password } = req.body;
+  try {
+    let { user_id, password } = req.body;
   const ID = user_id;
   const user = await LoginModel.findOne({ ID });
+  if (!user) {
+    res.send({ success: false, message: "User Does Not Exists!" });
+  }
   password = password.toString();
   const ValidPass = await bycrypt.compare(password, user.Password);
   // console.log(ValidPass, typeof(user.Password), typeof(password))
-  if (ValidPass) {
+  if (user && ValidPass) {
     res.send({ success: true, message: "Login Successful!" });
   } else {
+    res.send({ success: false, message: "Invalid Password!" });
+  }
+  } catch (error) {
     res.send({ success: false, message: "Invalid Credentials!" });
+    console.log(error);
   }
 });
+
+
 
 app.post("/verify_admin", async (req, res) => {
   // console.log("Hii")
@@ -238,3 +251,65 @@ app.post("/addNewBus", async (req, res) => {
     res.json({ success: false, message: "Failed to Add New Bus!" });
   }
 });
+app.post("/push_notification", async (req, res) => {
+  try {
+    const { title, message } = req.body;
+    let data = await NotificationModel.create({ title, message });
+    console.log(data);
+    if (data) {
+      res.json({ success: true, message: "Notification Sent Successfully!" });
+    } else {
+      res.json({ success: false, message: "Failed to Send Notification!" });
+    }
+  } catch (error) {
+    console.error("Error sending push notification:", error);
+  }
+});
+app.get("/get_notifications", async (req, res) => {
+  try {
+    let data = await NotificationModel.find({});
+    res.send(data);
+  } catch (error) {
+    console.error("Error getting notifications:", error);
+  }
+});
+app.post("/delete_notification", async (req, res) => {
+  try {
+    const { title } = req.body;
+    let data = await NotificationModel.deleteOne({ title });
+    if (data) {
+      res.json({ success: true, message: "Notification Deleted Successfully!" });
+    } else {
+      res.json({ success: false, message: "Failed to Delete Notification!" });
+    }
+  } catch (error) {
+    console.error("Error deleting notification:", error);
+  }
+});
+app.post("/post_feedback", async (req, res) => {
+  try {
+    const { user_id, title, Feedback } = req.body;
+    let NameData = await AllUsersModel.findOne({ Enrollment: user_id });
+    if(!NameData){
+      NameData = await AllUsersModel.findOne({ MIS_ID: user_id });
+    }
+    let Name=NameData.Name;
+    let data = await FeebackModel.create({ ID:user_id, Name, Title: title, Feedback });
+    if (data) {
+      res.json({ success: true, message: "Feedback Sent Successfully!" });
+    } else {
+      res.json({ success: false, message: "Failed to Send Feedback!" });
+    }
+  } catch (error) {
+    console.error("Error posting feedback:", error);
+  }
+});
+app.get("/get_feedback", async (req, res) => {
+  try {
+    let data = await FeebackModel.find({});
+    res.send(data);
+  } catch (error) {
+    console.error("Error getting feedback:", error);
+  }
+});
+    

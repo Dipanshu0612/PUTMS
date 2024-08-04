@@ -12,6 +12,9 @@ import AdminHome from "./Pages/adminHome";
 import AdminAllBuses from "./Pages/adminAllBuses";
 import AdminAllUsers from "./Pages/adminAllUsers";
 import ChangePassword from "./Pages/change_password";
+import PushNotification from "./Pages/push_notification";
+import Feedback from "./Pages/feedback";
+import AdminFeedback from "./Pages/admin_feedback";
 
 function App() {
   
@@ -20,15 +23,18 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
         <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/change-password" element={<ChangePassword />} />
-        <Route path="/forgot-password" element={<ForgotPasssword />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/my-bus-pass" element={<BusPass />} />
         <Route path="/all-Buses" element={<AllBuses />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/forgot-password" element={<ForgotPasssword />} />
         <Route path="/admin_home" element={<AdminHome />} />
         <Route path="/admin_all_users" element={<AdminAllUsers />} />
         <Route path="/admin_all_buses" element={<AdminAllBuses />} />
+        <Route path="/push_notification" element={<PushNotification />} />
+        <Route path="/admin_feedback" element={<AdminFeedback />} />
       </Routes>
     </Router>
     <ToastContainer

@@ -26,7 +26,7 @@ const url = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB
 mongoose.connect(url).then(console.log("Connected to Database!"));
 
 app.get("/hello", (req, res) => {
-  res.send("Hello World!");
+  res.send("OK");
 });
 
 app.post("/payment", async (req, res) => {

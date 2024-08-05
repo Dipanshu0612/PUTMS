@@ -9,7 +9,8 @@ import { MdDownload } from "react-icons/md";
 import { FaRupeeSign } from "react-icons/fa";
 import axios from 'axios'
 import { usePDF } from 'react-to-pdf';
-
+import {toast} from 'react-toastify'
+import { FaMoneyCheckDollar } from 'react-icons/fa6'
 
 
 export default function BusPass() {
@@ -24,6 +25,8 @@ export default function BusPass() {
         getUserInfo();
     }, [user_id])
 
+    const feesPaid = userData.Bus_Fees_Paid === "Yes" ? true : false;
+
     const openRazorpay = () => {
         let options = {
             "key": "rzp_test_CXhrGKDYeZO527",
@@ -34,11 +37,14 @@ export default function BusPass() {
             "show_coupons": true,
             "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
             handler: function (response) {
+                axios.post("http://localhost:3001/payment", { response, user_id });
             }
         }
         let rzp1 = new window.Razorpay(options);
         rzp1.open()
     }
+
+
     return (
         <>
             <Header />
@@ -83,15 +89,27 @@ export default function BusPass() {
 
                     </div>
                 </div>
-                <div className='w-1/3 m-3 bg-slate-100 p-3 flex items-center justify-center flex-col space-y-5 shadow-lg'>
-                    <button className='flex flex-col bg-blue-500 items-center justify-center px-[1.4rem] py-4 m-2 hover:bg-blue-800 ease-in-out transition font-bold hover:text-white rounded-md duration-200   ' onClick={() => toPDF()}>
-                        <MdDownload className='text-[5rem]' />
-                        Download Virtual Bus Pass
-                    </button>
-                    <button className='flex flex-col bg-green-500 items-center justify-center px-[3.7rem] py-4 font-bold text-xl m-2 hover:bg-green-700 hover:text-white rounded-md transition ease-in-out duration-200' onClick={openRazorpay}>
-                        <FaRupeeSign className='text-[4rem]' />
-                        Pay Bus Fees
-                    </button>
+                <div className='w-1/3 m-3 bg-slate-100 p-3 flex flex-col space-y-1 shadow-lg cursor-pointer'>
+                    <div className='flex space-x-2 text-center items-center text-blue-500'>
+                        <FaMoneyCheckDollar className='text-3xl mb-2' />
+                        <h4 className='text-center font-semibold'>FEES INFO</h4>
+                    </div>
+                    <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
+                    <div className='my-4 px-1'>
+                        <h4>Total Fees : Rs. 22000/-</h4>
+                        <h4>Fees Paid : {userData.Bus_Fees_Paid || "---"}</h4>
+                        <h4>Transaction ID: {userData.transaction_id || "None"}</h4>
+                    </div>
+                    <div className='flex'>
+                        <button className='flex flex-col bg-blue-500 items-center justify-center px-[1.4rem] py-4 m-2 hover:bg-blue-800 ease-in-out transition font-bold hover:text-white rounded-md duration-200' onClick={() => toPDF()}>
+                            <MdDownload className='text-[3rem]' />
+                            Download Virtual Bus Pass
+                        </button>
+                        <button className={`flex flex-col bg-green-500 items-center justify-center px-[3rem] py-4 font-bold text-xl m-2 hover:bg-green-700 hover:text-white rounded-md transition ease-in-out duration-200 disabled:cursor-not-allowed`} onClick={openRazorpay} disabled={feesPaid}>
+                            <FaRupeeSign className='text-[3rem]' />
+                            Pay Bus Fees
+                        </button>
+                    </div>
                 </div>
             </div>
             <Footer />

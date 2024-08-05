@@ -15,6 +15,8 @@ const AllUsersSchema=new mongoose.Schema({
    Shift:String,
    img_url:String,
    Boarding_Point:String,
+   Bus_Fees_Paid:String,
+   transaction_id:String,
 })
 
 const myDB=mongoose.connection.useDb('users_db')

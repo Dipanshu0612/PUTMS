@@ -30,21 +30,17 @@ app.get("/hello", (req, res) => {
 });
 
 app.post("/payment", async (req, res) => {
-  let instance = new Razorpay({
-    key_id: "rzp_test_CXhrGKDYeZO527",
-    key_secret: "htPOpiduZo4I48V4MQANKtYR",
-  });
-  let options = {
-    amount: 22000 * 100,
-    currency: "INR",
-    line_items_total: 22000 * 100,
-  };
-  instance.orders.create(options, function (err, order) {
-    if (err) {
-      console.log(err);
-    }
-    res.json(order);
-  });
+  try {
+    let { response, user_id } = req.body;
+    response=response.razorpay_payment_id;
+    const user = await AllUsersModel.updateOne({ Enrollment: user_id }, { $set: { Bus_Fees_Paid: "Yes", transaction_id : response } });
+    if (!user) {
+      user = await AllUsersModel.updateOne({ MIS_ID: user_id }, { $set: { Bus_Fees_Paid: "Yes", transaction_id : response } });
+    } 
+  } catch (error) {
+    console.error("Error making payment:", error);
+    res.json({ success: false, message: "Payment Failed!" });
+  }
 });
 
 app.get("/all-Buses", async (req, res) => {

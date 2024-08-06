@@ -9,8 +9,8 @@ import { MdDownload } from "react-icons/md";
 import { FaRupeeSign } from "react-icons/fa";
 import axios from 'axios'
 import { usePDF } from 'react-to-pdf';
-import {toast} from 'react-toastify'
 import { FaMoneyCheckDollar } from 'react-icons/fa6'
+import "../index.css";
 
 
 export default function BusPass() {
@@ -95,10 +95,31 @@ export default function BusPass() {
                         <h4 className='text-center font-semibold'>FEES INFO</h4>
                     </div>
                     <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
-                    <div className='my-4 px-1'>
-                        <h4>Total Fees : Rs. 22000/-</h4>
-                        <h4>Fees Paid : {userData.Bus_Fees_Paid || "---"}</h4>
-                        <h4>Transaction ID: {userData.transaction_id || "None"}</h4>
+                    <div className='my-3 px-1'>
+                        <table>
+                            <tr className='bg-slate-200 hover:bg-slate-300'>
+                                <td className='w-[45%]'>Total Fees</td>
+                                <td className='w-[5%]'>:</td>
+                                <td className='w-[50%] text-left'>Rs. 22000/-</td>
+                            </tr>
+                            <tr className='hover:bg-slate-200'>
+                                <td className='w-[30%]'>Fees Paid</td>
+                                <td className='w-[5%]'>:</td>
+                                <td className='w-[50%]'> <span style={{
+                                    backgroundColor: feesPaid ? 'green' : 'red',
+                                    color: 'white',
+                                    padding: '2px 5px',
+                                    borderRadius: '3px'
+                                }}>
+                                    {feesPaid ? 'Yes' : 'No'}
+                                </span></td>
+                            </tr>
+                            <tr className='bg-slate-200 hover:bg-slate-300'>
+                                <td className='w-[30%]'>Transaction ID</td>
+                                <td className='w-[5%]'>:</td>
+                                <td className='w-[50%]'>{userData.transaction_id || "No Transaction ID"}</td>
+                            </tr>
+                        </table>
                     </div>
                     <div className='flex'>
                         <button className='flex flex-col bg-blue-500 items-center justify-center px-[1.4rem] py-4 m-2 hover:bg-blue-800 ease-in-out transition font-bold hover:text-white rounded-md duration-200' onClick={() => toPDF()}>

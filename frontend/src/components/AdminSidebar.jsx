@@ -42,7 +42,7 @@ export default function AdminSidebar() {
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <GrTransaction />
-                        <Link to="/home" activeClassName='active' className="text-white">Show Transactions</Link>
+                        <Link to="/admin_transactions" activeClassName='active' className="text-white">Show Transactions</Link>
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <AiOutlineNotification />

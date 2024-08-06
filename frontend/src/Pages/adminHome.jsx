@@ -76,16 +76,16 @@ export default function AdminHome() {
                   <CountUp end={bus_data.length} />
                 </h3>
               </div>
-              <div className='h-[10rem] w-[10rem] flex flex-col items-center rounded-md bg-green-500 text-white justify-center cursor-pointer hover:bg-green-700'>
-                <h6>Total Amonut of Transacation</h6>
-                <h3 className='text-[5rem]'>
-                  <CountUp end={0} />
-                </h3>
-              </div>
               <div className='h-[10rem] w-[10rem] flex flex-col items-center rounded-md bg-yellow-500 text-white justify-center cursor-pointer hover:bg-yellow-700'>
                 <h5>Expired Bus Pases</h5>
                 <h3 className='text-[5rem]'>
-                  <CountUp end={0} />
+                  <CountUp end={user_data.filter(user => user.Bus_Fees_Paid === "No").length} />
+                </h3>
+              </div>
+              <div className='h-[10rem] w-[15rem] flex flex-col items-center rounded-md bg-green-500 text-white justify-center cursor-pointer hover:bg-green-700'>
+                <h6 className='p-1'>Total Amonut of Transacation</h6>
+                <h3 className='text-[5rem]'>
+                  <CountUp end={user_data.filter(user => user.Bus_Fees_Paid === "Yes").length * 22000} className='text-[4rem]'/>
                 </h3>
               </div>
             </div>

@@ -97,3 +97,12 @@ p {
   transform: scale(1.1);
   transition: 0.4s ease-in-out;
 }
+table, tr, td {
+  border: 1px solid black;
+  padding: 0.5rem;
+  border-collapse: collapse;
+  width: 100%;
+}
+td {
+    font-weight: bold;
+}

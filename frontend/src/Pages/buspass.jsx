@@ -37,7 +37,7 @@ export default function BusPass() {
             "show_coupons": true,
             "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
             handler: function (response) {
-                axios.post("http://localhost:3001/payment", { response, user_id });
+                axios.post("https://putms.onrender.com/payment", { response, user_id });
             }
         }
         let rzp1 = new window.Razorpay(options);

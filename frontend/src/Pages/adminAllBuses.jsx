@@ -93,14 +93,14 @@ export default function AdminAllBuses() {
                                     {bus_data.map((bus, index) => {
                                         return (
                                             <tr>
-                                                <td>{index + 1}</td>
-                                                <td>{bus.Bus_Number}</td>
-                                                <td>{bus.Driver_Name}</td>
-                                                <td>{bus.Driver_Contact}</td>
-                                                <td>{bus.Area}</td>
-                                                <td>{bus.Start_Point}</td>
-                                                <td>{bus.End_Point}</td>
-                                                <td><button className='bg-green-600 px-2 py-1 rounded-md hover:bg-green-800 transition ease-in-out' onClick={ViewRoute}>View Route</button> <button className='bg-red-500 px-2 py-1 rounded-md hover:bg-red-800 transition ease-in-out' onClick={() => {
+                                                <td className='w-[10%]'>{index + 1}</td>
+                                                <td className='w-[10%]'>{bus.Bus_Number}</td>
+                                                <td className='w-[10%]'>{bus.Driver_Name}</td>
+                                                <td className='w-[10%]'>{bus.Driver_Contact}</td>
+                                                <td className='w-[10%]'>{bus.Area}</td>
+                                                <td className='w-[10%]'>{bus.Start_Point}</td>
+                                                <td className='w-[10%]'>{bus.End_Point}</td>
+                                                <td className='w-[20%]'><button className='bg-green-600 px-2 py-1 rounded-md hover:bg-green-800 transition ease-in-out' onClick={ViewRoute}>View Route</button> <button className='bg-red-500 px-2 py-1 rounded-md hover:bg-red-800 transition ease-in-out' onClick={() => {
                                                     RemoveBus(bus.Bus_Number)
                                                 }}>Remove Bus</button></td>
                                             </tr>

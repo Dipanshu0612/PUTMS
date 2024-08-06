@@ -96,7 +96,7 @@ export default function BusPass() {
                     </div>
                     <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
                     <div className='my-3 px-1'>
-                        <table>
+                        <table className='buspass'>
                             <tr className='bg-slate-200 hover:bg-slate-300'>
                                 <td className='w-[45%]'>Total Fees</td>
                                 <td className='w-[5%]'>:</td>

@@ -4,10 +4,12 @@ import axios from 'axios'
 import { toast } from "react-toastify"
 import PU from "../assests/PU.png"
 import "../index.css"
+import Spinner from '../components/Spinner'
 
 
 export default function ChangePassword() {
   let navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   let [a, setA] = useState(0);
   const [user_id, setUserID] = useState();
   let [newPass, setNewPass] = useState('');
@@ -21,25 +23,42 @@ export default function ChangePassword() {
     cursor: isDisabled ? 'not-allowed' : 'auto',
   };
   async function submit() {
-    let response = await axios.post('https://putms.onrender.com/forgot_pass', { user_id });
-    if (response.data.success) {
-      setA((a) => 1 - a)
-      toast.success(response.data.message);
+    setLoading(true);
+    try {
+      let response = await axios.post('https://putms.onrender.com/forgot_pass', { user_id });
+      if (response.data.success) {
+        setA((a) => 1 - a)
+        toast.success(response.data.message);
+      }
+      else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error);
     }
-    else {
-      toast.error(response.data.message);
+    finally {
+      setLoading(false);
     }
   }
 
   async function verifyOTP() {
-    let response = await axios.post('https://putms.onrender.com/verify_otp', { user_id, otp });
-    if (response.data.success) {
-      setIsDisabled(true);
-      setShowNewPass(true);
-      toast.success(response.data.message);
+    setLoading(true);
+    try {
+      let response = await axios.post('https://putms.onrender.com/verify_otp', { user_id, otp });
+      if (response.data.success) {
+        setIsDisabled(true);
+        setShowNewPass(true);
+        toast.success(response.data.message);
+      }
+      else {
+        toast.error(response.data.message);
+      }
+      
+    } catch (error) {
+      toast.error(error);
     }
-    else {
-      toast.error(response.data.message);
+    finally{
+      setLoading(false);
     }
   }
 
@@ -48,19 +67,28 @@ export default function ChangePassword() {
       toast.error("Passwords do not match");
       return;
     }
-    let response = await axios.post('https://putms.onrender.com/change_pass', { user_id, newPass });
-    if (response.data.success) {
-      toast.success(response.data.message);
-      navigate('/');
+    setLoading(true);
+    try {
+      let response = await axios.post('https://putms.onrender.com/change_pass', { user_id, newPass });
+      if (response.data.success) {
+        toast.success(response.data.message);
+        navigate('/');
+      }
+      else {
+        toast.error(response.data.message);
+      }
+      
+    } catch (error) {
+      toast.error(error);
     }
-    else {
-      toast.error(response.data.message);
+    finally{
+      setLoading(false);
     }
   }
 
   return (
     <>
-
+      {loading && <Spinner />}
       <div className='flex justify-around h-screen w-full fpbg'>
 
         <div className='w-1/2 min-h-fit overflow-hidden '>

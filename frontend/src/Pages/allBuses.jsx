@@ -5,21 +5,35 @@ import axios from 'axios'
 import Table from 'react-bootstrap/Table';
 import { FaBus } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
+import Spinner from '../components/Spinner';
 
 
 export default function AllBuses() {
   const [bus_data, setBusData] = useState([])
+  const [loading, setLoading] = useState(false);
+
+  async function getBuses(){
+    setLoading(true);
+    try {
+      let response = await axios.get('https://putms.onrender.com/all-Buses')
+      setBusData(response.data)
+    } catch (error) {
+      toast.error(error)
+    }
+    finally {
+      setLoading(false);
+    }
+  }
   useEffect(() => {
-    axios.get('https://putms.onrender.com/all-Buses')
-      .then(bus => setBusData(bus.data))
-      .catch(err => console.log(err))
-  },[])
+    getBuses();
+  },[getBuses])
 
   function ViewRoute() {
     toast.error("This feature is still in development!")
   }
   return (
     <>
+    {loading && <Spinner />}  
       <Header />
       <div className='bg-slate-200 p-3'>
         <div className='flex flex-col bg-white p-3 shadow-lg'>

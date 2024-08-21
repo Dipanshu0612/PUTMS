@@ -13,6 +13,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Spinner from '../components/Spinner';
 
 
 
@@ -21,6 +22,8 @@ export default function Home() {
   const [userData, setUserData] = useState({});
   const [busData, setBusData] = useState({});
   const [notificationData, setNotification] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const [curr_notification, setCurrNotification] = useState({
     title: "",
@@ -32,11 +35,20 @@ export default function Home() {
 
   useEffect(() => {
     async function getUserInfo() {
-      let response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
-      setUserData(response.data);
-      const busArea = response.data.Area;
-      let busResponse = await axios.post("https://putms.onrender.com/getBusInfo", { busArea });
-      setBusData(busResponse.data);
+      setLoading(true); 
+      try {
+        let response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
+        setUserData(response.data);
+        const busArea = response.data.Area;
+        let busResponse = await axios.post("https://putms.onrender.com/getBusInfo", { busArea });
+        setBusData(busResponse.data);
+        
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+      finally {
+        setLoading(false);
+      }
 
     }
     getUserInfo();
@@ -51,6 +63,7 @@ export default function Home() {
 
   return (
     <>
+      {loading && <Spinner />}
       {user_id === "admin" ? navigate('/') : null}
       <Header />
 

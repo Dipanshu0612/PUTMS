@@ -4,14 +4,17 @@ import axios from 'axios'
 import { toast } from "react-toastify"
 import PU from "../assests/PU.png"
 import "../index.css"
+import Spinner from '../components/Spinner'
 
 
 export default function Login() {
   let navigate = useNavigate();
   const [user_id, setUserID] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
+    setLoading(true); 
     try {
       const response = await axios.post('https://putms.onrender.com/verify_user', { user_id, password });
       if (response.data.success) {
@@ -25,11 +28,14 @@ export default function Login() {
     } catch (error) {
       toast.error(error)
     }
+    finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
-
+      {loading && <Spinner />}
       <div className='flex justify-around h-screen w-full'>
 
         <div className='w-1/2 min-h-fit overflow-hidden busimg'>

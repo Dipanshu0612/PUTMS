@@ -4,16 +4,31 @@ import Footer from '../components/footer'
 import { FaMoneyCheckDollar } from 'react-icons/fa6'
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import Spinner from '../components/Spinner';
 
 export default function AdminTransactions() {
     const [userData, setUserData] = useState([])
+    const [loading, setLoading] = useState(false);
+
+    async function getTransactions(){
+        setLoading(true);
+        try {
+            let response = await axios.get('https://putms.onrender.com/all-users')
+            setUserData(response.data)
+        } catch (error) {
+            toast.error(error)
+        }
+        finally {
+            setLoading(false);
+        }
+    }
     useEffect(() => {
-        axios.get('https://putms.onrender.com/all-users')
-          .then(user => setUserData(user.data))
-          .catch(err => console.log(err))
+      getTransactions();
       },[])
   return (
     <>
+    {loading && <Spinner />}
     <AdminSidebar />
     <div className='bg-slate-200 p-3'>
         <div className='flex flex-col bg-white p-3 shadow-lg'>

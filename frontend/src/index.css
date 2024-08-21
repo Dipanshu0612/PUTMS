@@ -106,3 +106,6 @@ p {
 .buspass td {
     font-weight: bold;
 }
+.spinner{
+  background-color: rgba(0, 0, 0, 0.5)!important;
+}

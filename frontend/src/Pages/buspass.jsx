@@ -1,52 +1,69 @@
-import React, { useEffect, useState } from 'react'
-import Header from '../components/header'
-import Footer from '../components/footer'
-import { FaAddressCard } from "react-icons/fa"
-import PU3 from "../assests/PU3.png"
-import NAAC from "../assests/NAAC.png"
-import My from "../assests/My.jpg"
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import Header from '../components/header';
+import Footer from '../components/footer';
+import { FaAddressCard, FaRupeeSign } from "react-icons/fa";
+import PU3 from "../assests/PU3.png";
+import NAAC from "../assests/NAAC.png";
+import My from "../assests/My.jpg";
 import { MdDownload } from "react-icons/md";
-import { FaRupeeSign } from "react-icons/fa";
-import axios from 'axios'
+import { FaMoneyCheckDollar } from "react-icons/fa6";
+import axios from 'axios';
 import { usePDF } from 'react-to-pdf';
-import { FaMoneyCheckDollar } from 'react-icons/fa6'
 import "../index.css";
+import Spinner from '../components/Spinner';
 
+const BusPass = React.memo(() => {
+    console.log("BusPass Rendered");
 
-export default function BusPass() {
     const user_id = sessionStorage.getItem("user_id");
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState([]);
     const { toPDF, targetRef } = usePDF({ filename: `${user_id}_BusPass.pdf` });
-    useEffect(() => {
-        async function getUserInfo() {
-            let response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
+    const [loading, setLoading] = useState(false);
+
+
+    const getUserInfo = useCallback(async () => {
+        setLoading(true);
+        if (!user_id) return;
+
+        // console.log("Fetching Data");
+
+        try {
+            const response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
             setUserData(response.data);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
         }
+        finally {
+            setLoading(false);
+        }
+    }, [user_id]);
+
+    useEffect(() => {
         getUserInfo();
-    }, [user_id])
+    }, [getUserInfo]);
 
-    const feesPaid = userData.Bus_Fees_Paid === "Yes" ? true : false;
+    const feesPaid = useMemo(() => userData.Bus_Fees_Paid === "Yes", [userData.Bus_Fees_Paid]);
 
-    const openRazorpay = () => {
-        let options = {
-            "key": "rzp_test_CXhrGKDYeZO527",
-            "one_click_checkout": true,
-            "amount": 22000 * 100,
-            "name": "Parul Univerity Transport Department",
-            "order_id": "",
-            "show_coupons": true,
-            "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-            handler: function (response) {
+    const openRazorpay = useCallback(() => {
+        const options = {
+            key: "rzp_test_CXhrGKDYeZO527",
+            one_click_checkout: true,
+            amount: 22000 * 100,
+            name: "Parul University Transport Department",
+            order_id: "",
+            show_coupons: true,
+            callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
+            handler: (response) => {
                 axios.post("https://putms.onrender.com/payment", { response, user_id });
             }
-        }
-        let rzp1 = new window.Razorpay(options);
-        rzp1.open()
-    }
-
+        };
+        const rzp1 = new window.Razorpay(options);
+        rzp1.open();
+    }, [user_id]);
 
     return (
         <>
+        {loading && <Spinner />}
             <Header />
             <div className='w-full h-[30rem] flex px-2 bg-slate-200'>
                 <div className='w-2/3 m-3 bg-slate-100 p-3 cursor-pointer shadow-lg' ref={targetRef}>
@@ -55,13 +72,12 @@ export default function BusPass() {
                         <h4 className='text-center font-semibold'>BUS PASS</h4>
                     </div>
                     <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
-                    <div className='border border-black h-[22rem] my-3 hover:bg-slate-50' >
+                    <div className='border border-black h-[22rem] my-3 hover:bg-slate-50'>
                         <div className='h-[5.5rem] flex justify-between py-2 px-4 bg-green-600'>
                             <img src={NAAC} alt="Naac" className='w-1/3 h-full p-1' />
                             <img src={PU3} alt="PuLogo" className='w-1/3 h-full' />
                         </div>
                         <div className='h-[16.5rem] flex p-2 space-x-2'>
-
                             <div className='w-1/3'>
                                 <img src={user_id === "210305105661" ? My : "https://thumbs.dreamstime.com/b/profile-pic-icon-isolated-white-background-your-web-mobile-app-design-133862807.jpg"} alt="UserIMG" className='border border-black object-cover rounded-lg mix-blend-multiply' />
                             </div>
@@ -83,10 +99,8 @@ export default function BusPass() {
                                 <div className='flex absolute border border-black p-1 bottom-0 bg-green-500'>
                                     <h5 className='m-0'>{userData.Designation}</h5>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div className='w-1/3 m-3 bg-slate-100 p-3 flex flex-col space-y-1 shadow-lg cursor-pointer'>
@@ -95,30 +109,34 @@ export default function BusPass() {
                         <h4 className='text-center font-semibold'>FEES INFO</h4>
                     </div>
                     <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
-                    <div className='my-3 px-1'>
+                    <div className='my-3 p-2'>
                         <table className='buspass'>
-                            <tr className='bg-slate-200 hover:bg-slate-300'>
-                                <td className='w-[45%]'>Total Fees</td>
-                                <td className='w-[5%]'>:</td>
-                                <td className='w-[50%] text-left'>Rs. 22000/-</td>
-                            </tr>
-                            <tr className='hover:bg-slate-200'>
-                                <td className='w-[30%]'>Fees Paid</td>
-                                <td className='w-[5%]'>:</td>
-                                <td className='w-[50%]'> <span style={{
-                                    backgroundColor: feesPaid ? 'green' : 'red',
-                                    color: 'white',
-                                    padding: '2px 5px',
-                                    borderRadius: '3px'
-                                }}>
-                                    {feesPaid ? 'Yes' : 'No'}
-                                </span></td>
-                            </tr>
-                            <tr className='bg-slate-200 hover:bg-slate-300'>
-                                <td className='w-[30%]'>Transaction ID</td>
-                                <td className='w-[5%]'>:</td>
-                                <td className='w-[50%]'>{userData.transaction_id || "No Transaction ID"}</td>
-                            </tr>
+                            <tbody>
+                                <tr className='bg-slate-200 hover:bg-slate-300'>
+                                    <td className='w-[45%]'>Total Fees</td>
+                                    <td className='w-[5%]'>:</td>
+                                    <td className='w-[50%] text-left'>Rs. 22000/-</td>
+                                </tr>
+                                <tr className='hover:bg-slate-200'>
+                                    <td className='w-[30%]'>Fees Paid</td>
+                                    <td className='w-[5%]'>:</td>
+                                    <td className='w-[50%]'>
+                                        <span style={{
+                                            backgroundColor: feesPaid ? 'green' : 'red',
+                                            color: 'white',
+                                            padding: '2px 5px',
+                                            borderRadius: '3px'
+                                        }}>
+                                            {feesPaid ? 'Yes' : 'No'}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr className='bg-slate-200 hover:bg-slate-300'>
+                                    <td className='w-[30%]'>Transaction ID</td>
+                                    <td className='w-[5%]'>:</td>
+                                    <td className='w-[50%]'>{userData.transaction_id || "No Transaction ID"}</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     <div className='flex'>
@@ -135,5 +153,7 @@ export default function BusPass() {
             </div>
             <Footer />
         </>
-    )
-}
+    );
+});
+
+export default BusPass;

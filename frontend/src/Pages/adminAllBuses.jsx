@@ -8,11 +8,13 @@ import AdminSidebar from '../components/AdminSidebar'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Spinner from '../components/Spinner'
 
 
 export default function AdminAllBuses() {
     const [bus_data, setBusData] = useState([])
     const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [newBusNo, setNewBusNo] = useState('');
     const [newDriverName, setNewDriverName] = useState('');
     const [newDriverContact, setNewDriverContact] = useState('');
@@ -27,29 +29,47 @@ export default function AdminAllBuses() {
         setSelectedArea(e.target.value);
     }
     async function handleAddNewBus() {
-        let response = await axios.post("https://putms.onrender.com/addNewBus", {
-            Bus_Number: newBusNo,
-            Driver_Name: newDriverName,
-            Driver_Contact: newDriverContact,
-            Area: selectedArea,
-            Start_Point: newStartPoint,
-            End_Point: newEndPoint
-        })
-        if (response.data.message === "Success") {
-            toast.success("New Bus Added Successfully!")
+        setLoading(true);
+        try {
+            let response = await axios.post("https://putms.onrender.com/addNewBus", {
+                Bus_Number: newBusNo,
+                Driver_Name: newDriverName,
+                Driver_Contact: newDriverContact,
+                Area: selectedArea,
+                Start_Point: newStartPoint,
+                End_Point: newEndPoint
+            })
+            if (response.data.message === "Success") {
+                toast.success("New Bus Added Successfully!")
+            }
+            else {
+                toast.error("Failed to Add New Bus!")
+            }
+            setShow(false)
+            setSelectedArea('')
+        } catch (error) {
+            toast.error(error)
         }
-        else {
-            toast.error("Failed to Add New Bus!")
+        finally {
+            setLoading(false);
         }
-        setShow(false)
-        setSelectedArea('')
 
     }
-    useEffect(() => {
-        axios.get('https://putms.onrender.com/all-Buses')
-            .then(bus => setBusData(bus.data))
-            .catch(err => console.log(err))
-    },[])
+    async function getBuses(){
+        setLoading(true);
+        try {
+          let response = await axios.get('https://putms.onrender.com/all-Buses')
+          setBusData(response.data)
+        } catch (error) {
+          toast.error(error)
+        }
+        finally {
+          setLoading(false);
+        }
+      }
+      useEffect(() => {
+        getBuses();
+      },[])
 
     async function RemoveBus(bus_number) {
         let response = await axios.post("https://putms.onrender.com/removeBus", { bus_number })
@@ -64,6 +84,7 @@ export default function AdminAllBuses() {
 
     return (
         <>
+            {loading && <Spinner />}
             <AdminSidebar />
             <div className='bg-slate-200'>
                 <div className='bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>

@@ -3,18 +3,31 @@ import AdminSidebar from '../components/AdminSidebar';
 import Footer from '../components/footer';
 import { VscFeedback } from 'react-icons/vsc';
 import axios from 'axios';
+import Spinner from '../components/Spinner';
 
 export default function AdminFeedback() {
   const [feedbacks, setFeedbacks] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  async function getFeedbacks(){
+    setLoading(true);
+    try {
+      let response = await axios.get('https://putms.onrender.com/get_feedback')
+      setFeedbacks(response.data)
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+    finally {
+      setLoading(false);
+    }
+  }
   useEffect(() => {
-    axios.get("https://putms.onrender.com/get_feedback").then((res) => {
-      setFeedbacks(res.data);
-    });
-  }, [feedbacks]);
+    getFeedbacks();
+  }, []);
 
   return (
     <>
+    {loading && <Spinner />}
       <AdminSidebar />
       <div className='bg-slate-200'>
         <div className='bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>

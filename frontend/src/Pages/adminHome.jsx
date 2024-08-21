@@ -10,10 +10,12 @@ import { toast } from 'react-toastify'
 import { NavLink as Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Spinner from '../components/Spinner'
 
 export default function AdminHome() {
   const [user_data, setUserData] = useState([])
   const [bus_data, setBusData] = useState([])
+  const [loading, setLoading] = useState(false);
   const [notificationData, setNotification] = useState([]);
   const [curr_notification, setCurrNotification] = useState({
     title: "",
@@ -23,21 +25,26 @@ export default function AdminHome() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  async function getData(){
+    setLoading(true);
+    try {
+      let response = await axios.get('https://putms.onrender.com/all-users')
+      setUserData(response.data)
+      let response2 = await axios.get('https://putms.onrender.com/all-buses')
+      setBusData(response2.data)
+      let response3= await axios.get("https://putms.onrender.com/get_notifications")
+      setNotification(response3.data);
+    } catch (error) {
+      toast.error(error)
+    }
+    finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
-    axios.get('https://putms.onrender.com/all-users')
-      .then(user => setUserData(user.data))
-      .catch(err => console.log(err))
-
-    axios.get('https://putms.onrender.com/all-buses')
-      .then(bus => setBusData(bus.data))
-      .catch(err => console.log(err))
-
-    axios.get("https://putms.onrender.com/get_notifications").then((res) => {
-      setNotification(res.data);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }, [user_data, bus_data])
+    getData();
+  }, [])
 
   const handleDeleteNotification = async (title) => {
     let response = await axios.post("https://putms.onrender.com/delete_notification", { title })
@@ -50,6 +57,7 @@ export default function AdminHome() {
 
   return (
     <>
+    {loading && <Spinner />}
       <AdminSidebar />
       <div className='bg-slate-200'>
         <div className='bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>

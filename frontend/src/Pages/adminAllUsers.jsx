@@ -8,11 +8,13 @@ import AdminSidebar from '../components/AdminSidebar'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Spinner from '../components/Spinner'
 
 
 export default function AdminAllUsers() {
   const [show, setShow] = useState(false);
   const [user_data, setUserData] = useState([])
+  const [loading, setLoading] = useState(false);
   const [selectedArea, setSelectedArea] = useState('');
   const [selectedShift, setSelectedShift] = useState('');
   const [newUserName, setNewUserName] = useState('');
@@ -55,10 +57,20 @@ export default function AdminAllUsers() {
     setSelectedShift('');
 
   }
+  async function getUsers(){
+    setLoading(true);
+    try {
+      let response = await axios.get('https://putms.onrender.com/all-users')
+      setUserData(response.data)
+    } catch (error) {
+      toast.error(error)
+    }
+    finally {
+      setLoading(false);
+    }
+  }
   useEffect(() => {
-    axios.get('https://putms.onrender.com/all-users')
-      .then(user => setUserData(user.data))
-      .catch(err => console.log(err))
+    getUsers();
   },[])
 
   async function RemoveUser(Mobile) {
@@ -74,6 +86,7 @@ export default function AdminAllUsers() {
 
   return (
     <>
+    {loading && <Spinner />}
       <AdminSidebar />
       <div className='bg-slate-200'>
         <div className=' bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>

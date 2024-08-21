@@ -26,7 +26,7 @@ export default function AllBuses() {
   }
   useEffect(() => {
     getBuses();
-  },[getBuses])
+  },[])
 
   function ViewRoute() {
     toast.error("This feature is still in development!")

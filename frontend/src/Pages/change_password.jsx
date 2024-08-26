@@ -11,6 +11,7 @@ export default function ChangePassword() {
   let navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   let [a, setA] = useState(0);
+  
   const [user_id, setUserID] = useState();
   let [newPass, setNewPass] = useState('');
   let [confirmPass, setConfirmPass] = useState('');
@@ -89,17 +90,17 @@ export default function ChangePassword() {
   return (
     <>
       {loading && <Spinner />}
-      <div className='flex justify-around h-screen w-full fpbg'>
+      <div className='flex justify-around h-screen w-full md:flex-col sm:flex-col'>
 
-        <div className='w-1/2 min-h-fit overflow-hidden '>
+        <div className='w-1/2 md:w-full sm:w-full h-screen overflow-hidden md:max-h-min sm:max-h-min fpbg'>
           <div className='flex flex-col m-[4rem]'>
-            <img src={PU} alt="No" />
-            <h3 className='font-bold text-center text-4xl mt-4'>Transport Management System</h3>
-            <img src="https://www.shutterstock.com/image-vector/illustration-yellow-school-bus-flat-600nw-2246845245.jpg" alt="No" className='h-[25rem]' />
+            <img src={PU} alt="No" className='md:h-[3rem] sm:h-[3rem]'/>
+            <h3 className='font-bold text-center text-4xl mt-4 md:text-3xl sm:text-xl'>Transport Management System</h3>
+            <img src="https://www.shutterstock.com/image-vector/illustration-yellow-school-bus-flat-600nw-2246845245.jpg" alt="No" className='h-[25rem] md:h-[15rem] sm:h-[15rem]' />
           </div>
         </div>
 
-        <div className='w-1/2 h-full bg-slate-100 flex items-center justify-center flex-col space-y-8'>
+        <div className='w-1/2 h-full bg-slate-100 flex items-center justify-center flex-col space-y-8 md:w-full sm:w-full overflow-hidden md:max-h-min sm:max-h-min'>
 
           <div className='flex flex-col items-center justify-center'>
             <h1>Welcome to PUTMS</h1>
@@ -111,7 +112,7 @@ export default function ChangePassword() {
             {a === 1 ? <><input type="password" placeholder='Enter OTP' className='bg-slate-100 rounded-sm px-2 py-1 ' onChange={(e) => {
               setOtp(e.target.value)
             }} autoFocus="true" />
-              <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700' onClick={verifyOTP} hidden={showNewPass}>Submit</button> </> : <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700' onClick={() => {
+              <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700 sm:mx-0' onClick={verifyOTP} hidden={showNewPass}>Submit</button> </> : <button className='bg-green-500 py-2 px-[0.15rem] mt-4 mx-5 rounded-lg hover:bg-green-700 sm:mx-0' onClick={() => {
                 submit();
                 setIsDisabled(true);
               }}>Send OTP</button>}

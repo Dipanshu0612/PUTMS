@@ -26,7 +26,7 @@ export default function AdminSidebar() {
                     <h4 className='flex text-white items-center mt-2 font-extrabold text-4xl'>PU-TMS</h4>
                 </div>
             </div>
-            <div className={`w-[250px] bg-gray-800 ${isOpen ? "fixed" : "hidden"} h-[100vh] sidebar`} id='nav'>
+            <div className={`w-[250px] bg-gray-800 ${isOpen ? "fixed" : "hidden"} h-[100vh] sidebar`}>
                 <ul className='flex flex-col flex-wrap p-0'>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 justify-start items-center">
                         <RxDashboard />

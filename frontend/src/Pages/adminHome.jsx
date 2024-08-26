@@ -71,7 +71,7 @@ export default function AdminHome() {
 
             <div className='h-[0.1rem] bg-slate-200 w-[100%] mb-3'></div>
 
-            <div className='flex justify-around items-center text-center'>
+            <div className='flex justify-around items-center text-center flex-wrap md:space-y-3 sm:space-y-3'>
               <div className='h-[10rem] w-[10rem] flex flex-col items-center rounded-md bg-red-500 text-white justify-center cursor-pointer hover:bg-red-700'>
                 <h4>Total Users</h4>
                 <h3 className='text-[5rem]'>

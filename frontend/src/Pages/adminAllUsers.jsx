@@ -124,7 +124,7 @@ export default function AdminAllUsers() {
                         <td>{user.Mobile}</td>
                         <td>{user.Bus_Pass_No}</td>
                         <td>{user.Area}</td>
-                        <td><button className='bg-green-600 px-2 py-1 rounded-md hover:bg-green-800 transition ease-in-out' onClick={ViewUser}>View User</button> <button className='bg-red-500 px-2 py-1 rounded-md hover:bg-red-800 transition ease-in-out' onClick={() => {
+                        <td><button className='bg-green-600 px-2 py-1 rounded-md hover:bg-green-800 transition ease-in-out md:m-2 sm:m-2' onClick={ViewUser}>View User</button> <button className='bg-red-500 px-2 py-1 rounded-md hover:bg-red-800 transition ease-in-out' onClick={() => {
                           RemoveUser(user.Mobile)
                           toast.success("User Successfully Removed!")
                         }}>Remove User</button></td>

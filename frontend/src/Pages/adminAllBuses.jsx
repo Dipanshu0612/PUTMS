@@ -121,7 +121,7 @@ export default function AdminAllBuses() {
                                                 <td className='w-[10%]'>{bus.Area}</td>
                                                 <td className='w-[10%]'>{bus.Start_Point}</td>
                                                 <td className='w-[10%]'>{bus.End_Point}</td>
-                                                <td className='w-[20%]'><button className='bg-green-600 px-2 py-1 rounded-md hover:bg-green-800 transition ease-in-out' onClick={ViewRoute}>View Route</button> <button className='bg-red-500 px-2 py-1 rounded-md hover:bg-red-800 transition ease-in-out' onClick={() => {
+                                                <td className='w-[20%]'><button className='bg-green-600 px-2 py-1 rounded-md hover:bg-green-800 transition ease-in-out md:m-2 sm:m-2' onClick={ViewRoute}>View Route</button> <button className='bg-red-500 px-2 py-1 rounded-md hover:bg-red-800 transition ease-in-out' onClick={() => {
                                                     RemoveBus(bus.Bus_Number)
                                                 }}>Remove Bus</button></td>
                                             </tr>

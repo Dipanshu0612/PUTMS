@@ -35,14 +35,14 @@ export default function Home() {
 
   useEffect(() => {
     async function getUserInfo() {
-      setLoading(true); 
+      setLoading(true);
       try {
         let response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
         setUserData(response.data);
         const busArea = response.data.Area;
         let busResponse = await axios.post("https://putms.onrender.com/getBusInfo", { busArea });
         setBusData(busResponse.data);
-        
+
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -59,7 +59,7 @@ export default function Home() {
       setNotification(response.data);
     }
     getNotification();
-  },[])
+  }, [])
 
   return (
     <>
@@ -67,8 +67,8 @@ export default function Home() {
       {user_id === "admin" ? navigate('/') : null}
       <Header />
 
-      <div className='main h-[50rem] bg-slate-200 flex'>
-        <div className='m-3 bg-slate-100 h-[45rem] w-1/4 shadow-lg flex space-y-2 flex-col items-center py-3 overflow-hidden cursor-pointer'>
+      <div className='main max-h-min bg-slate-200 flex md:flex-col sm:flex-col'>
+        <div className='m-3 bg-slate-100 h-[45rem] w-1/4 shadow-lg flex space-y-2 flex-col items-center py-3 overflow-hidden cursor-pointer md:w-full sm:w-full'>
           <img src={user_id === "210305105661" ? My : "https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png"} alt="UserIMG" className='border border-black object-cover rounded-full h-[15rem] w-[15rem] mix-blend-normal' />
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
           <h2 className='hover:underline p-2 font-extrabold'>{userData.Name || "----"}</h2>
@@ -85,10 +85,10 @@ export default function Home() {
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
           <h5 className='hover:underline p-2'>Boarding Point : {userData.Boarding_Point || "----"}</h5>
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
-
         </div>
-        <div className='m-3 bg-slate-100 h-[45rem] w-3/4 shadow-lg flex flex-col space-y-5 py-3 px-3'>
-          <div className='h-[21rem] '>
+
+        <div className='m-3 bg-slate-100 h-[45rem] w-3/4 shadow-lg flex flex-col space-y-5 py-3 px-3 md:w-full sm:w-full'>
+          <div className='h-[21rem]'>
             <div className='flex space-x-2 text-center items-center text-blue-500'>
               <div className=''>
                 <FaBus className='text-3xl mb-2' />
@@ -97,22 +97,22 @@ export default function Home() {
             </div>
             <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
             <div className='flex h-[85%] my-2 gap-3 space-x-4'>
-              <div className='flex flex-col w-1/3 bg-yellow-100 p-4 text-center rounded-lg shadow-sm cursor-pointer'>
-                <h5 className='font-bold uppercase text-3xl'><GrBus className='inline mr-3 text-[2rem]' />Current Bus</h5>
+              <div className='flex flex-col w-1/3 bg-yellow-100 p-4 text-center rounded-lg shadow-sm cursor-pointer justify-center'>
+                <h5 className='font-bold uppercase text-3xl md:text-2xl sm:text-xl'><GrBus className='inline mr-3 text-[2rem] md:text-[1.5rem] sm:text-[1rem]' />Current Bus</h5>
                 <div className='h-[0.01rem] bg-black w-[100%]'></div>
-                <h4 className='text-center w-full text-[2.5rem] mt-3 tracking-widest'>GJ 06 BY</h4>
-                <h2 className='text-center w-full text-[5rem] font-extrabold tracking-wide'>{busData.Bus_Number || "----"}</h2>
+                <h4 className='text-center w-full text-[2.5rem] mt-3 tracking-widest md:text-[2rem] sm:text-[1.5rem]'>GJ 06 BY</h4>
+                <h2 className='text-center w-full text-[5rem] font-extrabold tracking-wide md:text-[4rem] sm:text-[3rem]'>{busData.Bus_Number || "----"}</h2>
 
               </div>
 
               <div className='flex w-2/3 flex-col justify-center space-y-2'>
-                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300'><TbUser className='inline mr-2 text-[2rem] justify-center' />Driver Name : {busData.Driver_Name || "----"}</h3>
+                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300 md:text-[1.8rem] sm:text-[1.5rem]'><TbUser className='inline mr-2 text-[2rem] justify-center md:text-[1.8rem] sm:text-[1.5rem]' />Driver Name : {busData.Driver_Name || "----"}</h3>
                 <div className='h-[0.15rem] bg-slate-200 w-[100%]'></div>
-                <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300'><FaPhoneAlt className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Contact : {busData.Driver_Contact || "----"}</h3>
+                <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300 md:text-[1.8rem] sm:text-[1.5rem]'><FaPhoneAlt className='inline mr-3 ml-1 text-[1.5rem] justify-center md:text-[1.2rem] sm:text-[1rem]' />Contact : {busData.Driver_Contact || "----"}</h3>
                 <div className='h-[0.15rem] bg-slate-200 w-[100%]'></div>
-                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300'><FaLocationDot className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Area : {busData.Area || "----"}</h3>
+                <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300 md:text-[1.8rem] sm:text-[1.5rem]'><FaLocationDot className='inline mr-3 ml-1 text-[1.5rem] justify-center md:text-[1.2rem] sm:text-[1rem]' />Area : {busData.Area || "----"}</h3>
                 <div className='h-[0.15rem] bg-slate-200 w-[100%]'></div>
-                <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300'><IoMdTime className='inline mr-3 ml-1 text-[1.5rem] justify-center' />Departure Time : 5:15 PM</h3>
+                <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300'><IoMdTime className='inline mr-3 ml-1 text-[1.5rem] justify-center md:text-[1.2rem] sm:text-[1rem]' />Departure Time : 5:15 PM</h3>
 
               </div>
             </div>

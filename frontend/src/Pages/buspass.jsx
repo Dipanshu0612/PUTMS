@@ -24,9 +24,6 @@ const BusPass = React.memo(() => {
     const getUserInfo = useCallback(async () => {
         setLoading(true);
         if (!user_id) return;
-
-        // console.log("Fetching Data");
-
         try {
             const response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
             setUserData(response.data);
@@ -65,31 +62,31 @@ const BusPass = React.memo(() => {
         <>
         {loading && <Spinner />}
             <Header />
-            <div className='w-full h-[30rem] flex px-2 bg-slate-200'>
-                <div className='w-2/3 m-3 bg-slate-100 p-3 cursor-pointer shadow-lg' ref={targetRef}>
+            <div className='w-full max-h-min flex px-2 bg-slate-200 md:flex-col sm:flex-col'>
+                <div className='w-2/3 m-3 bg-slate-100 p-3 cursor-pointer shadow-lg md:w-full sm:w-full' ref={targetRef}>
                     <div className='flex space-x-2 text-center items-center text-blue-500'>
                         <FaAddressCard className='text-3xl mb-2' />
                         <h4 className='text-center font-semibold'>BUS PASS</h4>
                     </div>
                     <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
-                    <div className='border border-black h-[22rem] my-3 hover:bg-slate-50'>
+                    <div className='border border-black h-[22rem] my-3 hover:bg-slate-50 sm:h-[45rem]'>
                         <div className='h-[5.5rem] flex justify-between py-2 px-4 bg-green-600'>
                             <img src={NAAC} alt="Naac" className='w-1/3 h-full p-1' />
                             <img src={PU3} alt="PuLogo" className='w-1/3 h-full' />
                         </div>
-                        <div className='h-[16.5rem] flex p-2 space-x-2'>
-                            <div className='w-1/3'>
-                                <img src={user_id === "210305105661" ? My : "https://thumbs.dreamstime.com/b/profile-pic-icon-isolated-white-background-your-web-mobile-app-design-133862807.jpg"} alt="UserIMG" className='border border-black object-cover rounded-lg mix-blend-multiply' />
+                        <div className='h-[16.5rem] flex p-2 space-x-2 sm:flex-col sm:items-center sm:space-y-5'>
+                            <div className='w-1/3 sm:w-1/2 sm:flex sm:items-center sm:justify-center'>
+                                <img src={user_id === "210305105661" ? My : "https://thumbs.dreamstime.com/b/profile-pic-icon-isolated-white-background-your-web-mobile-app-design-133862807.jpg"} alt="UserIMG" className='border border-black object-cover rounded-lg mix-blend-multiply sm:rounded-full sm:h-[15rem] sm:w-[15rem]' />
                             </div>
-                            <div className='w-2/3 flex p-2 tracking-wide text-4xl gap-4 relative mb-1'>
-                                <div className='flex flex-col space-y-5 justify-center mb-5'>
+                            <div className='w-2/3 flex p-2 tracking-wide text-4xl gap-4 relative mb-1 md:text-2xl sm:text-xl sm:w-full'>
+                                <div className='flex flex-col space-y-5 justify-center mb-5 md:space-y-3'>
                                     <h6 className='font-bold'>Name : {userData.Name}</h6>
                                     <h6 className='font-bold'>Enrollment : {userData.Enrollment || userData.MIS_ID}</h6>
                                     <h6 className='font-bold'>Card ID : {userData.Card_ID}</h6>
                                     <h6 className='font-bold'>Bus Pass No : {userData.Bus_Pass_No}</h6>
                                     <h6 className='font-bold'>Department : {userData.Department}</h6>
                                 </div>
-                                <div className='flex flex-col space-y-5 justify-center mb-5'>
+                                <div className='flex flex-col space-y-5 justify-center mb-5 md:space-y-3'>
                                     <h6 className='font-bold'>Institute : {userData.Institute}</h6>
                                     <h6 className='font-bold'>Shift Time : {userData.Shift} PM</h6>
                                     <h6 className='font-bold'>Area : {userData.Area}</h6>
@@ -103,7 +100,7 @@ const BusPass = React.memo(() => {
                         </div>
                     </div>
                 </div>
-                <div className='w-1/3 m-3 bg-slate-100 p-3 flex flex-col space-y-1 shadow-lg cursor-pointer'>
+                <div className='w-1/3 m-3 bg-slate-100 p-3 flex flex-col space-y-1 shadow-lg cursor-pointer md:w-1/2 sm:w-full'>
                     <div className='flex space-x-2 text-center items-center text-blue-500'>
                         <FaMoneyCheckDollar className='text-3xl mb-2' />
                         <h4 className='text-center font-semibold'>FEES INFO</h4>

@@ -11,16 +11,16 @@ import axios from 'axios';
 import { usePDF } from 'react-to-pdf';
 import "../index.css";
 import Spinner from '../components/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 const BusPass = React.memo(() => {
     console.log("BusPass Rendered");
-
     const user_id = sessionStorage.getItem("user_id");
+    console.log(user_id)
     const [userData, setUserData] = useState([]);
     const { toPDF, targetRef } = usePDF({ filename: `${user_id}_BusPass.pdf` });
     const [loading, setLoading] = useState(false);
-
-
+    const navigate = useNavigate();
     const getUserInfo = useCallback(async () => {
         setLoading(true);
         if (!user_id) return;
@@ -60,10 +60,11 @@ const BusPass = React.memo(() => {
 
     return (
         <>
+        {user_id === null ? navigate('/') : null}
         {loading && <Spinner />}
             <Header />
-            <div className='w-full max-h-min flex px-2 bg-slate-200 md:flex-col sm:flex-col'>
-                <div className='w-2/3 m-3 bg-slate-100 p-3 cursor-pointer shadow-lg md:w-full sm:w-full' ref={targetRef}>
+            <div className='w-full max-h-min flex px-2 bg-slate-200 md:flex-col sm:flex-col p-3'>
+                <div className='w-2/3 mb-3 bg-slate-100 p-3 cursor-pointer shadow-lg md:w-full sm:w-full' ref={targetRef}>
                     <div className='flex space-x-2 text-center items-center text-blue-500'>
                         <FaAddressCard className='text-3xl mb-2' />
                         <h4 className='text-center font-semibold'>BUS PASS</h4>

@@ -64,11 +64,11 @@ export default function Home() {
   return (
     <>
       {loading && <Spinner />}
-      {user_id === "admin" ? navigate('/') : null}
+      {user_id === "admin" || user_id === null ? navigate('/') : null}
       <Header />
 
-      <div className='main max-h-min bg-slate-200 flex md:flex-col sm:flex-col'>
-        <div className='m-3 bg-slate-100 h-[45rem] w-1/4 shadow-lg flex space-y-2 flex-col items-center py-3 overflow-hidden cursor-pointer md:w-full sm:w-full'>
+      <div className='main max-h-min bg-slate-200 flex md:flex-col sm:flex-col p-3 sm:space-y-5 md:space-y-5'>
+        <div className='bg-slate-100 h-[45rem] w-1/4 shadow-lg flex space-y-2 flex-col items-center py-3 overflow-hidden cursor-pointer md:w-full sm:w-full sm:m-0'>
           <img src={user_id === "210305105661" ? My : "https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png"} alt="UserIMG" className='border border-black object-cover rounded-full h-[15rem] w-[15rem] mix-blend-normal' />
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
           <h2 className='hover:underline p-2 font-extrabold'>{userData.Name || "----"}</h2>
@@ -87,8 +87,8 @@ export default function Home() {
           <div className='h-[0.1rem] bg-slate-200 w-[90%]'></div>
         </div>
 
-        <div className='m-3 bg-slate-100 h-[45rem] w-3/4 shadow-lg flex flex-col space-y-5 py-3 px-3 md:w-full sm:w-full'>
-          <div className='h-[21rem]'>
+        <div className='bg-slate-100 h-[45rem] w-3/4 shadow-lg flex flex-col space-y-5 py-3 px-3 md:w-full sm:w-full sm:h-[50rem]'>
+          <div className='h-[21rem] sm:h-[35rem]'>
             <div className='flex space-x-2 text-center items-center text-blue-500'>
               <div className=''>
                 <FaBus className='text-3xl mb-2' />
@@ -96,8 +96,8 @@ export default function Home() {
               <h4 className='text-center font-semibold'>BUS INFORMATION</h4>
             </div>
             <div className='h-[0.1rem] bg-slate-200 w-[100%]'></div>
-            <div className='flex h-[85%] my-2 gap-3 space-x-4'>
-              <div className='flex flex-col w-1/3 bg-yellow-100 p-4 text-center rounded-lg shadow-sm cursor-pointer justify-center'>
+            <div className='flex h-[85%] my-2 gap-3 space-x-4 sm:flex-col'>
+              <div className='flex flex-col w-1/3 bg-yellow-100 p-4 text-center rounded-lg shadow-sm cursor-pointer justify-center sm:w-full'>
                 <h5 className='font-bold uppercase text-3xl md:text-2xl sm:text-xl'><GrBus className='inline mr-3 text-[2rem] md:text-[1.5rem] sm:text-[1rem]' />Current Bus</h5>
                 <div className='h-[0.01rem] bg-black w-[100%]'></div>
                 <h4 className='text-center w-full text-[2.5rem] mt-3 tracking-widest md:text-[2rem] sm:text-[1.5rem]'>GJ 06 BY</h4>
@@ -105,7 +105,7 @@ export default function Home() {
 
               </div>
 
-              <div className='flex w-2/3 flex-col justify-center space-y-2'>
+              <div className='flex w-2/3 flex-col justify-center space-y-2 sm:w-full'>
                 <h3 className='bg-slate-100 p-2 rounded-md cursor-pointer hover:bg-gray-300 md:text-[1.8rem] sm:text-[1.5rem]'><TbUser className='inline mr-2 text-[2rem] justify-center md:text-[1.8rem] sm:text-[1.5rem]' />Driver Name : {busData.Driver_Name || "----"}</h3>
                 <div className='h-[0.15rem] bg-slate-200 w-[100%]'></div>
                 <h3 className='bg-slate-200 p-2 rounded-md cursor-pointer hover:bg-gray-300 md:text-[1.8rem] sm:text-[1.5rem]'><FaPhoneAlt className='inline mr-3 ml-1 text-[1.5rem] justify-center md:text-[1.2rem] sm:text-[1rem]' />Contact : {busData.Driver_Contact || "----"}</h3>
@@ -118,9 +118,9 @@ export default function Home() {
             </div>
           </div>
 
-          <div className='h-[0.1rem] bg-slate-300 w-[100%]'></div>
+          <div className='h-[0.1rem] bg-slate-300 w-[100%] md:space-y-5 sm:space-y-5'></div>
 
-          <div className='h-[21rem]'>
+          <div className='h-[21rem] sm:h-[30rem] md:space-y-5 sm:space-y-5'>
             <div className='flex space-x-2 text-center items-center text-blue-500'>
               <div className=''>
                 <GoBellFill className='text-3xl mb-2' />

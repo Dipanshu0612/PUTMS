@@ -58,7 +58,7 @@ export default function AdminAllBuses() {
     async function getBuses(){
         setLoading(true);
         try {
-          let response = await axios.get('https://putms.onrender.com/all-Buses')
+          let response = await axios.get('https://putms.onrender.com/get_all_buses')
           setBusData(response.data)
         } catch (error) {
           toast.error(error)

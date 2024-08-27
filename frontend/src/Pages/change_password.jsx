@@ -70,7 +70,7 @@ export default function ChangePassword() {
     }
     setLoading(true);
     try {
-      let response = await axios.post('https://putms.onrender.com/change_pass', { user_id, newPass });
+      let response = await axios.post('https://putms.onrender.com/change_password', { user_id, newPass });
       if (response.data.success) {
         toast.success(response.data.message);
         navigate('/');

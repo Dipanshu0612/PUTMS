@@ -60,7 +60,7 @@ export default function AdminAllUsers() {
   async function getUsers(){
     setLoading(true);
     try {
-      let response = await axios.get('https://putms.onrender.com/all-users')
+      let response = await axios.get('https://putms.onrender.com/get_all_users')
       setUserData(response.data)
     } catch (error) {
       toast.error(error)
@@ -74,7 +74,7 @@ export default function AdminAllUsers() {
   },[])
 
   async function RemoveUser(Mobile) {
-    let response = await axios.post("https://putms.onrender.com/removeUser", { Mobile })
+    let response = await axios.post("https://putms.onrender.com/remove_user", { Mobile })
     console.log(response.data)
   }
 

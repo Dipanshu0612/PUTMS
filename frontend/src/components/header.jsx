@@ -22,8 +22,8 @@ export default function Header() {
           <ul className='flex flex-wrap justify-centre items-center mr-4 space-x-5'>
             <li className="text-white cursor-pointer py-[1.37rem] font-semibold "><Link to="/home" activeClassName='active'>Home</Link></li>
             <li className="text-white cursor-pointer py-[1.37rem] font-semibold " ><Link to="/my-bus-pass" activeClassName='active'>My Bus Pass</Link></li>
-            <li className="text-white cursor-pointer py-[1.37rem] font-semibold" ><Link to="/all-Buses" activeClassName='active'>View All Buses</Link></li>
-            <li className="text-white cursor-pointer py-[1.37rem] font-semibold" ><Link to="/feedback" activeClassName='active'>Feedback</Link></li>
+            <li className="text-white cursor-pointer py-[1.37rem] font-semibold" ><Link to="/all-buses" activeClassName='active'>View All Buses</Link></li>
+            <li className="text-white cursor-pointer py-[1.37rem] font-semibold" ><Link to="/send_feedback" activeClassName='active'>Feedback</Link></li>
             <li className="text-white cursor-pointer py-[1.37rem] font-semibold" ><a href="https://ums.paruluniversity.ac.in/">GNUMS</a></li>
           <li className="text-white cursor-pointer py-[1.37rem] font-semibold" onClick={()=>{
             setShowDrop((prev) => !prev)

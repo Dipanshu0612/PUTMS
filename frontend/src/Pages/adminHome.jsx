@@ -28,9 +28,9 @@ export default function AdminHome() {
   async function getData(){
     setLoading(true);
     try {
-      let response = await axios.get('https://putms.onrender.com/all-users')
+      let response = await axios.get('https://putms.onrender.com/get_all_users')
       setUserData(response.data)
-      let response2 = await axios.get('https://putms.onrender.com/all-buses')
+      let response2 = await axios.get('https://putms.onrender.com/get_all_buses')
       setBusData(response2.data)
       let response3= await axios.get("https://putms.onrender.com/get_notifications")
       setNotification(response3.data);

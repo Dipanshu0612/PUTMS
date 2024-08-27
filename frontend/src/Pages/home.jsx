@@ -37,10 +37,10 @@ export default function Home() {
     async function getUserInfo() {
       setLoading(true);
       try {
-        let response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
+        let response = await axios.post("https://putms.onrender.com/get_user_info", { user_id });
         setUserData(response.data);
         const busArea = response.data.Area;
-        let busResponse = await axios.post("https://putms.onrender.com/getBusInfo", { busArea });
+        let busResponse = await axios.post("https://putms.onrender.com/get_bus_info", { busArea });
         setBusData(busResponse.data);
 
       } catch (error) {

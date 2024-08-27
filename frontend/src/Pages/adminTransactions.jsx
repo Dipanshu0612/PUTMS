@@ -14,7 +14,7 @@ export default function AdminTransactions() {
     async function getTransactions(){
         setLoading(true);
         try {
-            let response = await axios.get('https://putms.onrender.com/all-users')
+            let response = await axios.get('https://putms.onrender.com/get_all_users')
             setUserData(response.data)
         } catch (error) {
             toast.error(error)

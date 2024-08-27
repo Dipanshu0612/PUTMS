@@ -34,15 +34,15 @@ export default function AdminSidebar() {
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <FaUserGroup />
-                        <Link to="/admin_all_users" activeClassName='active' className="text-white">Show Users</Link>
+                        <Link to="/all_users" activeClassName='active' className="text-white">Show Users</Link>
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <TbBus />
-                        <Link to="/admin_all_buses" activeClassName='active' className="text-white">Show Buses</Link>
+                        <Link to="/all_buses" activeClassName='active' className="text-white">Show Buses</Link>
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <GrTransaction />
-                        <Link to="/admin_transactions" activeClassName='active' className="text-white">Show Transactions</Link>
+                        <Link to="transactions" activeClassName='active' className="text-white">Show Transactions</Link>
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <AiOutlineNotification />
@@ -50,7 +50,7 @@ export default function AdminSidebar() {
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                     <VscFeedback />
-                        <Link to="/admin_feedback" activeClassName='active' className="text-white">User Feedback</Link>
+                        <Link to="/feedbacks" activeClassName='active' className="text-white">User Feedback</Link>
                     </li>
                     <li className="text-white cursor-pointer py-[1.37rem] font-semibold flex space-x-2 items-center justify-start">
                         <FaLocationArrow />

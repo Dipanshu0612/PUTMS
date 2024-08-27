@@ -25,7 +25,7 @@ export default function ForgotPassword() {
   async function submit() {
     setLoading(true);
     try {
-      let response = await axios.post('https://putms.onrender.com/forgot_pass', { user_id });
+      let response = await axios.post('https://putms.onrender.com/forgot_password', { user_id });
       if (response.data.success) {
         setA((a) => 1 - a)
         toast.success(response.data.message);
@@ -69,7 +69,7 @@ export default function ForgotPassword() {
     }
     setLoading(true);
     try {
-      let response = await axios.post('https://putms.onrender.com/change_pass', { user_id, newPass });
+      let response = await axios.post('https://putms.onrender.com/change_password', { user_id, newPass });
       if (response.data.success) {
         toast.success(response.data.message);
         navigate('/');

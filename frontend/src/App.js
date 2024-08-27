@@ -27,16 +27,16 @@ function App() {
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/home" element={<Home />} />
         <Route path="/my-bus-pass" element={<BusPass />} />
-        <Route path="/all-Buses" element={<AllBuses />} />
-        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/all-buses" element={<AllBuses />} />
+        <Route path="/send_feedback" element={<Feedback />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/forgot-password" element={<ForgotPasssword />} />
         <Route path="/admin_home" element={<AdminHome />} />
-        <Route path="/admin_all_users" element={<AdminAllUsers />} />
-        <Route path="/admin_all_buses" element={<AdminAllBuses />} />
+        <Route path="/all_users" element={<AdminAllUsers />} />
+        <Route path="/all_buses" element={<AdminAllBuses />} />
         <Route path="/push_notification" element={<PushNotification />} />
-        <Route path="/admin_feedback" element={<AdminFeedback />} />
-        <Route path="/admin_transactions" element={<AdminTransactions />} />
+        <Route path="/feedbacks" element={<AdminFeedback />} />
+        <Route path="/transactions" element={<AdminTransactions />} />
       </Routes>
     </Router>
     <ToastContainer

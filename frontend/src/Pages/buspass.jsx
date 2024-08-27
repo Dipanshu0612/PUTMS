@@ -23,7 +23,7 @@ const BusPass = React.memo(() => {
         setLoading(true);
         if (!user_id) return;
         try {
-            const response = await axios.post("https://putms.onrender.com/getUserInfo", { user_id });
+            const response = await axios.post("https://putms.onrender.com/get_user_info", { user_id });
             setUserData(response.data);
         } catch (error) {
             console.error('Error fetching user data:', error);

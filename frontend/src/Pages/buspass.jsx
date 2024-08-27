@@ -14,9 +14,7 @@ import Spinner from '../components/Spinner';
 import { useNavigate } from 'react-router-dom';
 
 const BusPass = React.memo(() => {
-    console.log("BusPass Rendered");
     const user_id = sessionStorage.getItem("user_id");
-    console.log(user_id)
     const [userData, setUserData] = useState([]);
     const { toPDF, targetRef } = usePDF({ filename: `${user_id}_BusPass.pdf` });
     const [loading, setLoading] = useState(false);

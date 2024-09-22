@@ -60,8 +60,8 @@ export default function AdminHome() {
     {loading && <Spinner />}
       <AdminSidebar />
       <div className='bg-slate-200'>
-        <div className='bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>
-          <div className='flex flex-col bg-white p-4 shadow-lg m-3 max-h-min'>
+        <div className='bg-slate-200 sm:!p-1 sm:!m-1 md:!p-1 md:!m-1 space-y-5 flex flex-col'>
+          <div className='flex flex-col bg-white p-3 m-3 shadow-lg max-h-min sm:p-2 sm:m-1 md:p-2 md:m-1'>
             <div className='flex space-x-2 text-center items-center text-blue-500'>
               <div className=''>
                 <RxDashboard className='text-3xl mb-2' />
@@ -71,34 +71,34 @@ export default function AdminHome() {
 
             <div className='h-[0.1rem] bg-slate-200 w-[100%] mb-3'></div>
 
-            <div className='flex justify-around items-center text-center flex-wrap md:space-y-3 sm:space-y-3'>
-              <div className='h-[10rem] w-[10rem] flex flex-col items-center rounded-md bg-red-500 text-white justify-center cursor-pointer hover:bg-red-700'>
-                <h4>Total Users</h4>
-                <h3 className='text-[5rem]'>
-                  <CountUp end={user_data.length} />
+            <div className='flex justify-around items-center text-center flex-wrap sm:gap-2'>
+              <div className='h-[10rem] w-[10rem] flex flex-col items-center rounded-md bg-red-500 text-white justify-center cursor-pointer hover:bg-red-700 md:h-[8rem] md:w-[8rem] sm:h-[6rem] sm:w-[6rem] sm:p-1'>
+                <h4 className='sm:text-[0.8rem]'>Total Users</h4>
+                <h3 className='text-[5rem] md:text-[4rem] sm:text-[3rem]'>
+                  <CountUp end={user_data.length} className='sm:text-[2rem]'/>
                 </h3>
               </div>
-              <div className='h-[10rem] w-[10rem] flex flex-col items-center rounded-md bg-blue-500 text-white justify-center cursor-pointer hover:bg-blue-700'>
-                <h4>Total Buses</h4>
-                <h3 className='text-[5rem]'>
-                  <CountUp end={bus_data.length} />
+              <div className='h-[10rem] w-[10rem] flex flex-col items-center rounded-md bg-blue-500 text-white justify-center cursor-pointer hover:bg-blue-700 md:h-[8rem] md:w-[8rem] sm:h-[6rem] sm:w-[6rem]'>
+                <h4 className='sm:text-[0.8rem]'>Total Buses</h4>
+                <h3 className='text-[5rem] md:text-[4rem] sm:text-[3rem]'>
+                  <CountUp end={bus_data.length} className='sm:text-[2rem]'/>
                 </h3>
               </div>
-              <div className='h-[10rem] w-[10rem] flex flex-col items-center rounded-md bg-yellow-500 text-white justify-center cursor-pointer hover:bg-yellow-700'>
-                <h5>Expired Bus Pases</h5>
-                <h3 className='text-[5rem]'>
-                  <CountUp end={user_data.filter(user => user.Bus_Fees_Paid === "No").length} />
+              <div className='h-[10rem] w-[10rem] flex flex-col items-center rounded-md bg-yellow-500 text-white justify-center cursor-pointer hover:bg-yellow-700 md:h-[8rem] md:w-[8rem] sm:h-[6rem] sm:w-[6rem]'>
+                <h5 className='sm:text-[0.8rem]'>Expired Bus Pases</h5>
+                <h3 className='text-[5rem] md:text-[4rem] sm:text-[3rem]'>
+                  <CountUp end={user_data.filter(user => user.Bus_Fees_Paid === "No").length} className='sm:text-[2rem]'/>
                 </h3>
               </div>
-              <div className='h-[10rem] w-[15rem] flex flex-col items-center rounded-md bg-green-500 text-white justify-center cursor-pointer hover:bg-green-700'>
-                <h6 className='p-1'>Total Amonut of Transacation</h6>
-                <h3 className='text-[5rem]'>
-                  <CountUp end={user_data.filter(user => user.Bus_Fees_Paid === "Yes").length * 22000} className='text-[4rem]'/>
+              <div className='h-[10rem] w-[15rem] flex flex-col items-center rounded-md bg-green-500 text-white justify-center cursor-pointer hover:bg-green-700 md:h-[8rem] md:w-[8rem] sm:h-[6rem] sm:w-[6rem]'>
+                <h6 className='p-1 sm:text-[0.8rem]'>Total Amonut of Transacation</h6>
+                <h3 className='text-[5rem] md:text-[4rem] sm:text-[3rem]'>
+                  <CountUp end={user_data.filter(user => user.Bus_Fees_Paid === "Yes").length * 22000} className='text-[4rem] md:text-[2rem] sm:text-[1.2rem]'/>
                 </h3>
               </div>
             </div>
 
-            <div className='h-[15rem] mt-4'>
+            <div className='h-[17rem] mt-4 overflow-scroll'>
               <div className='flex space-x-2 text-center items-center text-blue-500'>
                 <div className=''>
                   <GoBellFill className='text-3xl mb-2' />

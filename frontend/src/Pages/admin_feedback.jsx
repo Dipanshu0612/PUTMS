@@ -30,7 +30,7 @@ export default function AdminFeedback() {
     {loading && <Spinner />}
       <AdminSidebar />
       <div className='bg-slate-200'>
-        <div className='bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>
+        <div className='bg-slate-200 space-y-5 flex flex-col'>
           <div className='flex flex-col bg-white p-3 shadow-lg m-3'>
             <div className='flex space-x-2 text-center items-center text-blue-500'>
               <div className=''>

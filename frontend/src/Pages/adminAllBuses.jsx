@@ -87,8 +87,8 @@ export default function AdminAllBuses() {
             {loading && <Spinner />}
             <AdminSidebar />
             <div className='bg-slate-200'>
-                <div className='bg-slate-200 p-3 m-2 space-y-5 flex flex-col'>
-                    <div className='flex flex-col bg-white p-3 shadow-lg'>
+                <div className='bg-slate-200 space-y-5 flex flex-col sm:!p-1 sm:!m-1 md:!p-1 md:!m-1'>
+                    <div className='flex flex-col bg-white p-3 m-3 shadow-lg sm:p-2 sm:m-1 md:p-2 md:m-1'>
                         <div className='flex space-x-2 text-center items-center text-blue-500'>
                             <div className=''>
                                 <FaBus className='text-3xl mb-2' />

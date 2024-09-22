@@ -8,7 +8,7 @@ export default function Footer() {
     <>
     <div className='h-[20rem] bg-gray-800 flex flex-col flex-wrap justify-center items-center text-white space-y-5 mb-1 cursor-pointer'>
         <p> Copyright &copy; 2024 | All Rights Reserved</p>
-        <h2>PU - Transport Management System</h2>
+        <h2 className='text-center'>PU - Transport Management System</h2>
         
         <div className='h-[0.05rem] bg-white w-[90%]'></div>
 

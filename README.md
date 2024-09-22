@@ -24,7 +24,8 @@ User need to login through their specific credentials to use the website.
 
 #### Bus Pass
 
-![image](https://github.com/user-attachments/assets/438679b0-0f74-4ef8-b81e-b63557e8b7e7)
+![image](https://github.com/user-attachments/assets/671f751b-2b09-4e60-b8ce-96052b3dbcb7)
+
 
 User can see their bus pass and download it as a PDF incase if the physical pass gets lost.\
 Users can also pay their fees through the Razorpay Payment Gateway.

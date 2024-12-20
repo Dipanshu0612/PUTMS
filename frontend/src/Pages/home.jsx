@@ -36,7 +36,7 @@ export default function Home() {
     async function getUserInfo() {
       setLoading(true);
       try {
-        console.log("Sending API Request!")
+        // console.log("Sending API Request!")
         let response = await axios.post(
           "https://putms.onrender.com/get_user_info",
           { user_id },

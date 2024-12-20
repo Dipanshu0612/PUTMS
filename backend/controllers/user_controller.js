@@ -52,7 +52,7 @@ exports.getUserInfo = async (req, res) => {
      const { user_id } = req.body;
      const authHeader = req.headers["authorization"];
      const token = authHeader && authHeader.split(" ")[1];
-     console.log(token);
+    //  console.log(token);
      let data;
      if (!token) {
        return res

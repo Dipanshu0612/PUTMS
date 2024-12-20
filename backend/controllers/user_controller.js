@@ -32,7 +32,6 @@ exports.verifyUser = async (req, res) => {
               httpOnly: true,
               sameSite: "None",
               maxAge: 3600000,
-              secure: true,
             });
             res.send({ success: true, message: "Login Successful!" });
           }

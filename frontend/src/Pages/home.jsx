@@ -46,9 +46,7 @@ export default function Home() {
             },
           }
         );
-        console.log(response);
-        if (response.success) {
-          console.log("Success!");
+        if (response.data.success) {
           setUserData(response.data.data);
         } else {
           toast.error(response.data.message);

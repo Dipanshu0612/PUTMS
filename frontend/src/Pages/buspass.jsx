@@ -36,7 +36,7 @@ const BusPass = React.memo(() => {
                 },
               }
             );
-            if (response.success) {
+            if (response.data.success) {
               setUserData(response.data.data);
             } else {
               toast.error(response.data.message);

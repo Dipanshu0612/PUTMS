@@ -30,7 +30,7 @@ exports.verifyUser = async (req, res) => {
           } else {
             res.cookie("authCookie", token, {
               httpOnly: true,
-              sameSite: "Strict",
+              sameSite: "None",
               maxAge: 3600000,
               secure: true,
             });

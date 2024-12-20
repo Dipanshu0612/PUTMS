@@ -49,7 +49,7 @@ export default function Home() {
         console.log(response);
         if (response.success) {
           console.log("Success!");
-          setUserData(response.data);
+          setUserData(response.data.data);
         } else {
           toast.error(response.data.message);
         }

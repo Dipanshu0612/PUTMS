@@ -74,8 +74,8 @@ exports.getUserInfo = async (req, res) => {
          success: false,
        });
      }
-     console.log(data);
-     res.status(200).json({ data, success: true });
+    //  console.log(data);
+     res.send({ data, success: true });
    } catch (error) {
      console.error("Error getting user info:", error);
    }

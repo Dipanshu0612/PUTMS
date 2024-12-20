@@ -51,7 +51,7 @@ export default function Home() {
         } else {
           toast.error(response.data.message);
         }
-        const busArea = response.data.Area;
+        const busArea = response.data.data.Area;
         let busResponse = await axios.post(
           "https://putms.onrender.com/get_bus_info",
           { busArea }

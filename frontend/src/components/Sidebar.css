@@ -1,0 +1,20 @@
+.sidebar{
+    transition: ease-in-out 0.2s;
+    padding: 0!important;
+    margin: 0;
+}
+.sidebar li{
+    font-size: larger;
+    padding: 1rem;
+    color: white!important;
+}
+.link a{
+    color: white!important;
+}
+.sidebar li:hover{
+    background-color: #1a1a1a!important;
+    transition: ease-in 0.2s;
+}
+.sidebar li a{
+    width: 100%;
+}

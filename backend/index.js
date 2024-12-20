@@ -11,7 +11,7 @@ const cookieParser = require("cookie-parser");
 
 app.use(express.json());
 const corsOptions = {
-  origin: "*",
+  origin: "https://putms.netlify.app",
   credentials: true,
   optionSuccessStatus: 200,
 };

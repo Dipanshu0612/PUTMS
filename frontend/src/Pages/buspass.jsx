@@ -12,6 +12,8 @@ import { usePDF } from 'react-to-pdf';
 import "../index.css";
 import Spinner from '../components/Spinner';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+
 
 const BusPass = React.memo(() => {
     const user_id = sessionStorage.getItem("user_id");
@@ -23,15 +25,24 @@ const BusPass = React.memo(() => {
         setLoading(true);
         if (!user_id) return;
         try {
-            const response = await axios.post("https://putms.onrender.com/get_user_info", { user_id });
-            setUserData(response.data);
+            let response = await axios.post(
+              "https://putms.onrender.com/get_user_info",
+              { user_id },
+              { withCredentials: true }
+            );
+            if (response.success) {
+              setUserData(response.data);
+            } else {
+              toast.error(response.data.message);
+              navigate("/");
+            }
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
         finally {
             setLoading(false);
         }
-    }, [user_id]);
+    }, [user_id,navigate]);
 
     useEffect(() => {
         getUserInfo();

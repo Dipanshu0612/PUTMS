@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink as Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from "react-toastify"
 import PU from "../assests/PU.png"
 import "../index.css"
 import Spinner from '../components/Spinner'
-
+import Cookies from "js-cookie"; 
 
 export default function Login() {
   let navigate = useNavigate();
@@ -32,6 +32,12 @@ export default function Login() {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    const token = Cookies.get("authCookie");
+    if (token) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   return (
     <>

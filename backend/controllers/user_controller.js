@@ -5,6 +5,9 @@ const AllBusModel = require('../models/allbuses');
 const LoginModel = require('../models/loginmodel');
 const FeebackModel = require('../models/feedback');
 const NotificationModel = require('../models/notification');
+const jwt = require("jsonwebtoken");
+
+
 
 exports.verifyUser = async (req, res) => {
   try {
@@ -15,9 +18,26 @@ exports.verifyUser = async (req, res) => {
       res.send({ success: false, message: "User Does Not Exists!" });
     }
     password = password.toString();
-    const ValidPass = await bcrypt.compare(password, user.Password);
+    const ValidPass = await bycrypt.compare(password, user.Password);
     if (user && ValidPass) {
-      res.send({ success: true, message: "Login Successful!" });
+      jwt.sign(
+        { user },
+        process.env.JWT_KEY,
+        { expiresIn: "1h" },
+        (err, token) => {
+          if (err) {
+            console.log("An Error Occured: ", err);
+          } else {
+            res.cookie("authCookie", token, {
+              httpOnly: true,
+              sameSite: "Strict",
+              maxAge: 3600000,
+              secure: true,
+            });
+            res.send({ success: true, message: "Login Successful!" });
+          }
+        }
+      );
     } else {
       res.send({ success: false, message: "Invalid Password!" });
     }
@@ -33,18 +53,34 @@ exports.getAllBuses = async (req, res) => {
 };
 
 exports.getUserInfo = async (req, res) => {
-  try {
-    const { user_id } = req.body;
-    let data;
-    if (user_id.length > 5) {
-      data = await AllUsersModel.findOne({ Enrollment: user_id });
-    } else {
-      data = await AllUsersModel.findOne({ MIS_ID: user_id });
-    }
-    res.send(data);
-  } catch (error) {
-    console.error("Error getting user info:", error);
-  }
+   try {
+     const { user_id } = req.body;
+     const token = req.cookies.authCookie;
+     let data;
+     if (!token) {
+       return res
+         .status(403)
+         .json({ message: "No token provided", success: false });
+     }
+     if (user_id.length > 5) {
+       data = await AllUsersModel.findOne({ Enrollment: user_id });
+     } else {
+       data = await AllUsersModel.findOne({ MIS_ID: user_id });
+     }
+
+     try {
+       await jwt.verify(token, process.env.JWT_KEY);
+     } catch (err) {
+       return res.status(401).json({
+         message:
+           "Unauthorized, invalid or expired token. Please Log in Again!",
+         success: false,
+       });
+     }
+     res.status(200).json({ data, success: true });
+   } catch (error) {
+     console.error("Error getting user info:", error);
+   }
 };
 
 exports.getBusInfo = async (req, res) => {
@@ -55,7 +91,19 @@ exports.getBusInfo = async (req, res) => {
 
 exports.forgotPassword = async (req, res) => {
   try {
-    const { user_id } = req.body;
+     const { user_id } = req.body;
+     const token = req.cookies.authCookie;
+     if (!token) {
+       return res.status(403).json({ message: "No token provided" });
+     }
+     try {
+       await jwt.verify(token, process.env.JWT_KEY);
+     } catch (err) {
+       return res.status(401).json({
+         message: "Unauthorized, invalid or expired token",
+         success: false,
+       });
+     }
     let user = await AllUsersModel.findOne({ Enrollment: user_id });
     if (!user) {
       user = await AllUsersModel.findOne({ MIS_ID: user_id });

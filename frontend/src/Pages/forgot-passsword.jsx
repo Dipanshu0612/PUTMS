@@ -25,14 +25,17 @@ export default function ForgotPassword() {
   async function submit() {
     setLoading(true);
     try {
-      let response = await axios.post('https://putms.onrender.com/forgot_password', { user_id });
-      if (response.data.success) {
-        setA((a) => 1 - a)
-        toast.success(response.data.message);
-      }
-      else {
-        toast.error(response.data.message);
-      }
+       let response = await axios.post(
+         "https://putms.onrender.com/forgot_pass",
+         { user_id },
+         { withCredentials: true }
+       );
+       if (response.data.success) {
+         setA((a) => 1 - a);
+         toast.success(response.data.message);
+       } else {
+         toast.error(response.data.message);
+       }
     } catch (error) {
       toast.error(error);
     }

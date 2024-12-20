@@ -7,11 +7,12 @@ const url = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB
 const app = express();
 const userRoutes = require("./routes/userRoutes");
 const adminRoutes = require("./routes/adminRoutes");
-
+const cookieParser = require("cookie-parser");
 
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 mongoose.connect(url)
 .then(console.log("Connected to Database!"))

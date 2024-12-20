@@ -10,7 +10,12 @@ const adminRoutes = require("./routes/adminRoutes");
 const cookieParser = require("cookie-parser");
 
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: "http://putms.netlify.com",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(cookieParser());
 

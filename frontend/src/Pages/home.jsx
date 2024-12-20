@@ -49,7 +49,6 @@ export default function Home() {
           setUserData(response.data);
         } else {
           toast.error(response.data.message);
-          navigate("/");
         }
         const busArea = response.data.Area;
         let busResponse = await axios.post(
@@ -64,7 +63,7 @@ export default function Home() {
       }
     }
     getUserInfo();
-  }, [navigate, user_id]);
+  }, [user_id]);
   useEffect(() => {
     async function getNotification() {
       let response = await axios.get(

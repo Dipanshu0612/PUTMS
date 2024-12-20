@@ -18,7 +18,7 @@ exports.verifyUser = async (req, res) => {
       res.send({ success: false, message: "User Does Not Exists!" });
     }
     password = password.toString();
-    const ValidPass = await bycrypt.compare(password, user.Password);
+    const ValidPass = await bcrypt.compare(password, user.Password);
     if (user && ValidPass) {
       jwt.sign(
         { user },

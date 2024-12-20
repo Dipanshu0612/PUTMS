@@ -30,8 +30,9 @@ exports.verifyUser = async (req, res) => {
           } else {
             res.cookie("authCookie", token, {
               httpOnly: true,
-              path:"https://putms.netlify.app",
+              sameSite:"None",
               maxAge: 3600000,
+              secure:false
             });
             res.send({ success: true, message: "Login Successful!" });
           }

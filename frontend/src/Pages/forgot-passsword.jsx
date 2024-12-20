@@ -21,7 +21,7 @@ export default function Login() {
     cursor: isDisabled ? 'not-allowed' : 'auto',
   };
   async function submit() {
-    let response = await axios.post('https://putms.onrender.com/forgot_pass', { user_id });
+    let response = await axios.post('https://putms.onrender.com/forgot_pass', { user_id }, {withCredentials:true});
     if (response.data.success) {
       setA((a) => 1 - a)
       toast.success(response.data.message);

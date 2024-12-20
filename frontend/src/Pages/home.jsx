@@ -39,7 +39,11 @@ export default function Home() {
         let response = await axios.post(
           "https://putms.onrender.com/get_user_info",
           { user_id },
-          { withCredentials: true }
+          {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+            },
+          }
         );
         if (response.success) {
           setUserData(response.data);

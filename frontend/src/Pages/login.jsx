@@ -5,7 +5,6 @@ import { toast } from "react-toastify"
 import PU from "../assests/PU.png"
 import "../index.css"
 import Spinner from '../components/Spinner'
-import Cookies from "js-cookie"; 
 
 export default function Login() {
   let navigate = useNavigate();
@@ -20,6 +19,7 @@ export default function Login() {
       if (response.data.success) {
         toast.success(response.data.message)
         sessionStorage.setItem("user_id", user_id);
+        sessionStorage.setItem("authToken", response.data.token);
         navigate('/home')
       }
       else {
@@ -33,7 +33,7 @@ export default function Login() {
     }
   };
   useEffect(() => {
-    const token = Cookies.get("authCookie");
+    const token = sessionStorage.getItem("authToken");
     if (token) {
       navigate("/home");
     }

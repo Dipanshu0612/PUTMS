@@ -11,6 +11,7 @@ const jwt = require("jsonwebtoken");
 
 exports.verifyUser = async (req, res) => {
   try {
+    console.log("Request Received!")
     let { user_id, password } = req.body;
     const ID = user_id;
     const user = await LoginModel.findOne({ ID });
@@ -28,13 +29,7 @@ exports.verifyUser = async (req, res) => {
           if (err) {
             console.log("An Error Occured: ", err);
           } else {
-            res.cookie("authCookie", token, {
-              httpOnly: true,
-              sameSite:"None",
-              maxAge: 3600000,
-              secure:false
-            });
-            res.send({ success: true, message: "Login Successful!" });
+            res.send({ success: true, message: "Login Successful!", token });
           }
         }
       );
@@ -55,7 +50,8 @@ exports.getAllBuses = async (req, res) => {
 exports.getUserInfo = async (req, res) => {
    try {
      const { user_id } = req.body;
-     const token = req.cookies.authCookie;
+     const authHeader = req.headers["authorization"];
+     const token = authHeader && authHeader.split(" ")[1];
      let data;
      if (!token) {
        return res
@@ -92,7 +88,8 @@ exports.getBusInfo = async (req, res) => {
 exports.forgotPassword = async (req, res) => {
   try {
      const { user_id } = req.body;
-     const token = req.cookies.authCookie;
+     const authHeader = req.headers["authorization"];
+     const token = authHeader && authHeader.split(" ")[1];
      if (!token) {
        return res.status(403).json({ message: "No token provided" });
      }

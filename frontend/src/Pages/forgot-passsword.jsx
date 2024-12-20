@@ -28,7 +28,11 @@ export default function ForgotPassword() {
        let response = await axios.post(
          "https://putms.onrender.com/forgot_pass",
          { user_id },
-         { withCredentials: true }
+         {
+           headers: {
+             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+           },
+         }
        );
        if (response.data.success) {
          setA((a) => 1 - a);

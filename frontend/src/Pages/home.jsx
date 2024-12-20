@@ -36,6 +36,7 @@ export default function Home() {
     async function getUserInfo() {
       setLoading(true);
       try {
+        console.log("Sending API Request!")
         let response = await axios.post(
           "https://putms.onrender.com/get_user_info",
           { user_id },
@@ -45,7 +46,9 @@ export default function Home() {
             },
           }
         );
+        console.log(response);
         if (response.success) {
+          console.log("Success!");
           setUserData(response.data);
         } else {
           toast.error(response.data.message);
